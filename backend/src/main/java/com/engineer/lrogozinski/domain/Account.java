@@ -1,0 +1,118 @@
+package com.engineer.lrogozinski.domain;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "account")
+public class Account {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
+
+    @NotNull
+    @Size(min = 1, max = 16)
+    @Column(name = "username", updatable = false)
+    private String username;
+
+    @Transient
+    private String password;
+
+    @Column(name = "encrypted_password")
+    private String encryptedPassword;
+
+    @Column(name = "verified")
+    private Boolean verified=false;
+
+    @Column(name = "active")
+    private Boolean active = true;
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles = new ArrayList<>();
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(Role role){
+        if(!this.roles.contains(role)){
+            this.roles.add(role);
+        }
+
+        if(!role.getAccounts().contains(this)){
+            role.getAccounts().add(this);
+        }
+    }
+}

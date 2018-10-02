@@ -1,0 +1,42 @@
+package com.engineer.lrogozinski.controllers;
+
+import com.engineer.lrogozinski.dto.security.LoginObject;
+import com.engineer.lrogozinski.services.security.LoginService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+
+@Controller
+@RequestMapping(path = "/login")
+public class LoginController extends RestBase{
+
+    @Context
+    private HttpServletRequest request;
+
+    @Context
+    private HttpServletResponse response;
+
+    private final LoginService loginService;
+
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
+
+    public Response login(LoginObject loginObject) {
+        Cookie cookie = new Cookie("JSESSIONID", request.getSession(true).getId());
+        cookie.setSecure(true);
+        response.addCookie(cookie);
+        try {
+            request.login(loginObject.getLogin(), loginObject.getPassword());
+            return jsonResponse(loginService.getLoggedUserInfo(loginObject.getLogin()));
+        } catch (ServletException e) {
+            return errorResponse("login_failed",401);
+        }
+    }
+}
