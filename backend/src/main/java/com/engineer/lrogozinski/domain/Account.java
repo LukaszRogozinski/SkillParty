@@ -1,5 +1,7 @@
 package com.engineer.lrogozinski.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -39,6 +41,7 @@ public class Account {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonBackReference
     private List<Role> roles = new ArrayList<>();
 
     public Integer getId() {

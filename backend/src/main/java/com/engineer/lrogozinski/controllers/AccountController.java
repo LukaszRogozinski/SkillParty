@@ -2,6 +2,7 @@ package com.engineer.lrogozinski.controllers;
 
 import com.engineer.lrogozinski.domain.Account;
 import com.engineer.lrogozinski.services.AccountService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,11 @@ public class AccountController {
 
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Account> getAllAccounts(){
-
         return accountService.findAll();
+    }
+
+    @RequestMapping(path = "/show/{username}")
+    public @ResponseBody Account getAccount(@PathVariable String username){
+        return accountService.findByUsername(username);
     }
 }
