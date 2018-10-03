@@ -11,18 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AccountToUserDetailsConverter implements Converter<Account, UserDetails> {
+public class AccountToUserDetails implements Converter<Account, UserDetails> {
 
     @Override
     public UserDetails convert(Account account) {
         UserDetailsImpl userDetails = new UserDetailsImpl();
         userDetails.setUsername(account.getUsername());
-        userDetails.setPassword(account.getPassword());
+        userDetails.setPassword(account.getEncryptedPassword());
         userDetails.setEnabled(account.getActive());
 
         List<SimpleGrantedAuthority> authorities = new ArrayList();
 
-       // account.getAccountLevelCollection().forEach(accountLevel -> authorities.add(new SimpleGrantedAuthority(accountLevel.getAccessLevel().getName())));
+        account.getRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+        });
 
         userDetails.setAuthorities(authorities);
         return userDetails;

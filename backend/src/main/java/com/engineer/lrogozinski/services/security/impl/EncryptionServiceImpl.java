@@ -1,24 +1,24 @@
 package com.engineer.lrogozinski.services.security.impl;
 
 import com.engineer.lrogozinski.services.security.EncryptionService;
-import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EncryptionServiceImpl implements EncryptionService {
 
-    private StrongPasswordEncryptor strongEncryptor;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public EncryptionServiceImpl(StrongPasswordEncryptor strongEncryptor) {
-        this.strongEncryptor = strongEncryptor;
+    public EncryptionServiceImpl(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public String encryptString(String input) {
-            return strongEncryptor.encryptPassword(input);
+            return bCryptPasswordEncoder.encode(input);
         }
 
     public boolean checkPassword(String plainPassword, String encryptedPassword) {
-        return strongEncryptor.checkPassword(plainPassword, encryptedPassword);
+        return  bCryptPasswordEncoder.matches(plainPassword, encryptedPassword);
     }
 }
 

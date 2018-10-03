@@ -16,7 +16,6 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
     private final RoleRepository roleRepository;
 
 
-
     public BootstrapClass(AccountService accountService, RoleRepository roleRepository) {
         this.accountService = accountService;
         this.roleRepository = roleRepository;
