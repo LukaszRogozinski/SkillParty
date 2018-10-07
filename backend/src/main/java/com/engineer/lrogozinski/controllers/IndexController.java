@@ -16,8 +16,8 @@ public class IndexController {
         return "access_denied";
     }
 
-    @RequestMapping("login")
+  /*  @RequestMapping("login")
     public String loginForm(){
         return "login";
-    }
+    }*/
 }

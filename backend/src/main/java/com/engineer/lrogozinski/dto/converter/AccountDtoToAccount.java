@@ -10,6 +10,9 @@ public class AccountDtoToAccount implements Converter<AccountDto, Account> {
 
     @Override
     public Account convert(AccountDto accountDto) {
-        return null;
+        Account account = new Account();
+        account.setUsername(accountDto.getUsername());
+        account.setPassword(accountDto.getPassword());
+        return account;
     }
 }

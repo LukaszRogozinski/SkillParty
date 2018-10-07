@@ -3,7 +3,7 @@ package com.engineer.lrogozinski.services.impl;
 import com.engineer.lrogozinski.domain.Account;
 import com.engineer.lrogozinski.repositories.AccountRepository;
 import com.engineer.lrogozinski.services.AccountService;
-import com.engineer.lrogozinski.services.security.EncryptionService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,11 +14,11 @@ public class AccountServiceImpl implements AccountService {
 
     private AccountRepository accountRepository;
 
-    private EncryptionService encryptionService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AccountServiceImpl(AccountRepository accountRepository, EncryptionService encryptionService) {
+    public AccountServiceImpl(AccountRepository accountRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.accountRepository = accountRepository;
-        this.encryptionService = encryptionService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
     public Account save(Account object)
     {
         if(object.getPassword() != null){
-            object.setEncryptedPassword(encryptionService.encryptString(object.getPassword()));
+            object.setEncryptedPassword(bCryptPasswordEncoder.encode(object.getPassword()));
         }
         return accountRepository.save(object);
     }

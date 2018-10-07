@@ -1,3 +1,4 @@
+/*
 package com.engineer.lrogozinski.bootstrap;
 
 import com.engineer.lrogozinski.domain.Account;
@@ -31,7 +32,9 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
     public void assignUser1ToAdmin(){
         Account user1 = accountService.findByUsername("user1");
         Role admin = roleRepository.findByRole("ADMIN");
+        Role user = roleRepository.findByRole("USER");
         user1.addRole(admin);
+        user1.addRole(user);
         accountService.save(user1);
     }
 
@@ -59,3 +62,4 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
     }
 
 }
+*/

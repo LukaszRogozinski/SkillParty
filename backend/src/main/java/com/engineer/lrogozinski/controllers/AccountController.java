@@ -2,14 +2,11 @@ package com.engineer.lrogozinski.controllers;
 
 import com.engineer.lrogozinski.domain.Account;
 import com.engineer.lrogozinski.services.AccountService;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@ComponentScan
 @CrossOrigin
 @RequestMapping(path = "/account")
 public class AccountController {
