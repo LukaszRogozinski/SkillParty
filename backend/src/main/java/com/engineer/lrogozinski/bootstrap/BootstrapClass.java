@@ -2,8 +2,10 @@
 package com.engineer.lrogozinski.bootstrap;
 
 import com.engineer.lrogozinski.domain.Account;
+import com.engineer.lrogozinski.dto.AccountDto;
 import com.engineer.lrogozinski.repositories.RoleRepository;
 import com.engineer.lrogozinski.services.AccountService;
+import com.engineer.lrogozinski.services.security.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -14,11 +16,14 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
 
     private final AccountService accountService;
 
+    private final UserService userService;
+
     private final RoleRepository roleRepository;
 
 
-    public BootstrapClass(AccountService accountService, RoleRepository roleRepository) {
+    public BootstrapClass(AccountService accountService, UserService userService, RoleRepository roleRepository) {
         this.accountService = accountService;
+        this.userService = userService;
         this.roleRepository = roleRepository;
     }
 
@@ -50,15 +55,15 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
 
 
     public void loadUsers(){
-        Account user1 = new Account();
+        AccountDto user1 = new AccountDto();
         user1.setUsername("user1");
         user1.setPassword("user1");
-        accountService.save(user1);
+        userService.save(user1);
 
-        Account user2 =new Account();
+        AccountDto user2 =new AccountDto();
         user2.setUsername("user2");
         user2.setPassword("user2");
-        accountService.save(user2);
+        userService.save(user2);
     }
 
 }

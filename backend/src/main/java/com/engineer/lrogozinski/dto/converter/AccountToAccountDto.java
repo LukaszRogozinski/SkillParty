@@ -13,7 +13,7 @@ public class AccountToAccountDto implements Converter<Account, AccountDto> {
         return AccountDto.builder()
                 .id(account.getId())
                 .username(account.getUsername())
-                .password(account.getEncryptedPassword())
+                .password(account.getPassword())
                 .build();
     }
 }

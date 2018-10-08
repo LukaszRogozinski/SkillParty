@@ -14,11 +14,8 @@ public class AccountServiceImpl implements AccountService {
 
     private AccountRepository accountRepository;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public AccountServiceImpl(AccountRepository accountRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -36,9 +33,9 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account save(Account object)
     {
-        if(object.getPassword() != null){
+       /* if(object.getPassword() != null){
             object.setEncryptedPassword(bCryptPasswordEncoder.encode(object.getPassword()));
-        }
+        }*/
         return accountRepository.save(object);
     }
 

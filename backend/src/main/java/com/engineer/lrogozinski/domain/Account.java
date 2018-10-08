@@ -1,6 +1,7 @@
 package com.engineer.lrogozinski.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,7 +14,7 @@ import java.util.List;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
 
@@ -22,11 +23,10 @@ public class Account {
     @Column(name = "username", updatable = false)
     private String username;
 
-    @Transient
+    @Column
+    @JsonIgnore
     private String password;
 
-    @Column(name = "encrypted_password")
-    private String encryptedPassword;
 
     @Column(name = "verified")
     private Boolean verified=false;
@@ -85,13 +85,6 @@ public class Account {
         this.version = version;
     }
 
-    public String getEncryptedPassword() {
-        return encryptedPassword;
-    }
-
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
-    }
 
     public String getPassword() {
         return password;
