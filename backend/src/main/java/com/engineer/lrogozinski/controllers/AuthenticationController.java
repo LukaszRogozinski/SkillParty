@@ -2,18 +2,20 @@ package com.engineer.lrogozinski.controllers;
 
 
 import com.engineer.lrogozinski.config.JwtTokenUtil;
-import com.engineer.lrogozinski.domain.Account;
+import com.engineer.lrogozinski.domain.UsedToken;
 import com.engineer.lrogozinski.security.AuthToken;
 import com.engineer.lrogozinski.security.LoginUser;
-import com.engineer.lrogozinski.services.security.UserService;
+import com.engineer.lrogozinski.services.UsedTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -27,10 +29,10 @@ public class AuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserService userService;
+    private UsedTokenService usedTokenService;
 
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
+    public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws Exception {
 
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -39,8 +41,15 @@ public class AuthenticationController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        final Account user = userService.findOne(loginUser.getUsername());
-        final String token = jwtTokenUtil.generateToken(user);
+        final String token = jwtTokenUtil.genurutuTokenutu(authentication);
+        List<UsedToken> usedTokens = usedTokenService.findAll();
+        for(int i=0; i<usedTokens.size(); i++){
+            if(usedTokens.get(i).getToken()
+                    .equals(token)){
+                throw new Exception("current token was used before");
+            }
+        }
+        usedTokenService.save(new UsedToken(token, new Date()));
         return ResponseEntity.ok(new AuthToken(token));
     }
 

@@ -14,6 +14,7 @@ public class AccountToAccountDto implements Converter<Account, AccountDto> {
                 .id(account.getId())
                 .username(account.getUsername())
                 .password(account.getPassword())
+                .userdata(account.getUserData())
                 .build();
     }
 }

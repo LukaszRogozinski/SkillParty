@@ -13,6 +13,7 @@ public class AccountDtoToAccount implements Converter<AccountDto, Account> {
         Account account = new Account();
         account.setUsername(accountDto.getUsername());
         account.setPassword(accountDto.getPassword());
+        account.setUserData(accountDto.getUserdata());
         return account;
     }
 }

@@ -1,21 +1,25 @@
 package com.engineer.lrogozinski.controllers;
 
 import com.engineer.lrogozinski.domain.Account;
+import com.engineer.lrogozinski.dto.UserInfo;
 import com.engineer.lrogozinski.services.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value="/users", method = RequestMethod.GET)
-    public List<Account> listUser(){
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping(value="/all", method = RequestMethod.GET)
+    public List<UserInfo> listUser(){
         return userService.findAll();
     }
 
@@ -23,10 +27,4 @@ public class UserController {
     public Account getOne(@PathVariable(value = "id") Integer id){
         return userService.findById(id);
     }
-
-   /* @RequestMapping(value="/signup", method = RequestMethod.POST)
-    public Account saveUser(@RequestBody UserDto user){
-        return userService.save(user);
-    }*/
-
 }

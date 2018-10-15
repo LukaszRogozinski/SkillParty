@@ -13,12 +13,17 @@ import {Interceptor} from './core/inteceptor';
 import {ErrorDialogComponent} from './core/error-dialog.component';
 import {AuthService} from './core/auth.service';
 import {TokenStorage} from './core/token.storage';
+import { EventComponent } from './event/event.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     LoginComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    EventComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,11 @@ import {TokenStorage} from './core/token.storage';
     AppRoutingModule
   ],
   entryComponents: [ErrorDialogComponent],
-  providers: [ErrorDialogComponent, UserService, AuthService, TokenStorage, TokenStorage,
+  providers: [
+    ErrorDialogComponent,
+    UserService,
+    AuthService,
+    TokenStorage,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

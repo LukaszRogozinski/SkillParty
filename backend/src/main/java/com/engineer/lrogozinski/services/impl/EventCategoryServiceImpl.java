@@ -43,4 +43,9 @@ public class EventCategoryServiceImpl implements EventCategoryService {
     public void deleteById(Integer id) {
         eventCategoryRepository.deleteById(id);
     }
+
+    @Override
+    public EventCategory findByName(String name) {
+        return eventCategoryRepository.findByName(name);
+    }
 }

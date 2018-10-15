@@ -1,5 +1,6 @@
 package com.engineer.lrogozinski.dto;
 
+import com.engineer.lrogozinski.domain.UserData;
 import lombok.*;
 
 @Data
@@ -11,4 +12,5 @@ public class AccountDto {
     private Integer id;
     private String username;
     private String password;
+    private UserData userdata;
 }

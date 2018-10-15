@@ -14,9 +14,9 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  private userUrl = 'http://localhost:8080';
+  private userUrl = 'http://localhost:8080/user';
 
   public getUsers(): Observable<any> {
-    return this.http.get(this.userUrl + '/users');
+    return this.http.get(this.userUrl + '/all');
   }
 }

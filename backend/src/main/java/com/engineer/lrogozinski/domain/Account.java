@@ -27,22 +27,25 @@ public class Account {
     @JsonIgnore
     private String password;
 
-
     @Column(name = "verified")
     private Boolean verified=false;
 
     @Column(name = "active")
     private Boolean active = true;
 
-    @Version
-    @Column(name = "version")
-    private Integer version;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @JsonBackReference
     private List<Role> roles = new ArrayList<>();
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
+
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private UserData userData;
+
 
     public Integer getId() {
         return id;
@@ -110,5 +113,15 @@ public class Account {
         if(!role.getAccounts().contains(this)){
             role.getAccounts().add(this);
         }
+    }
+
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public void setUserData(UserData userData) {
+
+        this.userData = userData;
+        userData.setAccount(this);
     }
 }

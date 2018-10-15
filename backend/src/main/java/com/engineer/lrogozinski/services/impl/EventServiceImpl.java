@@ -1,6 +1,9 @@
 package com.engineer.lrogozinski.services.impl;
 
 import com.engineer.lrogozinski.domain.Event;
+import com.engineer.lrogozinski.dto.EventDto;
+import com.engineer.lrogozinski.dto.converter.EventDtoToEvent;
+import com.engineer.lrogozinski.dto.converter.EventToEventDto;
 import com.engineer.lrogozinski.repositories.EventRepository;
 import com.engineer.lrogozinski.services.EventService;
 import org.springframework.stereotype.Service;
@@ -13,8 +16,14 @@ public class EventServiceImpl implements EventService {
 
     private EventRepository eventRepository;
 
-    public EventServiceImpl(EventRepository eventRepository) {
+    private EventDtoToEvent eventDtoToEvent;
+
+    private EventToEventDto eventToEventDto;
+
+    public EventServiceImpl(EventRepository eventRepository, EventDtoToEvent eventDtoToEvent, EventToEventDto eventToEventDto) {
         this.eventRepository = eventRepository;
+        this.eventDtoToEvent = eventDtoToEvent;
+        this.eventToEventDto = eventToEventDto;
     }
 
     @Override
@@ -43,4 +52,24 @@ public class EventServiceImpl implements EventService {
     public void deleteById(Integer id) {
         eventRepository.deleteById(id);
     }
+
+    @Override
+    public List<EventDto> findAllDto() {
+        List<EventDto> eventDtoList = new ArrayList<>();
+        eventRepository.findAll().forEach(event -> {
+            eventDtoList.add(eventToEventDto.convert(event));
+        });
+        return eventDtoList;
+    }
+
+    @Override
+    public EventDto findByIdDto(Integer id) {
+        return eventToEventDto.convert(eventRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public void saveDto(EventDto object) {
+        eventRepository.save(eventDtoToEvent.convert(object));
+    }
+
 }

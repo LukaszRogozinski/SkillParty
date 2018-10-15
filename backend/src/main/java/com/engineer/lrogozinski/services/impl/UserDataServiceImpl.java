@@ -1,9 +1,12 @@
 package com.engineer.lrogozinski.services.impl;
 
+import com.engineer.lrogozinski.domain.Account;
 import com.engineer.lrogozinski.domain.UserData;
 import com.engineer.lrogozinski.repositories.UserDataRepository;
+import com.engineer.lrogozinski.services.AccountService;
 import com.engineer.lrogozinski.services.UserDataService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +16,11 @@ public class UserDataServiceImpl implements UserDataService {
 
     private UserDataRepository userDataRepository;
 
-    public UserDataServiceImpl(UserDataRepository userDataRepository) {
+    private AccountService accountService;
+
+    public UserDataServiceImpl(UserDataRepository userDataRepository, AccountService accountService) {
         this.userDataRepository = userDataRepository;
+        this.accountService = accountService;
     }
 
     @Override
@@ -30,6 +36,7 @@ public class UserDataServiceImpl implements UserDataService {
     }
 
     @Override
+    @Transactional
     public UserData save(UserData object) {
         return userDataRepository.save(object);
     }
@@ -42,5 +49,12 @@ public class UserDataServiceImpl implements UserDataService {
     @Override
     public void deleteById(Integer id) {
         userDataRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public UserData findByUsername(String username) {
+        return userDataRepository.findById(
+                accountService.findByUsername(username).getUserData().getId()).orElse(null);
     }
 }

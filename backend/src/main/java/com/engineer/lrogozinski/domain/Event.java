@@ -1,7 +1,12 @@
 package com.engineer.lrogozinski.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "event")
@@ -28,11 +33,20 @@ public class Event {
     @Column(name = "price")
     private Integer price;
 
-    @Column(name = "average_voute")
-    private Double averageVoute;
+    @Column(name = "average_vote")
+    private Double averageVote;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private List<Vote> votes = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "EVENT_EVENT_CATEGORY", joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_category_id"))
+    @JsonBackReference
+    private List<EventCategory> eventCategories = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id")
     private UserData user;
 
     @Version
@@ -79,14 +93,6 @@ public class Event {
         this.price = price;
     }
 
-    public Double getAverageVoute() {
-        return averageVoute;
-    }
-
-    public void setAverageVoute(Double averageVoute) {
-        this.averageVoute = averageVoute;
-    }
-
     public Integer getVersion() {
         return version;
     }
@@ -100,6 +106,41 @@ public class Event {
     }
 
     public void setUser(UserData user) {
+
         this.user = user;
+    }
+
+    public Double getAverageVote() {
+        return averageVote;
+    }
+
+    public void setAverageVote(Double averageVote) {
+        this.averageVote = averageVote;
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public List<EventCategory> getEventCategories() {
+        return eventCategories;
+    }
+
+    public void addEventCategory(EventCategory eventCategory){
+        if(!this.eventCategories.contains(eventCategory)){
+            this.eventCategories.add(eventCategory);
+        }
+
+        if(!eventCategory.getEvents().contains(this)){
+            eventCategory.getEvents().add(this);
+        }
+    }
+
+    public void setEventCategories(List<EventCategory> eventCategories) {
+        this.eventCategories = eventCategories;
     }
 }

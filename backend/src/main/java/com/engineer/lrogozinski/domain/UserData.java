@@ -1,11 +1,15 @@
 package com.engineer.lrogozinski.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user_data")
@@ -53,8 +57,14 @@ public class UserData {
     @Column(name = "average_vote")
     private Double averageVote;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userData")
+    private List<Vote> votes = new ArrayList<>();
+
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private Account account;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Collection<Event> eventList = new ArrayList<>();
+    private List<Event> eventList = new ArrayList<>();
 
     @Version
     @Column(name = "version")
@@ -140,11 +150,33 @@ public class UserData {
         this.version = version;
     }
 
-    public Collection<Event> getEventList() {
+    public List<Event> getEventList() {
         return eventList;
     }
 
-    public void setEventList(Collection<Event> eventList) {
+    public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public void addEvent(Event event)
+    {
+        event.setUser(this);
+        this.eventList.add(event);
     }
 }
