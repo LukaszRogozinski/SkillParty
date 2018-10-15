@@ -15,6 +15,7 @@ import {AuthService} from './core/auth.service';
 import {TokenStorage} from './core/token.storage';
 import { EventComponent } from './event/event.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { WebsocketComponent } from './websocket/websocket.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     ErrorDialogComponent,
     EventComponent,
-    NavbarComponent
+    NavbarComponent,
+    WebsocketComponent
   ],
   imports: [
     BrowserModule,

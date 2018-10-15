@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TokenStorage} from '../core/token.storage';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private token: TokenStorage,
+              private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logout(): void {
+    this.token.signOut();
+    this.router.navigate(['login']);
   }
 
 }
