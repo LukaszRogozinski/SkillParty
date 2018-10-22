@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Event} from './model/event.model';
 import {Router} from '@angular/router';
+import {NewEvent} from './model/new-event.model';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +15,13 @@ export class EventService {
   constructor(private http: HttpClient,
               private router: Router) { }
 
-  public add(event: Event) {
-    this.http.post<Event>(this.eventUrl + '/add', event)
-      .subscribe(resp => {this.router.navigateByUrl('/users')
+  public add(event: NewEvent) {
+    this.http.post<NewEvent>(this.eventUrl + '/add', event)
+      .subscribe(resp => {this.router.navigateByUrl('/home')
       });
+  }
+
+  public getEvents(): Observable<any> {
+    return this.http.get(this.eventUrl + '/all');
   }
 }

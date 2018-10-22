@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" class="form-control" [(ngModel)]="newEvent.name" name="name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" class="form-control" [(ngModel)]="newEvent.description" name="description">
+        </div>
+      </div>
+      <div class="pagination-centered">
+        <div class="col-sm-4 form-group">
+          <label for="avaliableQuantity">Avaliable quantity</label>
+          <input type="number" id="avaliableQuantity" class="form-control"[(ngModel)]="newEvent.avaliableQuantity" name="avaliableQuantity">
+        </div>
+
+        <div class="col-sm-4 form-group">
+          <label for="price">Price</label>
+          <input type="number" id="price" class="form-control" [(ngModel)]="newEvent.price" name="price">
+        </div>
+
+
+        <div class="col-sm-4 form-group">
+          <label for="eventCategory">Event category</label>
+          <input type="text" id="eventCategory" class="form-control" [(ngModel)]="newEvent.eventCategory" name="eventCategory">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="imageUrl">Image url</label>
+          <input type="text" id="imageUrl" class="form-control" name="imageUrl">
+        </div>
+      </div>
+      <div class="pull-left">
+        <button class="btn btn-primary" type="button" (click)="addEvent()">Add</button>
+        <button class="btn btn-primary" type="button">Clear</button>
+        <button class="btn btn-danger" type="button">Delete</button>
+
+      </div>
+    </form>
+  </div>
+</div>

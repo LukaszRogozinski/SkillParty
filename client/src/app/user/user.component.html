@@ -1,68 +1,35 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-  <!--  <span><img src="./assets/devglan.png"></span>-->
-    <span class="example-fill-remaining-space"></span>
-    <span class="example-spacer"></span>
+<!--div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success">New User</button>
+  </div>
+</div>-->
 
-    <button mat-button (click)="logout()">Logout</button>
-    <button mat-button (click)="event()">Event</button>
-  </mat-toolbar-row>
-</mat-toolbar>
-<div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="users">
-
-    <ng-container matColumnDef="username">
-      <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-    </ng-container>
-
-
-    <ng-container matColumnDef="surname">
-      <mat-header-cell *matHeaderCellDef> Surname</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.surname}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-    </ng-container>
-
-
-    <ng-container matColumnDef="city">
-      <mat-header-cell *matHeaderCellDef> City</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
-    </ng-container>
-
-
-    <ng-container matColumnDef="street">
-      <mat-header-cell *matHeaderCellDef> Street</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.street}} </mat-cell>
-    </ng-container>
-
-
-    <ng-container matColumnDef="houseNo">
-      <mat-header-cell *matHeaderCellDef> houseNo</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.houseNo}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="flatNo">
-      <mat-header-cell *matHeaderCellDef> flatNo</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.flatNo}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="averageVote">
-      <mat-header-cell *matHeaderCellDef> averageVote</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.averageVote}} </mat-cell>
-    </ng-container>
-
-
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-</div>
+  <h2>Users:</h2>
+  <table class="table table-striped" align="center">
+    <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Email</th>
+      <th scope="col">City</th>
+      <th scope="col">Street</th>
+      <th scope="col">houseNo</th>
+      <th scope="col">flatNo</th>
+      <th scope="col">averageVote</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" align="left">
+        <td scope="row">{{user.username}}</td>
+        <td scope="row">{{user.name}}</td>
+        <td scope="row">{{user.surname}}</td>
+        <td scope="row">{{user.email}}</td>
+        <td scope="row">{{user.city}}</td>
+        <td scope="row">{{user.street}}</td>
+        <td scope="row">{{user.houseNo}}</td>
+        <td scope="row">{{user.flatNo}}</td>
+        <td scope="row">{{user.averageVote}}</td>
+      </tr>
+    </tbody>
+  </table>

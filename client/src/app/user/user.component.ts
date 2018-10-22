@@ -22,11 +22,6 @@ export class UserComponent implements OnInit {
     );
   }
 
-  logout(): void {
-    this.token.signOut();
-    this.router.navigate(['login']);
-  }
-
   event(): void {
     this.router.navigate(['event']);
   }

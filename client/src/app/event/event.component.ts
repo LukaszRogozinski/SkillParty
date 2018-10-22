@@ -1,3 +1,4 @@
+/*
 import { Component, OnInit } from '@angular/core';
 import {Event} from './model/event.model';
 import {TokenStorage} from '../core/token.storage';
@@ -10,7 +11,8 @@ import {EventService} from './event.service';
 })
 export class EventComponent implements OnInit {
 
-  event = new Event();
+//  event = new Event();
+  event: Event;
 
   constructor(private tokenStorage: TokenStorage,
               private eventService: EventService) { }
@@ -24,3 +26,4 @@ export class EventComponent implements OnInit {
   }
 
 }
+*/

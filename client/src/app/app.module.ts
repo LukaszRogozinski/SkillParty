@@ -13,9 +13,13 @@ import {Interceptor} from './core/inteceptor';
 import {ErrorDialogComponent} from './core/error-dialog.component';
 import {AuthService} from './core/auth.service';
 import {TokenStorage} from './core/token.storage';
-import { EventComponent } from './event/event.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { WebsocketComponent } from './websocket/websocket.component';
+import { EventListComponent } from './event/event-list/event-list.component';
+import { EventDetailComponent } from './event/event-detail/event-detail.component';
+import { EventEditComponent } from './event/event-edit/event-edit.component';
+import {DropdownDirective} from './shared/dropdown.directive';
+import { NewEventComponent } from './event/new-event/new-event.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +27,13 @@ import { WebsocketComponent } from './websocket/websocket.component';
     UserComponent,
     LoginComponent,
     ErrorDialogComponent,
-    EventComponent,
     NavbarComponent,
-    WebsocketComponent
+    WebsocketComponent,
+    EventListComponent,
+    EventDetailComponent,
+    EventEditComponent,
+    DropdownDirective,
+    NewEventComponent
   ],
   imports: [
     BrowserModule,

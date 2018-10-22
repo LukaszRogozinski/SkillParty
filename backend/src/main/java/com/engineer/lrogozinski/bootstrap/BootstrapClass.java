@@ -57,39 +57,6 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         loadEventCategories();
     }
 
-    private void loadSingleEvent() {
-       UserData userData =  userDataService.findByUsername("user1");
-       List<Event> list = userData.getEventList();
-       int z = 5;
-    }
-
-    public void loadEvents() {
-        UserData userData = userDataService.findByUsername("user1");
-        Event eventDto = new Event();
-        eventDto.setName("bieganie");
-        eventDto.setDescription("szybkie bieganie");
-        eventDto.setAvaliableQuantity(5);
-        eventDto.setPrice(15);
-        eventDto.setAverageVote(0.0);
-        eventDto.addEventCategory(eventCategoryService.findByName("SPORT"));
-        eventDto.setUser(userData);
-        eventService.save(eventDto);
-       // userData.addEvent(eventDto);
-       // userDataService.save(userData);
-
-    }
-
-    public void loadUserData(){
-        UserData userData = userDataService.findByUsername("user1");
-        EventDto event = eventToEventDto.convert(eventService.findById(9));
-        Event evento = eventService.findById(9);
-        Event event1 = eventDtoToEvent.convert(event);
-        userData.addEvent(evento);
-        userDataService.save(userData);
-        int z = 5;
-
-    }
-
     private void loadEventCategories() {
 
         EventCategory sport = new EventCategory();

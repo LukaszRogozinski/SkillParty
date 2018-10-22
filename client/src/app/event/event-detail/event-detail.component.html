@@ -1,0 +1,64 @@
+<div class="row">
+
+  <div class="col-xs-12">
+    <img src="" alt="" class="img-responsive">
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Event name</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-primary dropdown-toggle">
+          Manage Event <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Edit event</a></li>
+          <li><a href="#">Delete event</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<div *ngIf="event">
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Event description</h4>
+      <h2>{{event.description}}</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Avaliable quantity</h4>
+      <h2>{{event.avaliableQuantity}}</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>price</h4>
+      <h2>{{event.price}}</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>average Vote</h4>
+      <h2>{{event.averageVote}}</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Event category</h4>
+      <h2>{{event.eventCategory}}</h2>
+    </div>
+  </div>
+</div>
+</div>
