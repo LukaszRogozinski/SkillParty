@@ -20,10 +20,11 @@ public class EventCategory {
     @Column(name = "name")
     private String  name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "EVENT_EVENT_CATEGORY", joinColumns = @JoinColumn(name = "event_category_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id"))
-    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserData user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventCategory")
     private List<Event> events = new ArrayList<>();
 
     @Version
@@ -54,11 +55,20 @@ public class EventCategory {
         this.version = version;
     }
 
-    public List<Event> getEvents() {
+    public UserData getUser() {
+        return user;
+    }
+
+    public void setUser(UserData user) {
+
+        this.user = user;
+    }
+
+    public List<Event> getEvent() {
         return events;
     }
 
-    public void setEvents(List<Event> event) {
-        this.events = event;
+    public void addEvent(Event event) {
+       this.events.add(event);
     }
 }

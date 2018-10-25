@@ -39,11 +39,8 @@ public class Event {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<Vote> votes = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "EVENT_EVENT_CATEGORY", joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_category_id"))
-    @JsonBackReference
-    private List<EventCategory> eventCategories = new ArrayList<>();
+    @ManyToOne
+    EventCategory eventCategory;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -126,21 +123,12 @@ public class Event {
         this.votes = votes;
     }
 
-    public List<EventCategory> getEventCategories() {
-        return eventCategories;
+    public EventCategory getEventCategory() {
+        return eventCategory;
     }
 
-    public void addEventCategory(EventCategory eventCategory){
-        if(!this.eventCategories.contains(eventCategory)){
-            this.eventCategories.add(eventCategory);
-        }
-
-        if(!eventCategory.getEvents().contains(this)){
-            eventCategory.getEvents().add(this);
-        }
-    }
-
-    public void setEventCategories(List<EventCategory> eventCategories) {
-        this.eventCategories = eventCategories;
+    public void setEventCategory(EventCategory eventCategory) {
+        this.eventCategory = eventCategory;
+        eventCategory.addEvent(this);
     }
 }

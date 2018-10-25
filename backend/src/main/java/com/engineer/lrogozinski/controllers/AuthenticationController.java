@@ -1,6 +1,5 @@
 package com.engineer.lrogozinski.controllers;
 
-
 import com.engineer.lrogozinski.config.JwtTokenUtil;
 import com.engineer.lrogozinski.domain.UsedToken;
 import com.engineer.lrogozinski.security.AuthToken;

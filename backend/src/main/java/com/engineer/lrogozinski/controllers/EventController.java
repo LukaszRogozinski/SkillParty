@@ -12,8 +12,12 @@ import com.engineer.lrogozinski.services.UserDataService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.engineer.lrogozinski.security.Constants.HEADER_STRING;
+import static com.engineer.lrogozinski.security.Constants.TOKEN_PREFIX;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -24,18 +28,15 @@ public class EventController {
 
     private final EventService eventService;
 
-    private final AccountService accountService;
-
     private final EventDtoToEvent eventDtoToEvent;
 
     private final UserDataService userDataService;
 
     private final EventToEventDto eventToEventDto;
 
-    public EventController(JwtTokenUtil jwtTokenUtil, EventService eventService, AccountService accountService, EventDtoToEvent eventDtoToEvent, UserDataService userDataService, EventToEventDto eventToEventDto) {
+    public EventController(JwtTokenUtil jwtTokenUtil, EventService eventService, EventDtoToEvent eventDtoToEvent, UserDataService userDataService, EventToEventDto eventToEventDto) {
         this.jwtTokenUtil = jwtTokenUtil;
         this.eventService = eventService;
-        this.accountService = accountService;
         this.eventDtoToEvent = eventDtoToEvent;
         this.userDataService = userDataService;
         this.eventToEventDto = eventToEventDto;
@@ -53,18 +54,17 @@ public class EventController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @Transactional
-    public void addEvent(@RequestBody EventDto eventDto){
+    public void addEvent(@RequestBody EventDto eventDto, HttpServletRequest req){
+        String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
         Event event = eventDtoToEvent.convert(eventDto);
        eventService.save(event);
-       UserData userData =  userDataService.findByUsername(jwtTokenUtil.getUsernameFromToken(eventDto.getToken()));
+       UserData userData =  userDataService.findByUsername(jwtTokenUtil.getUsernameFromToken(token));
        userData.addEvent(event);
        userDataService.save(userData);
-     //  getEventList();
-       //eventService.save(eventDtoToEvent.convert(eventDto));
     }
 
-/*    @RequestMapping(value="/allEventsLogedUser", method = RequestMethod.GET)
-    public List<Event> getAllEventsLoggedUser(){
-        UserData userData
-    }*/
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    public EventDto getEventDetails(@PathVariable(value = "id") Integer id){
+        return eventToEventDto.convert(eventService.findById(id));
+    }
 }

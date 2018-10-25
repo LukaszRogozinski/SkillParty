@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {CustomMaterialModule} from './core/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { UserComponent } from './user/user.component';
 import {AppRoutingModule} from './core/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
@@ -18,13 +17,15 @@ import { WebsocketComponent } from './websocket/websocket.component';
 import { EventListComponent } from './event/event-list/event-list.component';
 import { EventDetailComponent } from './event/event-detail/event-detail.component';
 import { EventEditComponent } from './event/event-edit/event-edit.component';
-import {DropdownDirective} from './shared/dropdown.directive';
+import {DropdownDirective} from './directives/dropdown.directive';
 import { NewEventComponent } from './event/new-event/new-event.component';
+import { HighlightDirective } from './directives/highlight.directive';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
     LoginComponent,
     ErrorDialogComponent,
     NavbarComponent,
@@ -33,7 +34,10 @@ import { NewEventComponent } from './event/new-event/new-event.component';
     EventDetailComponent,
     EventEditComponent,
     DropdownDirective,
-    NewEventComponent
+    NewEventComponent,
+    HighlightDirective,
+    UserListComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

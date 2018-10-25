@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class EventDto {
 
+    private Integer id;
     private String name;
     private String description;
     private Integer avaliableQuantity;

@@ -13,11 +13,9 @@
         <li class="dropdown" appDropdown>
           <a class="dropdown-toggle" role="button">Manage<span class="caret"></span> </a>
           <ul class="dropdown-menu">
-           <li ><a class="" href="#">Save data</a> </li>
-            <li class="divider"></li>
-            <li ><a href="#">Fetch Data</a> </li>
-            <li class="divider"></li>
-            <li ><a style="cursor: pointer" (click)="logout()">Logout</a> </li>
+           <li ><a class="" routerLink="/detail" appHighlight>My account</a> </li>
+
+            <li ><a style="cursor: pointer" appHighlight [defaultColor]="'transparent'" (click)="logout()">Logout</a> </li>
           </ul>
         </li>
       </ul>

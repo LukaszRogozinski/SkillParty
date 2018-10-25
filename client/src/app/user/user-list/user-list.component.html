@@ -1,0 +1,35 @@
+<!--div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success">New User</button>
+  </div>
+</div>-->
+
+<h2>Users:</h2>
+<table class="table table-striped" align="center">
+  <thead>
+  <tr>
+    <th scope="col">Username</th>
+    <th scope="col">Name</th>
+    <th scope="col">Surname</th>
+    <th scope="col">Email</th>
+    <th scope="col">City</th>
+    <th scope="col">Street</th>
+    <th scope="col">houseNo</th>
+    <th scope="col">flatNo</th>
+    <th scope="col">averageVote</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users" align="left">
+    <td scope="row">{{user.username}}</td>
+    <td scope="row">{{user.name}}</td>
+    <td scope="row">{{user.surname}}</td>
+    <td scope="row">{{user.email}}</td>
+    <td scope="row">{{user.city}}</td>
+    <td scope="row">{{user.street}}</td>
+    <td scope="row">{{user.houseNo}}</td>
+    <td scope="row">{{user.flatNo}}</td>
+    <td scope="row">{{user.averageVote}}</td>
+  </tr>
+  </tbody>
+</table>

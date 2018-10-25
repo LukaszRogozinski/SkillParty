@@ -21,7 +21,11 @@ export class EventService {
       });
   }
 
-  public getEvents(): Observable<any> {
-    return this.http.get(this.eventUrl + '/all');
+  public getEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(this.eventUrl + '/all');
+  }
+
+  public getEventById(id: number): Observable<Event> {
+    return this.http.get<Event>(this.eventUrl + '/detail/' + id);
   }
 }
