@@ -5,6 +5,7 @@ import com.engineer.lrogozinski.dto.EventDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class EventToEventDto implements Converter<Event, EventDto> {
 
@@ -12,6 +13,7 @@ public class EventToEventDto implements Converter<Event, EventDto> {
 
     @Override
     public EventDto convert(Event event) {
+
         return EventDto.builder()
                 .id(event.getId())
                 .name(event.getName())

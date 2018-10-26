@@ -11,6 +11,8 @@ public class EventCategoryToEventCategoryDto implements Converter<EventCategory,
     @Override
     public EventCategoryDto convert(EventCategory eventCategory) {
 
-        return null;
+        return EventCategoryDto.builder()
+                    .name(eventCategory.getName())
+                    .build();
     }
 }

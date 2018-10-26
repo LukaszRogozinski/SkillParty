@@ -1,5 +1,3 @@
-import {EventCategory} from '../../event-category/model/event-category.model';
-
 export class User {
 
   username: string;
@@ -11,5 +9,5 @@ export class User {
   houseNo: number;
   flatNo: number;
   averageVote: number;
-  eventCategories: EventCategory[];
+  favouriteCategories: string[];
 }

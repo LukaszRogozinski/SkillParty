@@ -47,11 +47,11 @@ public class UserController {
         return userService.findById(id);
     }
 
-
     @RequestMapping(value="/detail", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public UserInfo getLoggedUserInfo(HttpServletRequest req){
         String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
-        return accountToUserInfo.convert(userService.findOne(jwtTokenUtil.getUsernameFromToken(token)));
+        UserInfo userInfo =  accountToUserInfo.convert(userService.findOne(jwtTokenUtil.getUsernameFromToken(token)));
+        return userInfo;
     }
 }

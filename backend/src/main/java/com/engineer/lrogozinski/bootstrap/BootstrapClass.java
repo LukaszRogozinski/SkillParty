@@ -2,20 +2,16 @@ package com.engineer.lrogozinski.bootstrap;
 
 import com.engineer.lrogozinski.domain.*;
 import com.engineer.lrogozinski.dto.AccountDto;
-import com.engineer.lrogozinski.dto.EventDto;
-import com.engineer.lrogozinski.dto.converter.EventDtoToEvent;
-import com.engineer.lrogozinski.dto.converter.EventToEventDto;
-import com.engineer.lrogozinski.services.*;
+import com.engineer.lrogozinski.services.AccountService;
+import com.engineer.lrogozinski.services.EventCategoryService;
+import com.engineer.lrogozinski.services.RoleService;
+import com.engineer.lrogozinski.services.UserDataService;
 import com.engineer.lrogozinski.services.security.UserService;
-import org.hibernate.Hibernate;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Component
 @Profile("bootstrap")
@@ -29,23 +25,16 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
 
     private final EventCategoryService eventCategoryService;
 
-    private final EventService eventService;
-
     private final UserDataService userDataService;
 
-    private final EventToEventDto eventToEventDto;
 
-    private final EventDtoToEvent eventDtoToEvent;
-
-    public BootstrapClass( AccountService accountService, UserService userService, RoleService roleService, EventCategoryService eventCategoryService, EventService eventService, UserDataService userDataService, EventToEventDto eventToEventDto, EventDtoToEvent eventDtoToEvent) {
+    public BootstrapClass(AccountService accountService, UserService userService, RoleService roleService, EventCategoryService eventCategoryService, UserDataService userDataService) {
         this.accountService = accountService;
         this.userService = userService;
         this.roleService = roleService;
         this.eventCategoryService = eventCategoryService;
-        this.eventService = eventService;
+
         this.userDataService = userDataService;
-        this.eventToEventDto = eventToEventDto;
-        this.eventDtoToEvent = eventDtoToEvent;
     }
 
     @Override
@@ -55,6 +44,14 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         loadRoles();
         assignUser1ToAdmin();
         loadEventCategories();
+        addFavouriteEventCategoryToUser1();
+    }
+
+    private void addFavouriteEventCategoryToUser1() {
+        UserData userData = userDataService.findByUsername("user1");
+        EventCategory eventCategory = eventCategoryService.findByName("SPORT");
+        userData.addFavouriteEventCategory(eventCategory);
+        userDataService.save(userData);
     }
 
     private void loadEventCategories() {

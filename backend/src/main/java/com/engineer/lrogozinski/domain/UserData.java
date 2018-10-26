@@ -1,14 +1,12 @@
 package com.engineer.lrogozinski.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -65,6 +63,12 @@ public class UserData {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Event> eventList = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_DATA_EVENT_CATEGORY", joinColumns = @JoinColumn(name = "user_data_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_category_id"))
+    @JsonBackReference
+    List<EventCategory> favouriteEventCategories = new ArrayList<>();
 
     @Version
     @Column(name = "version")
@@ -178,5 +182,23 @@ public class UserData {
     {
         event.setUser(this);
         this.eventList.add(event);
+    }
+
+    public List<EventCategory> getFavouriteEventCategories() {
+        return favouriteEventCategories;
+    }
+
+    public void setFavouriteEventCategories(List<EventCategory> favouriteEventCategories) {
+        this.favouriteEventCategories = favouriteEventCategories;
+    }
+
+    public void addFavouriteEventCategory(EventCategory eventCategory) {
+        if(!this.favouriteEventCategories.contains(eventCategory)){
+            this.favouriteEventCategories.add(eventCategory);
+        }
+
+        if(!eventCategory.getUserDataList().contains(this)){
+            eventCategory.getUserDataList().add(this);
+        }
     }
 }

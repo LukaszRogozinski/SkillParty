@@ -5,11 +5,18 @@ import com.engineer.lrogozinski.dto.UserInfo;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class AccountToUserInfo implements Converter<Account, UserInfo> {
 
     @Override
     public UserInfo convert(Account account) {
+
+        List<String> favouriteEventCategories = new ArrayList<>();
+        account.getUserData().getFavouriteEventCategories().forEach(eventCategory -> favouriteEventCategories.add(eventCategory.getName()));
+
         return UserInfo.builder()
                 .username(account.getUsername())
                 .name(account.getUserData().getName())
@@ -20,6 +27,7 @@ public class AccountToUserInfo implements Converter<Account, UserInfo> {
                 .houseNo(account.getUserData().getHouseNo())
                 .flatNo(account.getUserData().getFlatNo())
                 .averageVote(account.getUserData().getAverageVote())
+                .favouriteCategories(favouriteEventCategories)
                 .build();
     }
 }

@@ -1,4 +1,3 @@
-/*
 package com.engineer.lrogozinski.controllers;
 
 import com.engineer.lrogozinski.config.JwtTokenUtil;
@@ -61,4 +60,3 @@ public class EventCategoryController {
         userDataService.save(userData);
     }
 }
-*/

@@ -1,6 +1,10 @@
 package com.engineer.lrogozinski.dto;
 
+import com.engineer.lrogozinski.domain.EventCategory;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -17,4 +21,5 @@ public class UserInfo {
     private Integer houseNo;
     private Integer flatNo;
     private Double averageVote;
+    private List<String> favouriteCategories = new ArrayList<>();
 }

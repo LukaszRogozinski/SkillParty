@@ -20,9 +20,15 @@ public class EventCategory {
     @Column(name = "name")
     private String  name;
 
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventCategory")
     private List<Event> events = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "favouriteEventCategories")
+    /*@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_DATA_EVENT_CATEGORY", joinColumns = @JoinColumn(name = "event_category_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_data_id"))*/
+    //@JsonBackReference
+    List<UserData> userDataList = new ArrayList<>();
 
     @Version
     @Column(name = "version")
@@ -58,5 +64,21 @@ public class EventCategory {
 
     public void addEvent(Event event) {
        this.events.add(event);
+    }
+
+    public List<UserData> getUserDataList() {
+        return userDataList;
+    }
+
+    public void setUserDataList(List<UserData> userDataList) {
+        this.userDataList = userDataList;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }
