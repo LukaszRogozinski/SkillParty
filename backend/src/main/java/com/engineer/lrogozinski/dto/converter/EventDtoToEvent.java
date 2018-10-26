@@ -25,9 +25,8 @@ public class EventDtoToEvent  implements Converter<EventDto, Event> {
         event.setAvaliableQuantity(eventDto.getAvaliableQuantity());
         event.setPrice(eventDto.getPrice());
         event.setAverageVote(eventDto.getAverageVote());
-       // EventCategory eventCategory = eventCategoryService.findByName(eventDto.getEventCategory());
+        event.setImageUrl(eventDto.getImageUrl());
         event.setEventCategory(eventCategoryService.findByName(eventDto.getEventCategory()));
-      //  event.addEventCategory(eventCategoryService.findByName(eventDto.getEventCategory()));
         return event;
     }
 }

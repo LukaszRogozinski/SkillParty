@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NewEvent} from '../model/new-event.model';
 import {EventService} from '../event.service';
-import {TokenStorage} from '../../core/token.storage';
 
 @Component({
   selector: 'app-new-event',
@@ -12,11 +11,10 @@ export class NewEventComponent implements OnInit {
 
   newEvent: NewEvent = new NewEvent();
 
-  constructor(private eventService: EventService,
-              private tokenStorage: TokenStorage) { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
-    this.newEvent.token = this.tokenStorage.getToken();
+
     this.newEvent.averageVote = 0;
   }
 

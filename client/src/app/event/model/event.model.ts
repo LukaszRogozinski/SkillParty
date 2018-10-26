@@ -7,4 +7,5 @@ export class Event {
   price: number;
   averageVote: number;
   eventCategory: string;
+  imageUrl: string;
 }

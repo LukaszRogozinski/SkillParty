@@ -18,12 +18,7 @@ export class UserDetailComponent implements OnInit {
     this.userService.getLoggedUserDetail().subscribe(data => {
              this.user = data;
            });
-
-    /*    this.userService.setLoggedUser(this.token.getToken()).subscribe(
-      data => {
-        this.user = data;
-      }
-    );*/
   }
+
 
 }

@@ -8,6 +8,7 @@ import {EventEditComponent} from '../event/event-edit/event-edit.component';
 import {NewEventComponent} from '../event/new-event/new-event.component';
 import {UserListComponent} from '../user/user-list/user-list.component';
 import {UserDetailComponent} from '../user/user-detail/user-detail.component';
+import {EventCategoryListComponent} from '../event-category/event-category-list/event-category-list.component';
 
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'event-edit', component: EventEditComponent},
   {path: 'new-event', component: NewEventComponent},
   {path: 'event-detail/:id', component: EventDetailComponent},
-  {path: 'detail', component: UserDetailComponent}
+  {path: 'detail', component: UserDetailComponent},
+  {path: 'event-category-list', component: EventCategoryListComponent}
 ];
 
 @NgModule({

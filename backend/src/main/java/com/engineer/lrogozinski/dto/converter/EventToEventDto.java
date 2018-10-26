@@ -20,6 +20,7 @@ public class EventToEventDto implements Converter<Event, EventDto> {
                 .price(event.getPrice())
                 .averageVote(event.getAverageVote())
                 .eventCategory(event.getEventCategory().getName())
+                .imageUrl(event.getImageUrl())
                 .build();
     }
 }

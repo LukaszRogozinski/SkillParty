@@ -36,6 +36,9 @@ public class Event {
     @Column(name = "average_vote")
     private Double averageVote;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<Vote> votes = new ArrayList<>();
 
@@ -130,5 +133,13 @@ public class Event {
     public void setEventCategory(EventCategory eventCategory) {
         this.eventCategory = eventCategory;
         eventCategory.addEvent(this);
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

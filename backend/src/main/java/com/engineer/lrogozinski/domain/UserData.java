@@ -66,9 +66,6 @@ public class UserData {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Event> eventList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<EventCategory> subscribedEventCategories = new ArrayList<>();
-
     @Version
     @Column(name = "version")
     private Integer version;
@@ -181,18 +178,5 @@ public class UserData {
     {
         event.setUser(this);
         this.eventList.add(event);
-    }
-
-    public List<EventCategory> getSubscribedEventCategories() {
-        return subscribedEventCategories;
-    }
-
-    public void setSubscribedEventCategories(List<EventCategory> subscribedEventCategories) {
-        this.subscribedEventCategories = subscribedEventCategories;
-    }
-
-    public void addEventCategory(EventCategory eventCategory) {
-        eventCategory.setUser(this);
-        this.subscribedEventCategories.add(eventCategory);
     }
 }

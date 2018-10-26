@@ -16,4 +16,5 @@ public class EventDto {
     private Double averageVote;
     private String token;
     private String eventCategory;
+    private String imageUrl;
 }

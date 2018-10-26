@@ -5,5 +5,5 @@ export class NewEvent {
   price: number;
   averageVote: number;
   eventCategory: string;
-  token: string;
+  imageUrl: string;
 }

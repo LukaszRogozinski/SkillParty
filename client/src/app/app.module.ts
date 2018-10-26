@@ -22,6 +22,7 @@ import { NewEventComponent } from './event/new-event/new-event.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { EventCategoryListComponent } from './event-category/event-category-list/event-category-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
     NewEventComponent,
     HighlightDirective,
     UserListComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    EventCategoryListComponent
   ],
   imports: [
     BrowserModule,

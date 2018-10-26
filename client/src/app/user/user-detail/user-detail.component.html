@@ -1,29 +1,72 @@
-<h2>User Detail:</h2>
-<table class="table table-striped" align="center">
-  <thead>
-  <tr>
-    <th scope="col">Username</th>
-    <th scope="col">Name</th>
-    <th scope="col">Surname</th>
-    <th scope="col">Email</th>
-    <th scope="col">City</th>
-    <th scope="col">Street</th>
-    <th scope="col">houseNo</th>
-    <th scope="col">flatNo</th>
-    <th scope="col">averageVote</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr  align="left">
-    <td scope="row">{{user.username}}</td>
-    <td scope="row">{{user.name}}</td>
-    <td scope="row">{{user.surname}}</td>
-    <td scope="row">{{user.email}}</td>
-    <td scope="row">{{user.city}}</td>
-    <td scope="row">{{user.street}}</td>
-    <td scope="row">{{user.houseNo}}</td>
-    <td scope="row">{{user.flatNo}}</td>
-    <td scope="row">{{user.averageVote}}</td>
-  </tr>
-  </tbody>
-</table>
+<div class="col-xs-12" *ngIf="user">
+
+  <div class="row">
+      <h2>User details</h2>
+  </div>
+
+  <div class="row">
+    <div
+      class="btn-group"
+      appDropdown>
+      <button
+        type="button"
+        class="btn btn-primary dropdown-toggle">
+        Manage User <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" >
+        <li><a appHighlight  href="#">Edit user</a></li>
+        <li><a appHighlight [highlightColor]="'#5cb85c'" routerLink="/event-category-list">Add favourite category</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+      <h3>Username</h3>
+      <h4>{{user.username}}</h4>
+  </div>
+
+  <div class="row">
+    <h3>Name</h3>
+    <h4>{{user.name}}</h4>
+  </div>
+
+  <div class="row">
+    <h3>Surname</h3>
+    <h4>{{user.surname}}</h4>
+  </div>
+
+  <div class="row">
+    <h3>Email</h3>
+    <h4>{{user.email}}</h4>
+  </div>
+
+  <div class="row">
+    <h3>City</h3>
+    <h4>{{user.city}}</h4>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>House number</h3>
+      <h4>{{user.houseNo}}</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Flat number</h3>
+    <h4>{{user.flatNo}}</h4>
+  </div>
+
+  <div class="row">
+    <h3>Average vote</h3>
+    <h4>{{user.averageVote}}</h4>
+  </div>
+
+  <div class="row">
+    <h3>Favourite categories</h3>
+    <div *ngFor="let category of user.eventCategories">
+      <h4>{{category}}</h4>
+    </div>
+  </div>
+
+</div>
