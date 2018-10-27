@@ -49,9 +49,9 @@ export class EventListComponent implements OnInit {
     const content = temp.content;
     const type = temp.type;
 
-  /*  delete temp.title;
+    delete temp.title;
     delete temp.content;
-    delete temp.type;*/
+    delete temp.type;
     this._notifications.create(title, content, type, temp)
   }
 

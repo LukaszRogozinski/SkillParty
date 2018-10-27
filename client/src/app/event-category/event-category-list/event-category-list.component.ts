@@ -3,6 +3,8 @@ import {EventCategory} from '../model/event-category.model';
 import {EventCategoryService} from '../event-category.service';
 import {Router} from '@angular/router';
 import * as Stomp from 'stompjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-event-category-list',
@@ -13,13 +15,16 @@ export class EventCategoryListComponent implements OnInit {
 
   eventCategories: EventCategory[];
 
+  form: FormGroup;
 
   ws: any;
   name: string;
   disabled: boolean;
 
   constructor(private eventCategoryService: EventCategoryService,
-              private routerLink: Router) { }
+              private routerLink: Router,
+              private _notifications: NotificationsService,
+              private _fb: FormBuilder) { }
 
   ngOnInit() {
     this.eventCategoryService.getEventCategories().subscribe(
@@ -27,6 +32,30 @@ export class EventCategoryListComponent implements OnInit {
         this.eventCategories = data;
       }
     );
+
+    this.form = this._fb.group({
+      type: 'success',
+      title: 'This is just a title',
+      content: 'This is just some content',
+      timeOut: 5000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+      animate: 'fromRight'
+    });
+  }
+
+  create() {
+
+    const temp = this.form.getRawValue();
+    const title = temp.title;
+    const content = temp.content;
+    const type = temp.type;
+
+    delete temp.title;
+    delete temp.content;
+    delete temp.type;
+    this._notifications.create(title, content, type, temp)
   }
 
   addToFavourite(eventCategory: EventCategory) {
@@ -47,6 +76,7 @@ export class EventCategoryListComponent implements OnInit {
       });
       that.ws.subscribe("/sportTopic/reply", function(message) {
         console.log(message)
+        that.create()
        // that.showGreeting(message.body);
       });
       that.disabled = true;
