@@ -18,11 +18,11 @@ public class WebSockerController {
     @Autowired
     private SimpMessageSendingOperations simpMessageSendingOperations;
 
-    @MessageMapping("/message")
-    @SendTo("/topic/reply")
+    @MessageMapping("/sportMessage")
+    @SendTo("/sportTopic/reply")
     public String processMessageFromClient(@Payload String message) throws Exception {
 
-        return "Witam Pana";
+        return "You have new sport event!";
     }
 
     @MessageExceptionHandler

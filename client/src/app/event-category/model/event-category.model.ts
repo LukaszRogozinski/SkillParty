@@ -1,4 +1,4 @@
 export class EventCategory {
   name: string;
-  imageUrl: string;
+  //imageUrl: string;
 }

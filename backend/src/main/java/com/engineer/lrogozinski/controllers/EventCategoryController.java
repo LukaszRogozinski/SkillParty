@@ -50,13 +50,13 @@ public class EventCategoryController {
          return eventCategoryDtoList;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @Transactional
-    public void addEventCategoryToFavouriteList(@RequestBody EventCategoryDto eventCategoryDto, HttpServletRequest req) {
+    @RequestMapping(value ="/add", method = RequestMethod.POST)
+   // @Transactional
+    public void addEventCategoryToFavouriteList(@RequestBody EventCategoryDto eventCategory, HttpServletRequest req) {
         String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
         UserData userData = userDataService.findByUsername(jwtTokenUtil.getUsernameFromToken(token));
-        EventCategory eventCategory = eventCategoryDtoToEventCategory.convert(eventCategoryDto);
-        userData.addFavouriteEventCategory(eventCategory);
+        EventCategory eventCategoryy = eventCategoryService.findByName(eventCategory.getName());// eventCategoryDtoToEventCategory.convert(eventCategory);
+        userData.addFavouriteEventCategory(eventCategoryy);
         userDataService.save(userData);
     }
 }

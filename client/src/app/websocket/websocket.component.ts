@@ -24,14 +24,14 @@ export class WebsocketComponent implements OnInit {
   connect() {
     //connect to stomp where stomp endpoint is exposed
     //let ws = new SockJS(http://localhost:8080/greeting);
-    let socket = new WebSocket("ws://localhost:8080/greeting");
+    let socket = new WebSocket("ws://localhost:8080/sport");
     this.ws = Stomp.over(socket);
     let that = this;
     this.ws.connect({}, function(frame) {
       that.ws.subscribe("/errors", function(message) {
         alert("Error " + message.body);
       });
-      that.ws.subscribe("/topic/reply", function(message) {
+      that.ws.subscribe("/sportTopic/reply", function(message) {
         console.log(message)
         that.showGreeting(message.body);
       });
@@ -53,7 +53,7 @@ export class WebsocketComponent implements OnInit {
     let data = JSON.stringify({
       'name' : this.name
     })
-    this.ws.send("/app/message", {}, data);
+    this.ws.send("/app/sportMessage", {}, data);
   }
 
   showGreeting(message) {

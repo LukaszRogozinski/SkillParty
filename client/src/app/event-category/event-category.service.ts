@@ -16,7 +16,7 @@ export class EventCategoryService {
     return this.httpClient.get<EventCategory[]>(this.eventCategoryUrl + '/all');
   }
 
-  public addToFavourite(eventCategory: EventCategory): Observable<EventCategory> {
-   return this.httpClient.post<EventCategory>(this.eventCategoryUrl + '/add', eventCategory);
+  public addToFavourite(eventCategory: EventCategory): Observable<any> {
+   return this.httpClient.post(this.eventCategoryUrl + '/add', eventCategory);
   }
 }

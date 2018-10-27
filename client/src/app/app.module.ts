@@ -5,7 +5,7 @@ import {CustomMaterialModule} from './core/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './core/app-routing.module';
 import { LoginComponent } from './login/login.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UserService} from './user/user.service';
 import {Interceptor} from './core/inteceptor';
@@ -23,7 +23,7 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { EventCategoryListComponent } from './event-category/event-category-list/event-category-list.component';
-
+import { SimpleNotificationsModule } from 'angular2-notifications';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +47,9 @@ import { EventCategoryListComponent } from './event-category/event-category-list
     BrowserAnimationsModule,
     CustomMaterialModule,
     FormsModule,
-    AppRoutingModule
+    ReactiveFormsModule,
+    AppRoutingModule,
+    SimpleNotificationsModule.forRoot()
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [
