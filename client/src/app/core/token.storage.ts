@@ -19,7 +19,6 @@ export class TokenStorage {
   }
 
   public getToken(): string {
-    sessionStorage.ge
     return sessionStorage.getItem(TOKEN_KEY);
   }
 }

@@ -34,7 +34,7 @@ export class EventCategoryListComponent implements OnInit {
     );
 
     this.form = this._fb.group({
-      type: 'success',
+      type: 'info',
       title: 'This is just a title',
       content: 'This is just some content',
       timeOut: 5000,
@@ -45,11 +45,11 @@ export class EventCategoryListComponent implements OnInit {
     });
   }
 
-  create() {
+  create(message) {
 
     const temp = this.form.getRawValue();
-    const title = temp.title;
-    const content = temp.content;
+    const title = 'Sport event';//temp.title;
+    const content = message;//temp.content;
     const type = temp.type;
 
     delete temp.title;
@@ -76,7 +76,7 @@ export class EventCategoryListComponent implements OnInit {
       });
       that.ws.subscribe("/sportTopic/reply", function(message) {
         console.log(message)
-        that.create()
+        that.create(message.body)
        // that.showGreeting(message.body);
       });
       that.disabled = true;

@@ -24,7 +24,7 @@ export class Interceptor implements HttpInterceptor {
           console.log(err);
           console.log('req url :: ' + req.url);
           if (err.status === 401) {
-            this.router.navigate(['user']);
+            this.router.navigate(['login']);
           }
         }
       }
