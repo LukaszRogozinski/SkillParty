@@ -21,4 +21,20 @@ export class TokenStorage {
   public getToken(): string {
     return sessionStorage.getItem(TOKEN_KEY);
   }
+
+  public getDecodedToken(): any {
+
+    let jwt = this.getToken();
+    let jwtData = jwt.split('.')[1];
+    let decodedJwtJsonData = window.atob(jwtData);
+    let decodedJwtData = JSON.parse(decodedJwtJsonData);
+/*
+    let isAdmin = decodedJwtData.admin
+
+    console.log('jwtData: ' + jwtData)
+    console.log('decodedJwtJsonData: ' + decodedJwtJsonData)
+    console.log('decodedJwtData: ' + decodedJwtData)
+    console.log('Is admin: ' + isAdmin)*/
+    return decodedJwtData;
+  }
 }

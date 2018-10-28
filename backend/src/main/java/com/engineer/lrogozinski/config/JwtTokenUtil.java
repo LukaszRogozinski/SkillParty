@@ -74,7 +74,7 @@ public class JwtTokenUtil implements Serializable {
                         && !isTokenExpired(token));
     }
 
-    public String genurutuTokenutu(Authentication authentication) {
+    public String generateToken(Authentication authentication) {
         final String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));

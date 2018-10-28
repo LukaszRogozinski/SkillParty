@@ -40,7 +40,7 @@ public class AuthenticationController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        final String token = jwtTokenUtil.genurutuTokenutu(authentication);
+        final String token = jwtTokenUtil.generateToken(authentication);
         List<UsedToken> usedTokens = usedTokenService.findAll();
         for(int i=0; i<usedTokens.size(); i++){
             if(usedTokens.get(i).getToken()
