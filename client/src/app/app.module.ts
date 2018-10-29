@@ -24,6 +24,10 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { EventCategoryListComponent } from './event-category/event-category-list/event-category-list.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import {RouteGuardComponent} from './guards/routeGuard.component';
+import { PageNotAvaliableComponent } from './page-not-avaliable/page-not-avaliable.component';
+import {LoginGuardComponent} from './guards/loginGuard.component';
+import {CanDeactivateGuard} from './guards/can-deactivate-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +43,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     HighlightDirective,
     UserListComponent,
     UserDetailComponent,
-    EventCategoryListComponent
+    EventCategoryListComponent,
+    PageNotAvaliableComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +62,9 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     UserService,
     AuthService,
     TokenStorage,
+    RouteGuardComponent,
+    LoginGuardComponent,
+    CanDeactivateGuard,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

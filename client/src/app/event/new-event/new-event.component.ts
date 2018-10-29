@@ -2,22 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import {NewEvent} from '../model/new-event.model';
 import {EventService} from '../event.service';
 import * as Stomp from 'stompjs';
+import {CanComponentDeactivate} from '../../guards/can-deactivate-guard.service';
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-event',
   templateUrl: './new-event.component.html',
   styleUrls: ['./new-event.component.css']
 })
-export class NewEventComponent implements OnInit {
+export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
   newEvent: NewEvent = new NewEvent();
-  greetings: string[] = [];
-  showConversation: boolean = false;
   ws: any;
   name: string;
   disabled: boolean;
+  allowEdit = false;
+  changesSaved = false;
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService,
+              private router: Router) { }
 
   ngOnInit() {
     this.connect();
@@ -28,6 +32,8 @@ export class NewEventComponent implements OnInit {
 
     this.eventService.add(this.newEvent);
     this.sendName();
+    this.changesSaved = true;
+    this.router.navigateByUrl('/home');
   }
 
   sendName() {
@@ -35,7 +41,8 @@ export class NewEventComponent implements OnInit {
     let data = JSON.stringify({
       'name' : "jacek"
     })
-    this.ws.send("/app/sportMessage", {}, data);
+    this.ws.send("/app/sportMessage", {});
+   // this.ws.send("/app/sportMessage", {}, data);
   }
 
   connect() {
@@ -57,5 +64,14 @@ export class NewEventComponent implements OnInit {
       alert("STOMP error " + error);
     });
   }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if((this.newEvent.name !== null) && !this.changesSaved){
+      return confirm('Do you want to discard the changes?');
+    } else {
+      return true;
+    }
+  }
+
 
 }

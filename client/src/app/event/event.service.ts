@@ -17,8 +17,7 @@ export class EventService {
 
   public add(event: NewEvent) {
     this.http.post<NewEvent>(this.eventUrl + '/add', event)
-      .subscribe(resp => {this.router.navigateByUrl('/home')
-      });
+      .subscribe();
   }
 
   public getEvents(): Observable<Event[]> {

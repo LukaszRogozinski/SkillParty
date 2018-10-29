@@ -1,4 +1,4 @@
 export const URLsAvability = {
-  'ADMIN': ['/users'],
-  'USER': [],
+  'ROLE_ADMIN': ['/users'],
+  'ROLE_USER': [],
 };

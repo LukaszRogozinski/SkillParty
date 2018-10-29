@@ -9,20 +9,27 @@ import {NewEventComponent} from '../event/new-event/new-event.component';
 import {UserListComponent} from '../user/user-list/user-list.component';
 import {UserDetailComponent} from '../user/user-detail/user-detail.component';
 import {EventCategoryListComponent} from '../event-category/event-category-list/event-category-list.component';
+import {RouteGuardComponent} from '../guards/routeGuard.component';
+import {PageNotAvaliableComponent} from '../page-not-avaliable/page-not-avaliable.component';
+import {LoginGuardComponent} from '../guards/loginGuard.component';
+import {CanDeactivateGuard} from '../guards/can-deactivate-guard.service';
 
 const routes: Routes = [
-  { path: 'users', component: UserListComponent },
-  { path: 'login', component: LoginComponent },
-  {path : '', component : LoginComponent},
+  { path: 'users', component: UserListComponent, canActivate: [RouteGuardComponent] },
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuardComponent] },
+  {path : '', component : LoginComponent, pathMatch: 'full'},
   {path: 'home', component: EventListComponent},
   {path: 'event', component: EventDetailComponent},
   {path: 'websocket', component: WebsocketComponent},
   {path: 'event-list', component: EventListComponent},
   {path: 'event-edit', component: EventEditComponent},
-  {path: 'new-event', component: NewEventComponent},
+  {path: 'new-event', component: NewEventComponent, canDeactivate: [CanDeactivateGuard]},
   {path: 'event-detail/:id', component: EventDetailComponent},
   {path: 'detail', component: UserDetailComponent},
-  {path: 'event-category-list', component: EventCategoryListComponent}
+  {path: 'event-category-list', component: EventCategoryListComponent},
+  {path: 'pageNotAvaliable', component: PageNotAvaliableComponent, data: {message: 'Page not avaliable'}},
+  {path: 'pageNotFound', component: PageNotAvaliableComponent, data: {message: 'Page not found'}},
+  {path: '**', redirectTo: '/pageNotFound'}
 ];
 
 @NgModule({

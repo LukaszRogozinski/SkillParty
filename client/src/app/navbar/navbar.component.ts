@@ -1,25 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorage} from '../core/token.storage';
-import {Router} from '@angular/router';
-import {URLsAvability} from '../guards/URLsAvailabilityForUsersRoles';
-
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit{
 
-  decodedToken: {sub: string, scopes: string, iat: number, exp: number}
-  rolesArray: String[];
+  roles = {ROLE_ADMIN: false, ROLE_USER: false};
+  rolesArray = [];
 
   constructor(private token: TokenStorage,
               private router: Router) { }
 
-
-  ngOnInit() {
-
+  ngOnInit(): void {
+    this.initRoles();
   }
 
   logout(): void {
@@ -27,19 +24,22 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
-  decode(): void {
-  this.decodedToken = this.token.getDecodedToken();
-  this.rolesArray = this.decodedToken.scopes.split(',');
-  this.rolesArray[0] = this.rolesArray[0].substring(5,this.rolesArray[0].length);
-  this.rolesArray[1] = this.rolesArray[1].substring(5,this.rolesArray[1].length);
-  for(const url in URLsAvability){
-    let a =  this.rolesArray.includes(url,0)
-    break;
-    let z = 5;
+  private initRoles(){
+    let decodedToken = this.token.getDecodedToken();
+    this.rolesArray = decodedToken.scopes.split(',');
+    for(let role in this.roles){
+      Object.entries(this.roles).forEach(([key, value]) => this.roles[key] = this.hasRole(key))
+    }
   }
 
-    let tokenutu =  this.token.getDecodedToken();
-
+  hasRole(role: string): boolean {
+    for(var i=0; i < this.rolesArray.length; i++){
+      if(this.rolesArray[i]===role){
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 
 }

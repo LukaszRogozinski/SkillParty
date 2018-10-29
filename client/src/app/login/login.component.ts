@@ -22,7 +22,7 @@ export class LoginComponent {
     this.authService.attemptAuth(this.username, this.password).subscribe(
       data => {
         this.token.saveToken(data.token);
-        this.router.navigate(['users']);
+        this.router.navigate(['home']);
       }
     );
   }
