@@ -28,6 +28,7 @@ import {RouteGuardComponent} from './guards/routeGuard.component';
 import { PageNotAvaliableComponent } from './page-not-avaliable/page-not-avaliable.component';
 import {LoginGuardComponent} from './guards/loginGuard.component';
 import {CanDeactivateGuard} from './guards/can-deactivate-guard.service';
+import {CollapseModule} from 'ngx-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import {CanDeactivateGuard} from './guards/can-deactivate-guard.service';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    CollapseModule.forRoot(),
     SimpleNotificationsModule.forRoot()
   ],
   entryComponents: [ErrorDialogComponent],

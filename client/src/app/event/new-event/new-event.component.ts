@@ -41,8 +41,8 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
     let data = JSON.stringify({
       'name' : "jacek"
     })
-    this.ws.send("/app/sportMessage", {});
-   // this.ws.send("/app/sportMessage", {}, data);
+   // this.ws.send("/app/sportMessage", {});
+    this.ws.send("/app/sportMessage", {}, data);
   }
 
   connect() {
