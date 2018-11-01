@@ -8,11 +8,11 @@
       <ul  class="nav navbar-nav">
         <li >
           <a routerLink="/event-list">Events</a> </li> <!--<li *ngIf="(roles['ROLE_UESR'])">-->
-        <li > <!--<li *ngIf="(roles['ROLE_ADMIN'])">-->
+        <li *ngIf="(roles['ROLE_ADMIN'])"> <!--<li *ngIf="(roles['ROLE_ADMIN'])">-->
         <a routerLink="/users">Users</a> </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" appDropdown>  <!--<li class="dropdown" appDropdown *ngIf="isLogged">-->
+        <li class="dropdown" appDropdown *ngIf="isLogged">  <!--<li class="dropdown" appDropdown *ngIf="isLogged">-->
       <a class="dropdown-toggle" role="button">Manage<span class="caret"></span> </a>
           <ul class="dropdown-menu">
            <li ><a class="" routerLink="/detail" appHighlight>My account</a> </li>

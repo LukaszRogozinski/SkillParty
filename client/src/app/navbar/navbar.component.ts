@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorage} from '../core/token.storage';
 import { Router} from '@angular/router';
+import {IsLoggedService} from '../services/is-logged.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,11 +15,24 @@ export class NavbarComponent implements OnInit{
   isLogged = false;
 
   constructor(private token: TokenStorage,
-              private router: Router) { }
+              private router: Router,
+              private isLoggedService: IsLoggedService) { }
 
   ngOnInit(): void {
+    this.isLoggedService.statusUpdated.subscribe(
+      data => {
+        this.isLogged = data;
+        if(this.isLogged)
+        {
+          this.initRoles();
+        } else {
+          this.resetRoles();
+        }
+
+      }
+    );
    // let a = this.token.watchSession();
-    this.token.watchSession().subscribe(loggedIn => {
+/*    this.token.watchSession().subscribe(loggedIn => {
       if(loggedIn) {
         this.isLogged = true;
         this.initRoles();
@@ -26,12 +40,12 @@ export class NavbarComponent implements OnInit{
         this.isLogged = false;
         this.resetRoles();
       }
-    });
+    });*/
   }
 
   logout(): void {
     this.token.signOut();
-    this.isLogged = false;
+    this.isLoggedService.statusUpdated.emit(false);
     this.router.navigate(['login']);
   }
 

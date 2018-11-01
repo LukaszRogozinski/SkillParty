@@ -29,6 +29,7 @@ import { PageNotAvaliableComponent } from './page-not-avaliable/page-not-avaliab
 import {LoginGuardComponent} from './guards/loginGuard.component';
 import {CanDeactivateGuard} from './guards/can-deactivate-guard.service';
 import {CollapseModule} from 'ngx-bootstrap';
+import {IsLoggedService} from './services/is-logged.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +68,7 @@ import {CollapseModule} from 'ngx-bootstrap';
     RouteGuardComponent,
     LoginGuardComponent,
     CanDeactivateGuard,
+    IsLoggedService,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}
