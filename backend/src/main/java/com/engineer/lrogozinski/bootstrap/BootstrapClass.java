@@ -67,13 +67,16 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
     public void assignUser1ToAdmin(){
         Account user1 = accountService.findByUsername("user1");
         Account user2 = accountService.findByUsername("user2");
+        Account user3 = accountService.findByUsername("user3");
         Role admin = roleService.findByRole("ADMIN");
         Role user = roleService.findByRole("USER");
         user1.addRole(admin);
         user1.addRole(user);
         user2.addRole(user);
+        user3.addRole(user);
         accountService.save(user1);
         accountService.save(user2);
+        accountService.save(user3);
     }
 
     public void loadRoles(){
@@ -121,5 +124,24 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         userData2.setAverageVote(0.0);
         user2.setUserdata(userData2);
         userService.save(user2);
+
+//-------------------------------------------------------------------------
+
+        AccountDto user3 =new AccountDto();
+        user3.setUsername("user3");
+        user3.setPassword("user3");
+
+
+        UserData userData3 = new UserData();
+        userData3.setEmail("user3@email.com");
+        userData3.setName("Gienek");
+        userData3.setSurname("Paździoch");
+        userData3.setCity("Koszalin");
+        userData3.setStreet("Malinowa");
+        userData3.setHouseNo(30);
+        userData3.setFlatNo(10);
+        userData3.setAverageVote(0.0);
+        user3.setUserdata(userData3);
+        userService.save(user3);
     }
 }

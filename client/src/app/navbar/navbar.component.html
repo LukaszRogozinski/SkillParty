@@ -6,8 +6,8 @@
 
     <div class="collapse navbar-collapse" >
       <ul  class="nav navbar-nav">
-        <li >
-          <a routerLink="/event-list">Events</a> </li> <!--<li *ngIf="(roles['ROLE_UESR'])">-->
+        <li *ngIf="(roles['ROLE_USER'])">
+          <a routerLink="/event-list">Events</a> </li> <!--<li *ngIf="(roles['ROLE_USER'])">-->
         <li *ngIf="(roles['ROLE_ADMIN'])"> <!--<li *ngIf="(roles['ROLE_ADMIN'])">-->
         <a routerLink="/users">Users</a> </li>
       </ul>

@@ -28,19 +28,8 @@ export class NavbarComponent implements OnInit{
         } else {
           this.resetRoles();
         }
-
       }
     );
-   // let a = this.token.watchSession();
-/*    this.token.watchSession().subscribe(loggedIn => {
-      if(loggedIn) {
-        this.isLogged = true;
-        this.initRoles();
-      } else {
-        this.isLogged = false;
-        this.resetRoles();
-      }
-    });*/
   }
 
   logout(): void {
@@ -52,9 +41,8 @@ export class NavbarComponent implements OnInit{
   private initRoles(){
     let decodedToken = this.token.getDecodedToken();
     this.rolesArray = decodedToken.scopes.split(',');
-    for(let role in this.roles){
       Object.entries(this.roles).forEach(([key, value]) => this.roles[key] = this.hasRole(key))
-    }
+
   }
 
   private resetRoles(){
@@ -65,10 +53,9 @@ export class NavbarComponent implements OnInit{
     for(var i=0; i < this.rolesArray.length; i++){
       if(this.rolesArray[i]===role){
         return true;
-      } else {
-        return false;
       }
     }
+    return false;
   }
 
 }
