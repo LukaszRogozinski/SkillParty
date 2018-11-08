@@ -8,6 +8,8 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class EventDto {
 
+    private Boolean isEventLoggedUser;
+    private Integer usernameOwnerId;
     private Integer id;
     private String name;
     private String description;

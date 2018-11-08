@@ -30,6 +30,9 @@ import {LoginGuardComponent} from './guards/loginGuard.component';
 import {CanDeactivateGuard} from './guards/can-deactivate-guard.service';
 import {CollapseModule} from 'ngx-bootstrap';
 import {IsLoggedService} from './services/is-logged.service';
+import { MyEventListComponent } from './event/my-event-list/my-event-list.component';
+import {IsLoggedUserEventService} from './services/is-logged-user-event.service';
+import {CustomEventsService} from './services/custom-events.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +49,8 @@ import {IsLoggedService} from './services/is-logged.service';
     UserListComponent,
     UserDetailComponent,
     EventCategoryListComponent,
-    PageNotAvaliableComponent
+    PageNotAvaliableComponent,
+    MyEventListComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,9 @@ import {IsLoggedService} from './services/is-logged.service';
     RouteGuardComponent,
     LoginGuardComponent,
     CanDeactivateGuard,
+    CustomEventsService,
     IsLoggedService,
+    IsLoggedUserEventService,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

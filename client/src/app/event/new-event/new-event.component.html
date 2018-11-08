@@ -1,43 +1,77 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form (ngSubmit)="addEvent()" #f="ngForm">
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="name">Name</label>
-          <input type="text" id="name" class="form-control" [(ngModel)]="newEvent.name" name="name">
+          <input type="text"
+                 id="name"
+                 class="form-control"
+                 [(ngModel)]="newEvent.name"
+                 name="name"
+                 required
+                 #name="ngModel">
+          <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a valid name!</span>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="description">Description</label>
-          <input type="text" id="description" class="form-control" [(ngModel)]="newEvent.description" name="description">
+          <input
+            type="text"
+            id="description"
+            class="form-control"
+            [(ngModel)]="newEvent.description"
+            name="description"
+            required>
         </div>
       </div>
       <div class="pagination-centered">
         <div class="col-sm-4 form-group">
           <label for="avaliableQuantity">Avaliable quantity</label>
-          <input type="number" id="avaliableQuantity" class="form-control"[(ngModel)]="newEvent.avaliableQuantity" name="avaliableQuantity">
+          <input
+            type="number"
+            id="avaliableQuantity"
+            class="form-control"[(ngModel)]="newEvent.avaliableQuantity"
+            name="avaliableQuantity"
+            required>
         </div>
 
         <div class="col-sm-4 form-group">
           <label for="price">Price</label>
-          <input type="number" id="price" class="form-control" [(ngModel)]="newEvent.price" name="price">
+          <input
+            type="number"
+            id="price"
+            class="form-control"
+            [(ngModel)]="newEvent.price"
+            name="price"
+            required>
         </div>
-
 
         <div class="col-sm-4 form-group">
           <label for="eventCategory">Event category</label>
-          <input type="text" id="eventCategory" class="form-control" [(ngModel)]="newEvent.eventCategory" name="eventCategory">
+          <input
+            type="text"
+            id="eventCategory"
+            class="form-control"
+            [(ngModel)]="newEvent.eventCategory"
+            name="eventCategory"
+            required>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="imageUrl">Image url</label>
-          <input type="text" id="imageUrl" class="form-control" [(ngModel)]="newEvent.imageUrl" name="imageUrl">
+          <input
+            type="text"
+            id="imageUrl"
+            class="form-control"
+            [(ngModel)]="newEvent.imageUrl"
+            name="imageUrl">
         </div>
       </div>
       <div class="pull-left">
-        <button class="btn btn-primary" type="button" (click)="addEvent()">Add</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Add</button>
         <button class="btn btn-primary" type="button">Clear</button>
         <button class="btn btn-danger" type="button">Delete</button>
 

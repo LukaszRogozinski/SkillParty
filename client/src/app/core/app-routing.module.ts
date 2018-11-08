@@ -13,6 +13,7 @@ import {RouteGuardComponent} from '../guards/routeGuard.component';
 import {PageNotAvaliableComponent} from '../page-not-avaliable/page-not-avaliable.component';
 import {LoginGuardComponent} from '../guards/loginGuard.component';
 import {CanDeactivateGuard} from '../guards/can-deactivate-guard.service';
+import {MyEventListComponent} from '../event/my-event-list/my-event-list.component';
 
 const routes: Routes = [
   { path: 'users', component: UserListComponent, canActivate: [RouteGuardComponent] },
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'event', component: EventDetailComponent},
   {path: 'websocket', component: WebsocketComponent},
   {path: 'event-list', component: EventListComponent},
+  {path: 'my-event-list', component: MyEventListComponent},
   {path: 'event-edit', component: EventEditComponent},
   {path: 'new-event', component: NewEventComponent, canDeactivate: [CanDeactivateGuard]},
   {path: 'event-detail/:id', component: EventDetailComponent},

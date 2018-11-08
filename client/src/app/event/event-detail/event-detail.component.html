@@ -18,13 +18,14 @@
           class="btn-group"
           appDropdown>
           <button
+            *ngIf="isThisMyEvent"
             type="button"
             class="btn btn-primary dropdown-toggle">
             Manage Event <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" >
-            <li><a appHighlight  href="#">Edit event</a></li>
-            <li><a appHighlight [highlightColor]="'#c9302c'" href="#">Delete event</a></li>
+            <li><a appHighlight  href="#" >Edit event</a></li>
+            <li><a appHighlight [highlightColor]="'#c9302c'" (click)="deleteEvent()">Delete event</a></li>
           </ul>
         </div>
       </div>

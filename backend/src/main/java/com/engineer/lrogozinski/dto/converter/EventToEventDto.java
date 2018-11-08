@@ -15,6 +15,7 @@ public class EventToEventDto implements Converter<Event, EventDto> {
     public EventDto convert(Event event) {
 
         return EventDto.builder()
+                .usernameOwnerId(event.getUser().getId())
                 .id(event.getId())
                 .name(event.getName())
                 .description(event.getDescription())

@@ -19,8 +19,8 @@ export class NavbarComponent implements OnInit{
               private isLoggedService: IsLoggedService) { }
 
   ngOnInit(): void {
-    this.isLoggedService.statusUpdated.subscribe(
-      data => {
+    this.isLoggedService.statusUpdatednew.subscribe(
+      (data: boolean) => {
         this.isLogged = data;
         if(this.isLogged)
         {
@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit{
 
   logout(): void {
     this.token.signOut();
-    this.isLoggedService.statusUpdated.emit(false);
+    this.isLoggedService.statusUpdatednew.next(false);
     this.router.navigate(['login']);
   }
 

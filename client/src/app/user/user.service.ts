@@ -8,8 +8,6 @@ import {Observable} from 'rxjs';
 })
 export class UserService {
 
-
-
   constructor(private http: HttpClient) { }
 
   private userUrl = 'http://localhost:8080/user';
@@ -17,7 +15,6 @@ export class UserService {
   public getUsers(): Observable<any> {
     return this.http.get(this.userUrl + '/all');
   }
-
 
   public getLoggedUserDetail(): Observable<any> {
    return this.http.get(this.userUrl + '/detail');

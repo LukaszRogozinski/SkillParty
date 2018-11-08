@@ -28,9 +28,10 @@ export class EventCategoryListComponent implements OnInit {
 
   ngOnInit() {
     this.eventCategoryService.getEventCategories().subscribe(
-      data => {
-        this.eventCategories = data;
-      }
+      response => {
+        this.eventCategories = response;
+      },
+      (error) => console.log(error)
     );
 
     this.form = this._fb.group({

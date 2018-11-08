@@ -1,5 +1,6 @@
 export class Event {
 
+  isEventLoggedUser: boolean;
   id: number;
   name: string;
   description: string;

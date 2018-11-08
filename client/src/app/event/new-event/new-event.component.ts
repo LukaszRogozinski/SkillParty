@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NewEvent} from '../model/new-event.model';
 import {EventService} from '../event.service';
 import * as Stomp from 'stompjs';
 import {CanComponentDeactivate} from '../../guards/can-deactivate-guard.service';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-new-event',
@@ -13,6 +14,7 @@ import {Router} from '@angular/router';
 })
 export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
+  @ViewChild('f') signupForm: NgForm;
   newEvent: NewEvent = new NewEvent();
   ws: any;
   name: string;
@@ -30,7 +32,11 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
   addEvent(){
 
-    this.eventService.add(this.newEvent);
+    this.eventService.add(this.newEvent)
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
     this.sendName();
     this.changesSaved = true;
     this.router.navigateByUrl('/home');
@@ -72,6 +78,5 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
       return true;
     }
   }
-
 
 }
