@@ -63,7 +63,6 @@ public class Account {
         this.username = username;
     }
 
-
     public Boolean getVerified() {
         return verified;
     }
@@ -88,7 +87,6 @@ public class Account {
         this.version = version;
     }
 
-
     public String getPassword() {
         return password;
     }
@@ -103,16 +101,6 @@ public class Account {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }
-
-    public void addRole(Role role){
-        if(!this.roles.contains(role)){
-            this.roles.add(role);
-        }
-
-        if(!role.getAccounts().contains(this)){
-            role.getAccounts().add(this);
-        }
     }
 
     public UserData getUserData() {

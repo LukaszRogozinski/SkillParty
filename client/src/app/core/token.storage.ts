@@ -7,6 +7,7 @@ const TOKEN_KEY = 'AuthToken';
 @Injectable()
 export class TokenStorage {
 
+  username: string;
 
   constructor() { }
 
@@ -32,5 +33,15 @@ export class TokenStorage {
     let decodedJwtJsonData = window.atob(jwtData);
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
     return decodedJwtData;
+  }
+
+  public getUsernameFromToken(): string {
+    let jwt = this.getToken();
+    let jwtData = jwt.split('.')[1];
+    let decodedJwtJsonData = window.atob(jwtData);
+    let decodedToken: {exp:number, iat: number, scopes: string[], sub: string};
+   // let decodedJwtData = JSON.parse(decodedJwtJsonData);
+    decodedToken = JSON.parse(decodedJwtJsonData);
+    return decodedToken.sub;
   }
 }

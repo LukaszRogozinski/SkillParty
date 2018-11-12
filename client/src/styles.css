@@ -1,1 +1,30 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+.required-sign:after {
+  content: " *";
+  color: red;
+}
+
+.alertMessage {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 15px;
+}
+
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.help-block{
+  color: red;
+}
+

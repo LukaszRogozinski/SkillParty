@@ -13,6 +13,7 @@ public class EventCategoryDtoToEventCategory implements Converter<EventCategoryD
 
         EventCategory eventCategory = new EventCategory();
         eventCategory.setName(eventCategoryDto.getName());
+        eventCategory.setImageUrl(eventCategoryDto.getImageUrl());
         return eventCategory;
     }
 }

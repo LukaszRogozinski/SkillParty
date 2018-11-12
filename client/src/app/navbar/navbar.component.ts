@@ -13,17 +13,20 @@ export class NavbarComponent implements OnInit{
   roles = {ROLE_ADMIN: false, ROLE_USER: false};
   rolesArray = [];
   isLogged = false;
+  username: string;
 
   constructor(private token: TokenStorage,
               private router: Router,
-              private isLoggedService: IsLoggedService) { }
+              private isLoggedService: IsLoggedService,
+              private tokenStorage: TokenStorage) { }
 
   ngOnInit(): void {
-    this.isLoggedService.statusUpdatednew.subscribe(
+    this.isLoggedService.statusUpdated.subscribe(
       (data: boolean) => {
         this.isLogged = data;
         if(this.isLogged)
         {
+          this.username = this.tokenStorage.getUsernameFromToken();
           this.initRoles();
         } else {
           this.resetRoles();
@@ -34,7 +37,7 @@ export class NavbarComponent implements OnInit{
 
   logout(): void {
     this.token.signOut();
-    this.isLoggedService.statusUpdatednew.next(false);
+    this.isLoggedService.statusUpdated.next(false);
     this.router.navigate(['login']);
   }
 
@@ -57,5 +60,6 @@ export class NavbarComponent implements OnInit{
     }
     return false;
   }
+
 
 }

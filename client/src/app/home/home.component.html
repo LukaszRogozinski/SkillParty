@@ -1,0 +1,21 @@
+<div class="grid grid-pad">
+  <a class="col-1-4">
+
+  <div class="module hero" routerLink="/event-list">
+    <a  style="color: white">Event List</a>
+  </div>
+</a>
+
+  <a class="col-1-4">
+    <div class="module hero" routerLink="/my-event-list">
+      <a  style="color: white">My Event List</a>
+    </div>
+  </a>
+
+  <a class="col-1-4">
+    <div class="module hero" [routerLink]="['/detail', username]">
+      <a style="color: white">My Account</a>
+    </div>
+  </a>
+
+</div>

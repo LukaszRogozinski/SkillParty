@@ -30,6 +30,14 @@ public class Role {
     @JsonBackReference
     private List<Account> accounts = new ArrayList<>();
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getRole() {
         return role;
     }

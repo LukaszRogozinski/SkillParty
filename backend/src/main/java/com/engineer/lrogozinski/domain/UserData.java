@@ -53,7 +53,7 @@ public class UserData {
     private Integer flatNo;
 
     @Column(name = "average_vote")
-    private Double averageVote;
+    private Double averageVote = 0.0;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userData")
     private List<Vote> votes = new ArrayList<>();

@@ -1,0 +1,136 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="registerNewUser()" #f="ngForm">
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label class="required-sign" for="username">Username</label>
+          <input type="text"
+                 id="username"
+                 class="form-control"
+                 [(ngModel)]="newUser.username"
+                 name="username"
+                 required
+                 #username="ngModel">
+          <span class="help-block" *ngIf="!username.valid && username.touched">Please enter a valid username!</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label class="required-sign" for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            [(ngModel)]="newUser.password"
+            name="password"
+            required
+            #password="ngModel">
+          <span class="help-block" *ngIf="!password.valid && password.touched">Please enter a valid password!</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label class="required-sign" for="name">Name</label>
+          <input type="text"
+                 id="name"
+                 class="form-control"
+                 [(ngModel)]="newUser.name"
+                 name="name"
+                 required
+                 #name="ngModel">
+          <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label class="required-sign" for="surname">Surname</label>
+          <input type="text"
+                 id="surname"
+                 class="form-control"
+                 [(ngModel)]="newUser.surname"
+                 name="surname"
+                 required
+                 #surname="ngModel">
+          <span class="help-block" *ngIf="!surname.valid && surname.touched">Please enter a valid surname!</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label class="required-sign" for="email">Email</label>
+          <input type="email"
+                 id="email"
+                 class="form-control"
+                 [(ngModel)]="newUser.email"
+                 name="email"
+                 required
+                 #email="ngModel">
+          <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label class="required-sign" for="citz">Citz</label>
+          <input type="text"
+                 id="citz"
+                 class="form-control"
+                 [(ngModel)]="newUser.city"
+                 name="city"
+                 required
+                 #city="ngModel">
+          <span class="help-block" *ngIf="!city.valid && city.touched">Please enter a city!</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label class="required-sign" for="street">Street</label>
+          <input type="text"
+                 id="street"
+                 class="form-control"
+                 [(ngModel)]="newUser.street"
+                 name="street"
+                 required
+                 #street="ngModel">
+          <span class="help-block" *ngIf="!street.valid && street.touched">Please enter a street!</span>
+        </div>
+      </div>
+
+      <div class="pagination-centered">
+        <div class="col-sm-6 form-group">
+          <label class="required-sign" for="houseNo">House number</label>
+          <input
+            type="number"
+            id="houseNo"
+            class="form-control"[(ngModel)]="newUser.houseNo"
+            name="houseNo"
+            required>
+        </div>
+
+        <div class="col-sm-6 form-group">
+          <label class="required-sign" for="flatNo">Flat number</label>
+          <input
+            type="number"
+            id="flatNo"
+            class="form-control"
+            [(ngModel)]="newUser.flatNo"
+            name="flatNo"
+            required>
+        </div>
+      </div>
+
+      <div class="row">
+
+          <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Register</button>
+
+      </div>
+
+
+    </form>
+  </div>
+</div>

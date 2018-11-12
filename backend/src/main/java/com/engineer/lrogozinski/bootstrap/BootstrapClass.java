@@ -44,23 +44,17 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         loadRoles();
         assignUser1ToAdmin();
         loadEventCategories();
-        addFavouriteEventCategoryToUser1();
-    }
-
-    private void addFavouriteEventCategoryToUser1() {
-        UserData userData = userDataService.findByUsername("user1");
-        EventCategory eventCategory = eventCategoryService.findByName("SPORT");
-        userData.addFavouriteEventCategory(eventCategory);
-        userDataService.save(userData);
     }
 
     private void loadEventCategories() {
 
         EventCategory sport = new EventCategory();
         sport.setName("SPORT");
+        sport.setImageUrl("https://banner2.kisspng.com/20180408/cdw/kisspng-computer-icons-sport-icon-design-spor-5acacc0bd07735.2046578415232399478539.jpg");
         eventCategoryService.save(sport);
         EventCategory relax = new EventCategory();
         relax.setName("RELAX");
+        relax.setImageUrl("https://image.flaticon.com/icons/png/512/157/157830.png");
         eventCategoryService.save(relax);
     }
 
@@ -70,13 +64,17 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         Account user3 = accountService.findByUsername("user3");
         Role admin = roleService.findByRole("ADMIN");
         Role user = roleService.findByRole("USER");
-        user1.addRole(admin);
-        user1.addRole(user);
-        user2.addRole(user);
-        user3.addRole(user);
-        accountService.save(user1);
-        accountService.save(user2);
-        accountService.save(user3);
+        user1.getRoles().add(admin);
+        user1.getRoles().add(user);
+        user2.getRoles().add(user);
+        user3.getRoles().add(user);
+        //user1.addRole(admin);
+        //user1.addRole(user);
+      //  user2.addRole(user);
+        //user3.addRole(user);
+       // accountService.save(user1);
+       // accountService.save(user2);
+       // accountService.save(user3);
     }
 
     public void loadRoles(){
@@ -103,7 +101,7 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         userData1.setStreet("Skierniewicka");
         userData1.setHouseNo(10);
         userData1.setFlatNo(2);
-        userData1.setAverageVote(0.0);
+       // userData1.setAverageVote(0.0);
         user1.setUserdata(userData1);
         userService.save(user1);
 //-------------------------------------------------------------------------
@@ -121,7 +119,7 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         userData2.setStreet("Zielona");
         userData2.setHouseNo(20);
         userData2.setFlatNo(5);
-        userData2.setAverageVote(0.0);
+       // userData2.setAverageVote(0.0);
         user2.setUserdata(userData2);
         userService.save(user2);
 
@@ -140,7 +138,7 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         userData3.setStreet("Malinowa");
         userData3.setHouseNo(30);
         userData3.setFlatNo(10);
-        userData3.setAverageVote(0.0);
+      //  userData3.setAverageVote(0.0);
         user3.setUserdata(userData3);
         userService.save(user3);
     }

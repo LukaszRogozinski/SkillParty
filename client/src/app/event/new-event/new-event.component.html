@@ -3,7 +3,7 @@
     <form (ngSubmit)="addEvent()" #f="ngForm">
       <div class="row">
         <div class="col-sm-12 form-group">
-          <label for="name">Name</label>
+          <label class="required-sign" for="name">Name</label>
           <input type="text"
                  id="name"
                  class="form-control"
@@ -28,7 +28,7 @@
       </div>
       <div class="pagination-centered">
         <div class="col-sm-4 form-group">
-          <label for="avaliableQuantity">Avaliable quantity</label>
+          <label class="required-sign" for="avaliableQuantity">Avaliable quantity</label>
           <input
             type="number"
             id="avaliableQuantity"
@@ -38,7 +38,7 @@
         </div>
 
         <div class="col-sm-4 form-group">
-          <label for="price">Price</label>
+          <label class="required-sign" for="price">Price</label>
           <input
             type="number"
             id="price"
@@ -49,7 +49,7 @@
         </div>
 
         <div class="col-sm-4 form-group">
-          <label for="eventCategory">Event category</label>
+          <label class="required-sign" for="eventCategory">Event category</label>
           <input
             type="text"
             id="eventCategory"

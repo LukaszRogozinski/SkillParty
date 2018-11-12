@@ -1,7 +1,5 @@
 package com.engineer.lrogozinski.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -20,14 +18,13 @@ public class EventCategory {
     @Column(name = "name")
     private String  name;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventCategory")
     private List<Event> events = new ArrayList<>();
 
     @ManyToMany(mappedBy = "favouriteEventCategories")
-    /*@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "USER_DATA_EVENT_CATEGORY", joinColumns = @JoinColumn(name = "event_category_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_data_id"))*/
-    //@JsonBackReference
     List<UserData> userDataList = new ArrayList<>();
 
     @Version
@@ -80,5 +77,13 @@ public class EventCategory {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

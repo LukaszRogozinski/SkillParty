@@ -1,10 +1,11 @@
-import { Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
 @Injectable()
 export class CustomEventsService {
 
-  isMyEvent = new Subject();
+  showLoggedUserDetails = new Subject();
+  showLoggedUserDetailsEvent = new EventEmitter<boolean>();
 
   constructor(){}
 

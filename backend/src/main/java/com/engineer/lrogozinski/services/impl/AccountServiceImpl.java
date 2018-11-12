@@ -33,9 +33,6 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account save(Account object)
     {
-       /* if(object.getPassword() != null){
-            object.setEncryptedPassword(bCryptPasswordEncoder.encode(object.getPassword()));
-        }*/
         return accountRepository.save(object);
     }
 

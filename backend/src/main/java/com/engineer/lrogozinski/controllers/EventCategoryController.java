@@ -8,6 +8,7 @@ import com.engineer.lrogozinski.dto.converter.EventCategoryDtoToEventCategory;
 import com.engineer.lrogozinski.dto.converter.EventCategoryToEventCategoryDto;
 import com.engineer.lrogozinski.services.EventCategoryService;
 import com.engineer.lrogozinski.services.UserDataService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,11 +53,12 @@ public class EventCategoryController {
 
     @RequestMapping(value ="/add", method = RequestMethod.POST)
    // @Transactional
-    public void addEventCategoryToFavouriteList(@RequestBody EventCategoryDto eventCategory, HttpServletRequest req) {
+    public ResponseEntity<?> addEventCategoryToFavouriteList(@RequestBody EventCategoryDto eventCategory, HttpServletRequest req) {
         String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
         UserData userData = userDataService.findByUsername(jwtTokenUtil.getUsernameFromToken(token));
         EventCategory eventCategoryy = eventCategoryService.findByName(eventCategory.getName());// eventCategoryDtoToEventCategory.convert(eventCategory);
         userData.addFavouriteEventCategory(eventCategoryy);
         userDataService.save(userData);
+        return ResponseEntity.ok().build();
     }
 }

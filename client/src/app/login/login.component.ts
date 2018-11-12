@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {AuthService} from '../core/auth.service';
 import {TokenStorage} from '../core/token.storage';
 import {IsLoggedService} from '../services/is-logged.service';
-import {CustomEventsService} from '../services/custom-events.service';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +14,7 @@ export class LoginComponent {
   constructor(private router: Router,
               private authService: AuthService,
               private token: TokenStorage,
-              private isLogedService: IsLoggedService,
-              private customService: CustomEventsService
+              private isLogedService: IsLoggedService
              ) {
   }
 
@@ -29,9 +27,9 @@ export class LoginComponent {
       data => {
         this.token.saveToken(data.token);
         this.router.navigate(['home']);
-        this.isLogedService.statusUpdatednew.next(true);
-        this.customService.isMyEvent.next(true);
-      }
+        this.isLogedService.statusUpdated.next(true);
+      },
+      error => console.log(error)
     );
   }
 

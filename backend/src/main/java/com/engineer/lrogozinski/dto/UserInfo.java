@@ -1,6 +1,5 @@
 package com.engineer.lrogozinski.dto;
 
-import com.engineer.lrogozinski.domain.EventCategory;
 import lombok.*;
 
 import java.util.ArrayList;

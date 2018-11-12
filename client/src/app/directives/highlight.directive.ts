@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostBinding, HostListener, Input, OnInit, Renderer2} from '@angular/core';
+import {Directive, HostBinding, HostListener, Input, OnInit} from '@angular/core';
 
 @Directive({
   selector: '[appHighlight]'
@@ -9,19 +9,17 @@ export class HighlightDirective implements OnInit{
 
   @HostBinding('style.backgroundColor') backgroundColor: string = 'transparent';
 
-  constructor(private elRef: ElementRef, private renderer: Renderer2) { }
+  constructor() { }
 
   ngOnInit(){
     this.backgroundColor = this.defaultColor;
   }
 
-  @HostListener('mouseenter') mouseover(eventData: Event) {
-    //this.renderer.setStyle(this.elRef.nativeElement, 'background-color', '#337ab7');
+  @HostListener('mouseenter') mouseover() {
     this.backgroundColor = this.highlightColor;
   }
 
-  @HostListener('mouseleave') mouseleave(eventData: Event) {
-   // this.renderer.setStyle(this.elRef.nativeElement, 'background-color', 'transparent');
+  @HostListener('mouseleave') mouseleave() {
     this.backgroundColor = this.defaultColor;
   }
 }

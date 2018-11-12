@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import {CustomMaterialModule} from './core/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './core/app-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -9,7 +8,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UserService} from './user/user.service';
 import {Interceptor} from './core/inteceptor';
-import {ErrorDialogComponent} from './core/error-dialog.component';
 import {AuthService} from './core/auth.service';
 import {TokenStorage} from './core/token.storage';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -28,16 +26,18 @@ import {RouteGuardComponent} from './guards/routeGuard.component';
 import { PageNotAvaliableComponent } from './page-not-avaliable/page-not-avaliable.component';
 import {LoginGuardComponent} from './guards/loginGuard.component';
 import {CanDeactivateGuard} from './guards/can-deactivate-guard.service';
-import {CollapseModule} from 'ngx-bootstrap';
+import {CollapseModule, ModalModule} from 'ngx-bootstrap';
 import {IsLoggedService} from './services/is-logged.service';
 import { MyEventListComponent } from './event/my-event-list/my-event-list.component';
-import {IsLoggedUserEventService} from './services/is-logged-user-event.service';
-import {CustomEventsService} from './services/custom-events.service';
+import { HomeComponent } from './home/home.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import {MessageService} from './services/message.service';
+import { RegisterComponent } from './login/register/register.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ErrorDialogComponent,
     NavbarComponent,
     WebsocketComponent,
     EventListComponent,
@@ -50,31 +50,33 @@ import {CustomEventsService} from './services/custom-events.service';
     UserDetailComponent,
     EventCategoryListComponent,
     PageNotAvaliableComponent,
-    MyEventListComponent
+    MyEventListComponent,
+    HomeComponent,
+    ConfirmDialogComponent,
+    RegisterComponent,
   ],
   imports: [
+
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CustomMaterialModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     CollapseModule.forRoot(),
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
+    ModalModule.forRoot()
   ],
-  entryComponents: [ErrorDialogComponent],
+  entryComponents: [ ConfirmDialogComponent],
   providers: [
-    ErrorDialogComponent,
     UserService,
     AuthService,
     TokenStorage,
     RouteGuardComponent,
     LoginGuardComponent,
     CanDeactivateGuard,
-    CustomEventsService,
     IsLoggedService,
-    IsLoggedUserEventService,
+    MessageService,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

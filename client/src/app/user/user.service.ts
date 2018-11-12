@@ -19,4 +19,9 @@ export class UserService {
   public getLoggedUserDetail(): Observable<any> {
    return this.http.get(this.userUrl + '/detail');
   }
+
+  public getUserDetailByUsername(username: string): Observable<any> {
+    let usernameee = username;
+    return this.http.get(this.userUrl + '/detail/' + username);
+  }
 }

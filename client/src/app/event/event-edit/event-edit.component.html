@@ -1,45 +1,83 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form (ngSubmit)="editEvent()" #f="ngForm">
       <div class="row">
         <div class="col-sm-12 form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" class="form-control">
+          <label class="required-sign" for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            [(ngModel)]="event.name"
+            name="name"
+            required
+            #name="ngModel"
+            >
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="description">Description</label>
-          <input type="text" id="description" class="form-control">
+          <input
+            type="text"
+            id="description"
+            class="form-control"
+            [(ngModel)]="event.description"
+            name="description"
+            #description="ngModel"
+          >
         </div>
       </div>
       <div class="pagination-centered">
         <div class="col-sm-4 form-group">
           <label for="avaliableQuantity">Avaliable quantity</label>
-          <input type="number" id="avaliableQuantity" class="form-control">
+          <input
+            type="number"
+            id="avaliableQuantity"
+            class="form-control"
+            [(ngModel)]="event.avaliableQuantity"
+            name="avaliableQuantity"
+            #avaliableQuantity="ngModel"
+          >
         </div>
 
         <div class="col-sm-4 form-group">
-          <label for="price">Price</label>
-          <input type="number" id="price" class="form-control">
+          <label class="required-sign" for="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            class="form-control"
+            [(ngModel)]="event.price"
+            name="price"
+            #price="ngModel">
         </div>
 
 
         <div class="col-sm-4 form-group">
-          <label for="eventCategory">Event category</label>
-          <input type="text" id="eventCategory" class="form-control">
+          <label class="required-sign" for="eventCategory">Event category</label>
+          <input
+            type="text"
+            id="eventCategory"
+            class="form-control"
+            [(ngModel)]="event.eventCategory"
+            name="eventCategory"
+            #eventCategory="ngModel">
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="imageUrl">Image url</label>
-          <input type="text" id="imageUrl" class="form-control">
+          <input
+            type="text"
+            id="imageUrl"
+            class="form-control"
+            [(ngModel)]="event.imageUrl"
+            name="imageUrl"
+            #imageUrl="ngModel">
         </div>
       </div>
       <div class="pull-left">
-        <button class="btn btn-primary" type="button">Clear</button>
-        <button class="btn btn-danger" type="button">Delete</button>
-
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Save</button>
       </div>
     </form>
   </div>

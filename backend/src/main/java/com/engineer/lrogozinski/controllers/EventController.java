@@ -70,13 +70,7 @@ public class EventController {
        userData.addEvent(event);
        userDataService.save(userData);
     }
-/*
 
-    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public EventDto getEventDetails(@PathVariable(value = "id") Integer id){
-        return eventToEventDto.convert(eventService.findById(id));
-    }
-*/
 
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public EventDto getEventDetails(@PathVariable(value = "id") Integer id, HttpServletRequest req){
@@ -91,7 +85,7 @@ public class EventController {
         return eventDto;
     }
 
-    @RequestMapping(value = "/detail/{id}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/detail/{id}/delete", method = RequestMethod.DELETE)
     public ResponseEntity<?> DeleteEvent(@PathVariable(value = "id") Integer id){
          eventService.deleteById(id);
          return ResponseEntity.ok().build();

@@ -54,4 +54,10 @@ public class UserController {
         UserInfo userInfo =  accountToUserInfo.convert(userService.findOne(jwtTokenUtil.getUsernameFromToken(token)));
         return userInfo;
     }
+
+    @RequestMapping(value="/detail/{username}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public UserInfo getLoggedUserInfo(@PathVariable(value = "username") String username){
+        return accountToUserInfo.convert(userService.findOne(username));
+    }
 }

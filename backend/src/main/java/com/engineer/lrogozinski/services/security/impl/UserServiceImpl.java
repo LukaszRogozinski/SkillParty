@@ -1,10 +1,12 @@
 package com.engineer.lrogozinski.services.security.impl;
 
 import com.engineer.lrogozinski.domain.Account;
+import com.engineer.lrogozinski.domain.Role;
 import com.engineer.lrogozinski.dto.AccountDto;
 import com.engineer.lrogozinski.dto.UserInfo;
 import com.engineer.lrogozinski.dto.converter.AccountToUserInfo;
 import com.engineer.lrogozinski.services.AccountService;
+import com.engineer.lrogozinski.services.RoleService;
 import com.engineer.lrogozinski.services.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -27,6 +30,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Autowired
     private AccountToUserInfo accountToUserInfo;
+
+    @Autowired
+    private RoleService roleService;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account user = accountService.findByUsername(username);
@@ -73,7 +79,14 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setUserData(user.getUserdata());
+        addUserRole(newUser);
         return accountService.save(newUser);
+    }
+
+    public Account addUserRole(Account account){
+        Role user = roleService.findByRole("USER");
+        account.getRoles().add(user);
+        return account;
     }
 }
 

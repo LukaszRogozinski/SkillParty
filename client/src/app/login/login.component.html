@@ -1,14 +1,38 @@
 <div class="row">
-  <h3>Sign up</h3>
+  <h3>Login page</h3>
   <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-    <form (ngSubmit)="login()">
+    <form (ngSubmit)="login()" #f="ngForm">
       <div class="form-group">
-        <input placeholder="username" id="username" name="username" class="form-control" [(ngModel)]="username" required>
+        <input
+          id="username"
+          name="username"
+          class="form-control"
+          [(ngModel)]="username"
+          required
+          #usernameModel="ngModel"
+          >
+        <span class="help-block" style="color: red" *ngIf="!usernameModel.valid && usernameModel.touched">Please enter an username!</span>
+
       </div>
       <div class="form-group">
-        <input placeholder="password" type="password" id="password" name="password" class="form-control" [(ngModel)]="password" required>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          [(ngModel)]="password"
+          required
+          #passwordModel="ngModel"
+          >
+        <span class="help-block" style="color: red" *ngIf="!passwordModel.valid && passwordModel.touched">Please enter a password!</span>
+
       </div>
-      <button class="btn btn-primary" type="submit" >Sign up</button>
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid" >Sign in</button>
+      <br>
+      <br>
+      <div class="row">
+        <p>Don't have an account? <a routerLink="/register">sign up</a></p>
+      </div>
     </form>
   </div>
 </div>

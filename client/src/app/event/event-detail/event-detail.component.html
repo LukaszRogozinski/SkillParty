@@ -24,7 +24,7 @@
             Manage Event <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" >
-            <li><a appHighlight  href="#" >Edit event</a></li>
+            <li><a appHighlight  [routerLink]="['/event-edit', event.id]" >Edit event</a></li>
             <li><a appHighlight [highlightColor]="'#c9302c'" (click)="deleteEvent()">Delete event</a></li>
           </ul>
         </div>

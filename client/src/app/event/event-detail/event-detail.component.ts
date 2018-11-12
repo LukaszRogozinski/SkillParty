@@ -1,7 +1,8 @@
 import { Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EventService} from '../event.service';
 import {Event} from '../model/event.model';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -14,7 +15,9 @@ export class EventDetailComponent implements OnInit {
   event: Event;
 
   constructor(private route: ActivatedRoute,
-              private eventService: EventService) {  }
+              private eventService: EventService,
+              private router: Router,
+              private messageService: MessageService) {  }
 
   ngOnInit() {
     this.getEvent();
@@ -33,14 +36,26 @@ export class EventDetailComponent implements OnInit {
     );
   }
 
+
   deleteEvent(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.eventService.deleteEventByID(id)
-      .subscribe(
-        response => {
-          console.log(response);
-        },
-        error => console.log(error)
-      );
+    this.messageService.confirm(
+      'Delete Event', 'Do you want delete this event?', 'Yes', 'No'
+    ).subscribe(
+      confirmed => {
+        if(confirmed) {
+          const id = +this.route.snapshot.paramMap.get('id');
+          this.eventService.deleteEventByID(id)
+            .subscribe(
+              response => {
+                this.router.navigateByUrl('/home');
+                console.log(response);
+              },
+              error => console.log(error)
+            );
+        }
+      }
+    );
   }
+
+
 }

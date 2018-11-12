@@ -14,13 +14,9 @@ public class Vote {
     private Integer quantity;
 
     @ManyToOne
-    /*@JoinColumn(name = "id", insertable = false, updatable = false)*/
     private Event event;
 
     @ManyToOne
-/*
-    @JoinColumn(name = "id", insertable = false, updatable = false)
-*/
     private UserData userData;
 
     public Integer getId() {

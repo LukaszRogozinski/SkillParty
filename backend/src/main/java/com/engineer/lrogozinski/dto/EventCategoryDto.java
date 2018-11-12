@@ -8,4 +8,5 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class EventCategoryDto {
     private String name;
+    private String imageUrl;
 }

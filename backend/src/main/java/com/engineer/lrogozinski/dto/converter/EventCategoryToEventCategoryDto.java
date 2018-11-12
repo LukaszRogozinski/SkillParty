@@ -13,6 +13,7 @@ public class EventCategoryToEventCategoryDto implements Converter<EventCategory,
 
         return EventCategoryDto.builder()
                     .name(eventCategory.getName())
+                .imageUrl(eventCategory.getImageUrl())
                     .build();
     }
 }
