@@ -38,7 +38,6 @@ public class JwtTokenUtil implements Serializable {
                 usedTokenService.delete(usedToken);
             }
         });
-
     }
 
     public String getUsernameFromToken(String token) {

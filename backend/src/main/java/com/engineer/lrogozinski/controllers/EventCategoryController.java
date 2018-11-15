@@ -9,6 +9,7 @@ import com.engineer.lrogozinski.dto.converter.EventCategoryToEventCategoryDto;
 import com.engineer.lrogozinski.services.EventCategoryService;
 import com.engineer.lrogozinski.services.UserDataService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,7 @@ public class EventCategoryController {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<EventCategoryDto> getAllEventCategories(){
 
@@ -51,6 +53,7 @@ public class EventCategoryController {
          return eventCategoryDtoList;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value ="/add", method = RequestMethod.POST)
    // @Transactional
     public ResponseEntity<?> addEventCategoryToFavouriteList(@RequestBody EventCategoryDto eventCategory, HttpServletRequest req) {

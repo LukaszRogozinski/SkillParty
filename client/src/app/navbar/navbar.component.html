@@ -20,7 +20,7 @@
         <li class="dropdown" appDropdown *ngIf="isLogged">
       <a class="dropdown-toggle" role="button">Manage<span class="caret"></span> </a>
           <ul class="dropdown-menu">
-           <li ><a class="" [routerLink]="['/detail', username]" appHighlight>My account</a> </li>
+           <li ><a class="" [routerLink]="['/user-detail', username]" appHighlight>My account</a> </li>
             <li  ><a style="cursor: pointer" appHighlight [defaultColor]="'transparent'" (click)="logout()">Logout</a> </li>
           </ul>
         </li>

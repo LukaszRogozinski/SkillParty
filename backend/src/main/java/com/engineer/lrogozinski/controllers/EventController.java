@@ -9,6 +9,7 @@ import com.engineer.lrogozinski.dto.converter.EventToEventDto;
 import com.engineer.lrogozinski.services.EventService;
 import com.engineer.lrogozinski.services.UserDataService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,7 @@ public class EventController {
         this.eventToEventDto = eventToEventDto;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<EventDto> getAllEvents(){
         List<EventDto> eventDtoList = new ArrayList<>();
@@ -50,7 +52,7 @@ public class EventController {
         });
         return eventDtoList;
     }
-
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value="/all-mine-events", method = RequestMethod.GET)
     public List<EventDto> getAllMineEvents(HttpServletRequest req) {
         String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
@@ -60,6 +62,7 @@ public class EventController {
         return eventDtoList;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @Transactional
     public void addEvent(@RequestBody EventDto eventDto, HttpServletRequest req){
@@ -71,7 +74,7 @@ public class EventController {
        userDataService.save(userData);
     }
 
-
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public EventDto getEventDetails(@PathVariable(value = "id") Integer id, HttpServletRequest req){
         String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
@@ -85,6 +88,7 @@ public class EventController {
         return eventDto;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/detail/{id}/delete", method = RequestMethod.DELETE)
     public ResponseEntity<?> DeleteEvent(@PathVariable(value = "id") Integer id){
          eventService.deleteById(id);

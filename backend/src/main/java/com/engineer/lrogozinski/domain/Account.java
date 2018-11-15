@@ -46,7 +46,6 @@ public class Account {
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private UserData userData;
 
-
     public Integer getId() {
         return id;
     }

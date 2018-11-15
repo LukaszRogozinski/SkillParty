@@ -1,4 +1,5 @@
 package com.engineer.lrogozinski.dto;
+import java.util.Date;
 
 import lombok.*;
 
@@ -12,6 +13,8 @@ public class EventDto {
     private Integer usernameOwnerId;
     private Integer id;
     private String name;
+    private String place;
+    private Date date;
     private String description;
     private Integer avaliableQuantity;
     private Integer price;

@@ -40,7 +40,6 @@ export class TokenStorage {
     let jwtData = jwt.split('.')[1];
     let decodedJwtJsonData = window.atob(jwtData);
     let decodedToken: {exp:number, iat: number, scopes: string[], sub: string};
-   // let decodedJwtData = JSON.parse(decodedJwtJsonData);
     decodedToken = JSON.parse(decodedJwtJsonData);
     return decodedToken.sub;
   }

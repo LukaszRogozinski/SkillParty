@@ -16,10 +16,11 @@ import {CanDeactivateGuard} from '../guards/can-deactivate-guard.service';
 import {MyEventListComponent} from '../event/my-event-list/my-event-list.component';
 import {HomeComponent} from '../home/home.component';
 import {RegisterComponent} from '../login/register/register.component';
+import {UserEditComponent} from '../user/user-edit/user-edit.component';
 
 const routes: Routes = [
-  { path: 'users', component: UserListComponent, canActivate: [RouteGuardComponent] },
-  { path: 'login', component: LoginComponent, canActivate: [LoginGuardComponent] },
+  {path: 'users', component: UserListComponent, canActivate: [RouteGuardComponent]},
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuardComponent]},
   {path : '', component : LoginComponent, pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'event', component: EventDetailComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path: 'event-edit/:id', component: EventEditComponent},
   {path: 'new-event', component: NewEventComponent, canDeactivate: [CanDeactivateGuard]},
   {path: 'event-detail/:id', component: EventDetailComponent},
-  {path: 'detail/:username', component: UserDetailComponent},
+  {path: 'user-detail/:username', component: UserDetailComponent},
+  {path: 'user-edit/:username', component: UserEditComponent},
   {path: 'event-category-list', component: EventCategoryListComponent},
   {path: 'pageNotAvaliable', component: PageNotAvaliableComponent, data: {message: 'Page not avaliable'}},
   {path: 'pageNotFound', component: PageNotAvaliableComponent, data: {message: 'Page not found'}},

@@ -6,6 +6,8 @@ import {CanComponentDeactivate} from '../../guards/can-deactivate-guard.service'
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {EventCategory} from '../../event-category/model/event-category.model';
+import {EventCategoryService} from '../../event-category/event-category.service';
 
 @Component({
   selector: 'app-new-event',
@@ -14,6 +16,8 @@ import {NgForm} from '@angular/forms';
 })
 export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
+  eventCategories: EventCategory[];
+  selectedCategory: String;
   @ViewChild('f') signupForm: NgForm;
   newEvent: NewEvent = new NewEvent();
   ws: any;
@@ -23,21 +27,30 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   changesSaved = false;
 
   constructor(private eventService: EventService,
+              private eventCategoryService: EventCategoryService,
               private router: Router) { }
 
   ngOnInit() {
-    this.connect();
+    this.getEventCategories();
     this.newEvent.averageVote = 0;
   }
 
-  addEvent(){
+  getEventCategories(){
+    this.eventCategoryService.getEventCategories().subscribe(
+      response => this.eventCategories = response,
+      error => console.log(error)
+    );
+  }
 
+  addEvent(){
+    this.connect();
     this.eventService.add(this.newEvent)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
       );
-    this.sendName();
+    let a = this.ws.connected;
+      this.sendName();
     this.changesSaved = true;
     this.router.navigateByUrl('/home');
   }
@@ -47,7 +60,7 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
     let data = JSON.stringify({
       'name' : "jacek"
     })
-   // this.ws.send("/app/sportMessage", {});
+    // this.ws.send("/app/sportMessage", {});
     this.ws.send("/app/sportMessage", {}, data);
   }
 
@@ -63,7 +76,7 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
       });
       that.ws.subscribe("/sportTopic/reply", function(message) {
         console.log(message)
-     //   that.showGreeting(message.body);
+        //   that.showGreeting(message.body);
       });
       that.disabled = true;
     }, function(error) {

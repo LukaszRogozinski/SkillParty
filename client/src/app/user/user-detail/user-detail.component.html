@@ -14,7 +14,7 @@
         Manage User <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" >
-        <li><a appHighlight  href="#">Edit user</a></li>
+        <li><a appHighlight  [routerLink]="['/user-edit', user.username]">Edit user</a></li>
         <li><a appHighlight [highlightColor]="'#5cb85c'" routerLink="/event-category-list">Add favourite category</a></li>
       </ul>
     </div>
@@ -43,6 +43,11 @@
   <div class="row">
     <h3>City</h3>
     <h4>{{user.city}}</h4>
+  </div>
+
+  <div class="row">
+    <h3>Street</h3>
+    <h4>{{user.street}}</h4>
   </div>
 
   <div class="row">

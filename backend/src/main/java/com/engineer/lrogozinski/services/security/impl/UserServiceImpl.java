@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     private List<SimpleGrantedAuthority> getAuthority(Account user) {
         List authorities = new ArrayList();
         user.getRoles().forEach(role -> {
+         //   authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
         });
         return authorities;
@@ -62,6 +63,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public void delete(Integer id) {
         accountService.deleteById(id);
     }
+
+    @Override
+    public void deleteByUsername(String username) {accountService.deleteByUsername(username);}
 
     @Override
     public Account findOne(String username) {

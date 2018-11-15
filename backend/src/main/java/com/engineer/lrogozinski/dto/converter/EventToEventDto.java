@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EventToEventDto implements Converter<Event, EventDto> {
 
-
-
     @Override
     public EventDto convert(Event event) {
 
@@ -18,6 +16,8 @@ public class EventToEventDto implements Converter<Event, EventDto> {
                 .usernameOwnerId(event.getUser().getId())
                 .id(event.getId())
                 .name(event.getName())
+                .place(event.getPlace())
+                .date(event.getDate())
                 .description(event.getDescription())
                 .avaliableQuantity(event.getAvaliableQuantity())
                 .price(event.getPrice())

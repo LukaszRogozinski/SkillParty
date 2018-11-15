@@ -1,7 +1,8 @@
 package com.engineer.lrogozinski.services.impl;
 
-import com.engineer.lrogozinski.domain.Account;
 import com.engineer.lrogozinski.domain.UserData;
+import com.engineer.lrogozinski.dto.UserDataDto;
+import com.engineer.lrogozinski.dto.converter.UserDataDtoToUserData;
 import com.engineer.lrogozinski.repositories.UserDataRepository;
 import com.engineer.lrogozinski.services.AccountService;
 import com.engineer.lrogozinski.services.UserDataService;
@@ -18,9 +19,12 @@ public class UserDataServiceImpl implements UserDataService {
 
     private AccountService accountService;
 
-    public UserDataServiceImpl(UserDataRepository userDataRepository, AccountService accountService) {
+    private UserDataDtoToUserData userDataDtoToUserData;
+
+    public UserDataServiceImpl(UserDataRepository userDataRepository, AccountService accountService, UserDataDtoToUserData userDataDtoToUserData) {
         this.userDataRepository = userDataRepository;
         this.accountService = accountService;
+        this.userDataDtoToUserData = userDataDtoToUserData;
     }
 
     @Override
@@ -50,6 +54,7 @@ public class UserDataServiceImpl implements UserDataService {
     public void deleteById(Integer id) {
         userDataRepository.deleteById(id);
     }
+
 
     @Override
     @Transactional

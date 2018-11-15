@@ -21,6 +21,8 @@ public class EventDtoToEvent  implements Converter<EventDto, Event> {
     public Event convert(EventDto eventDto) {
         Event event = new Event();
         event.setName(eventDto.getName());
+        event.setPlace(eventDto.getPlace());
+        event.setDate(eventDto.getDate());
         event.setDescription(eventDto.getDescription());
         event.setAvaliableQuantity(eventDto.getAvaliableQuantity());
         event.setPrice(eventDto.getPrice());

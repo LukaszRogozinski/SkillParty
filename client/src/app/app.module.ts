@@ -33,6 +33,7 @@ import { HomeComponent } from './home/home.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import {MessageService} from './services/message.service';
 import { RegisterComponent } from './login/register/register.component';
+import { UserEditComponent } from './user/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { RegisterComponent } from './login/register/register.component';
     HomeComponent,
     ConfirmDialogComponent,
     RegisterComponent,
+    UserEditComponent,
   ],
   imports: [
 

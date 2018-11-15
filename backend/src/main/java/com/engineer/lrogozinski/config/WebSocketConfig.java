@@ -11,7 +11,7 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 public class WebSocketConfig  extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/sportTopic/", "/queue/");
+        config.enableSimpleBroker("/sportTopic/", "/relaxTopic/");
         config.setApplicationDestinationPrefixes("/app");
     }
 

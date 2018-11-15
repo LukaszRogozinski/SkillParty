@@ -20,9 +20,16 @@ public class WebSockerController {
 
     @MessageMapping("/sportMessage")
     @SendTo("/sportTopic/reply")
-    public String processMessageFromClient(@Payload String message) throws Exception {
+    public String processSportMessageFromClient(@Payload String message) throws Exception {
 
-        return "You have new sport event!";
+        return "You have new Sport event";
+    }
+
+    @MessageMapping("/relaxMessage")
+    @SendTo("/relaxTopic/reply")
+    public String processRelaxMessageFromClient(@Payload String message) throws Exception {
+            //String mes = message;
+        return message;
     }
 
     @MessageExceptionHandler

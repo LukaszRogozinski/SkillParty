@@ -63,14 +63,14 @@ export class EventCategoryListComponent implements OnInit {
     this.eventCategoryService.addToFavourite(eventCategory).subscribe(
       response => console.log('YEA added new category!' + response)
     );
-    this.connect(eventCategory.name);
+    this.connect(eventCategory);
     this.routerLink.navigateByUrl('/home');
   }
 
-  connect(eventCategoryName: String) {
+  connect(eventCategoryName: EventCategory) {
     //connect to stomp where stomp endpoint is exposed
     //let ws = new SockJS(http://localhost:8080/greeting);
-    let socket = new WebSocket("ws://localhost:8080/" + eventCategoryName.toLowerCase());
+    let socket = new WebSocket("ws://localhost:8080/" + eventCategoryName.name.toLowerCase());
     this.ws = Stomp.over(socket);
     let that = this;
     this.ws.connect({}, function(frame) {
@@ -80,12 +80,11 @@ export class EventCategoryListComponent implements OnInit {
       that.ws.subscribe("/sportTopic/reply", function(message) {
         console.log(message)
         that.create(message.body)
-       // that.showGreeting(message.body);
+        // that.showGreeting(message.body);
       });
       that.disabled = true;
     }, function(error) {
       alert("STOMP error " + error);
     });
   }
-
 }

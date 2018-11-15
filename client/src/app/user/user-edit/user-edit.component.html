@@ -1,0 +1,94 @@
+<div class="col-xs-12" *ngIf="user">
+
+  <div class="row">
+    <h2>User details</h2>
+  </div>
+
+  <form (ngSubmit)="editUser()" #f="ngForm">
+
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-10 form-group">
+        <label class="required-sign" for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="user.email"
+          name="email"
+          required
+          #email="ngModel"
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-10 form-group">
+        <label class="required-sign" for="city">City</label>
+        <input
+          type="text"
+          id="city"
+          class="form-control"
+          [(ngModel)]="user.city"
+          name="city"
+          required
+          #city="ngModel"
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-10 form-group">
+        <label class="required-sign" for="street">Street</label>
+        <input
+          type="text"
+          id="street"
+          class="form-control"
+          [(ngModel)]="user.street"
+          name="street"
+          required
+          #street="ngModel"
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-10 form-group">
+        <label class="required-sign" for="houseNo">House number</label>
+        <input
+          type="text"
+          id="houseNo"
+          class="form-control"
+          [(ngModel)]="user.houseNo"
+          name="houseNo"
+          required
+          #houseNo="ngModel"
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-10 form-group">
+        <label class="required-sign" for="flatNo">Flat number</label>
+        <input
+          type="text"
+          id="flatNo"
+          class="form-control"
+          [(ngModel)]="user.flatNo"
+          name="flatNo"
+          required
+          #flatNo="ngModel"
+        >
+      </div>
+    </div>
+<!--
+  <div class="row">
+    <h3>Favourite categories</h3>
+    <div *ngFor="let category of user.favouriteCategories">
+      <h4>{{category}}</h4>
+    </div>
+  </div>
+-->
+
+    <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Save</button>
+  </form>
+</div>

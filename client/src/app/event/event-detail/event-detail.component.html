@@ -36,17 +36,27 @@
       </div>
 
       <div class="row">
+        <h3>Place</h3>
+        <h4>{{event.place}}</h4>
+      </div>
+
+      <div class="row">
+        <h3>Date</h3>
+        <h4>{{event.date | date: 'dd/MM/yyyy'}}</h4>
+      </div>
+
+      <div class="row">
         <h3>Avaliable quantity</h3>
         <h4>{{event.avaliableQuantity}}</h4>
       </div>
 
       <div class="row">
-        <h3>price</h3>
-        <h4>{{event.price}}</h4>
+        <h3>Price</h3>
+        <h4>{{event.price}} PLN</h4>
       </div>
 
       <div class="row">
-        <h3>average Vote</h3>
+        <h3>Average Vote</h3>
         <h4>{{event.averageVote}}</h4>
       </div>
 

@@ -48,9 +48,9 @@ export class EventDetailComponent implements OnInit {
             .subscribe(
               response => {
                 this.router.navigateByUrl('/home');
-                console.log(response);
+                console.log("success" + response);
               },
-              error => console.log(error)
+              error => console.log("error" + error)
             );
         }
       }

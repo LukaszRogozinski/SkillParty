@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,14 @@ public class Event {
     @NotNull
     @Column(name = "name")
     private String name;
+
+    @NotNull
+    @Column(name = "place")
+    private String place;
+
+    @NotNull
+    @Column(name = "date")
+    private Date date;
 
     @NotNull
     @Column(name = "description")
@@ -67,6 +76,22 @@ public class Event {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getDescription() {
