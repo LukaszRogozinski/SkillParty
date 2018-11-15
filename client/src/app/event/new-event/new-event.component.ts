@@ -17,13 +17,11 @@ import {EventCategoryService} from '../../event-category/event-category.service'
 export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
   eventCategories: EventCategory[];
-  selectedCategory: String;
   @ViewChild('f') signupForm: NgForm;
   newEvent: NewEvent = new NewEvent();
   ws: any;
   name: string;
   disabled: boolean;
-  allowEdit = false;
   changesSaved = false;
 
   constructor(private eventService: EventService,
@@ -31,6 +29,7 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
               private router: Router) { }
 
   ngOnInit() {
+
     this.getEventCategories();
     this.newEvent.averageVote = 0;
   }
@@ -56,27 +55,25 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   }
 
   sendName() {
-
     let data = JSON.stringify({
-      'name' : "jacek"
+      'title' : this.newEvent.eventCategory.toLocaleLowerCase() + " Event",
+      'body' : 'You have new ' +  this.newEvent.eventCategory.toLowerCase() + ' event',
+      'type' : 'Info'
     })
-    // this.ws.send("/app/sportMessage", {});
-    this.ws.send("/app/sportMessage", {}, data);
+    this.ws.ws.onopen = () => this.ws.send("/app/" + this.newEvent.eventCategory.toLowerCase() + "Message", {}, data);
   }
 
   connect() {
-    //connect to stomp where stomp endpoint is exposed
-    //let ws = new SockJS(http://localhost:8080/greeting);
-    let socket = new WebSocket("ws://localhost:8080/sport");
-    this.ws = Stomp.over(socket);
+    let socket = new WebSocket("ws://localhost:8080/" + this.newEvent.eventCategory.toLowerCase());
+    this.ws = Stomp.over(socket );
+
     let that = this;
     this.ws.connect({}, function(frame) {
       that.ws.subscribe("/errors", function(message) {
         alert("Error " + message.body);
       });
-      that.ws.subscribe("/sportTopic/reply", function(message) {
+        that.ws.subscribe("/" + that.newEvent.eventCategory.toLowerCase() + "Topic/reply", function(message) {
         console.log(message)
-        //   that.showGreeting(message.body);
       });
       that.disabled = true;
     }, function(error) {

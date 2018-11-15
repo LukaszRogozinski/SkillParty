@@ -22,7 +22,7 @@ public class WebSockerController {
     @SendTo("/sportTopic/reply")
     public String processSportMessageFromClient(@Payload String message) throws Exception {
 
-        return "You have new Sport event";
+        return message;
     }
 
     @MessageMapping("/relaxMessage")

@@ -4,7 +4,7 @@ import {EventCategoryService} from '../event-category.service';
 import {Router} from '@angular/router';
 import * as Stomp from 'stompjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NotificationsService } from 'angular2-notifications';
+import {NotificationsService, NotificationType} from 'angular2-notifications';
 
 @Component({
   selector: 'app-event-category-list',
@@ -48,10 +48,12 @@ export class EventCategoryListComponent implements OnInit {
 
   create(message) {
 
+    let messageBody : {title: string, body: string, type: string};
+    messageBody = JSON.parse(message);
     const temp = this.form.getRawValue();
-    const title = 'Sport event';//temp.title;
-    const content = message;//temp.content;
-    const type = temp.type;
+    const title = messageBody.title;
+    const content = messageBody.body;
+    const type = NotificationType[messageBody.type];
 
     delete temp.title;
     delete temp.content;
@@ -77,10 +79,9 @@ export class EventCategoryListComponent implements OnInit {
       that.ws.subscribe("/errors", function(message) {
         alert("Error " + message.body);
       });
-      that.ws.subscribe("/sportTopic/reply", function(message) {
+      that.ws.subscribe("/" + eventCategoryName.name.toLowerCase() +  "Topic/reply", function(message) {
         console.log(message)
         that.create(message.body)
-        // that.showGreeting(message.body);
       });
       that.disabled = true;
     }, function(error) {
