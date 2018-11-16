@@ -34,6 +34,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import {MessageService} from './services/message.service';
 import { RegisterComponent } from './login/register/register.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
+import {HttpService} from './services/http.service';
+import {HttpErrorHandler} from './services/http-error-handler.service';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,8 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
     CanDeactivateGuard,
     IsLoggedService,
     MessageService,
+    HttpService,
+    HttpErrorHandler,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true}

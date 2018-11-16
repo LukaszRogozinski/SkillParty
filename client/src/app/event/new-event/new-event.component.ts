@@ -56,7 +56,7 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
   sendName() {
     let data = JSON.stringify({
-      'title' : this.newEvent.eventCategory.toLocaleLowerCase() + " Event",
+      'title' : this.newEvent.eventCategory.toLocaleLowerCase() + " event",
       'body' : 'You have new ' +  this.newEvent.eventCategory.toLowerCase() + ' event',
       'type' : 'Info'
     })

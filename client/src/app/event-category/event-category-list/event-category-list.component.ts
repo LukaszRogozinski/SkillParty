@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import * as Stomp from 'stompjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-event-category-list',
@@ -15,7 +16,6 @@ export class EventCategoryListComponent implements OnInit {
 
   eventCategories: EventCategory[];
 
-  form: FormGroup;
 
   ws: any;
   name: string;
@@ -24,7 +24,8 @@ export class EventCategoryListComponent implements OnInit {
   constructor(private eventCategoryService: EventCategoryService,
               private routerLink: Router,
               private _notifications: NotificationsService,
-              private _fb: FormBuilder) { }
+              private _fb: FormBuilder,
+              private messageService: MessageService) { }
 
   ngOnInit() {
     this.eventCategoryService.getEventCategories().subscribe(
@@ -33,32 +34,6 @@ export class EventCategoryListComponent implements OnInit {
       },
       (error) => console.log(error)
     );
-
-    this.form = this._fb.group({
-      type: 'info',
-      title: 'This is just a title',
-      content: 'This is just some content',
-      timeOut: 5000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-      animate: 'fromRight'
-    });
-  }
-
-  create(message) {
-
-    let messageBody : {title: string, body: string, type: string};
-    messageBody = JSON.parse(message);
-    const temp = this.form.getRawValue();
-    const title = messageBody.title;
-    const content = messageBody.body;
-    const type = NotificationType[messageBody.type];
-
-    delete temp.title;
-    delete temp.content;
-    delete temp.type;
-    this._notifications.create(title, content, type, temp)
   }
 
   addToFavourite(eventCategory: EventCategory) {
@@ -81,7 +56,7 @@ export class EventCategoryListComponent implements OnInit {
       });
       that.ws.subscribe("/" + eventCategoryName.name.toLowerCase() +  "Topic/reply", function(message) {
         console.log(message)
-        that.create(message.body)
+        that.messageService.createNotification(message.body)
       });
       that.disabled = true;
     }, function(error) {
