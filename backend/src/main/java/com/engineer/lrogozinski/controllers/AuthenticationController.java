@@ -32,7 +32,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws Exception {
-
+    try {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginUser.getUsername(),
@@ -41,15 +41,20 @@ public class AuthenticationController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
-        List<UsedToken> usedTokens = usedTokenService.findAll();
-        for(int i=0; i<usedTokens.size(); i++){
+        usedTokenService.save(new UsedToken(token, new Date()));
+        return ResponseEntity.ok(new AuthToken(token));
+    } catch (org.springframework.security.authentication.BadCredentialsException e){
+        return ResponseEntity.status(403).body(e);
+    }
+
+     //   List<UsedToken> usedTokens = usedTokenService.findAll();
+       /* for(int i=0; i<usedTokens.size(); i++){
             if(usedTokens.get(i).getToken()
                     .equals(token)){
                 throw new Exception("current token was used before");
             }
-        }
-        usedTokenService.save(new UsedToken(token, new Date()));
-        return ResponseEntity.ok(new AuthToken(token));
+        }*/
+
     }
 
 }

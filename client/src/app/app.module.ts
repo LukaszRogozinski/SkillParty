@@ -36,6 +36,11 @@ import { RegisterComponent } from './login/register/register.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import {HttpService} from './services/http.service';
 import {HttpErrorHandler} from './services/http-error-handler.service';
+import {Error400Component} from './error-pages/400/error-400.component';
+import {Error401Component} from './error-pages/401/error-401.component';
+import {Error403Component} from './error-pages/403/error-403.component';
+import {Error404Component} from './error-pages/404/error-404.component';
+import {Error500Component} from './error-pages/500/error-500.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +63,11 @@ import {HttpErrorHandler} from './services/http-error-handler.service';
     ConfirmDialogComponent,
     RegisterComponent,
     UserEditComponent,
+    Error400Component,
+    Error401Component,
+    Error403Component,
+    Error404Component,
+    Error500Component
   ],
   imports: [
 
