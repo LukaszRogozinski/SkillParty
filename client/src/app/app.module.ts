@@ -41,6 +41,8 @@ import {Error401Component} from './error-pages/401/error-401.component';
 import {Error403Component} from './error-pages/403/error-403.component';
 import {Error404Component} from './error-pages/404/error-404.component';
 import {Error500Component} from './error-pages/500/error-500.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,8 @@ import {Error500Component} from './error-pages/500/error-500.component';
     AppRoutingModule,
     CollapseModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [ ConfirmDialogComponent],
   providers: [
