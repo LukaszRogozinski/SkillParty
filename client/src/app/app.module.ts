@@ -41,6 +41,8 @@ import {Error401Component} from './error-pages/401/error-401.component';
 import {Error403Component} from './error-pages/403/error-403.component';
 import {Error404Component} from './error-pages/404/error-404.component';
 import {Error500Component} from './error-pages/500/error-500.component';
+import {PushNotificationsService} from './services/push.notification.service';
+import { PushNotificationComponent } from './push-notification/push-notification.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import {Error500Component} from './error-pages/500/error-500.component';
     Error401Component,
     Error403Component,
     Error404Component,
-    Error500Component
+    Error500Component,
+    PushNotificationComponent
   ],
   imports: [
 
@@ -92,6 +95,7 @@ import {Error500Component} from './error-pages/500/error-500.component';
     IsLoggedService,
     MessageService,
     HttpService,
+    PushNotificationsService,
     HttpErrorHandler,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,

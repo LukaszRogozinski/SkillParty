@@ -6,6 +6,7 @@ import * as Stomp from 'stompjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 import {MessageService} from '../../services/message.service';
+import {PushNotificationsService} from '../../services/push.notification.service';
 
 @Component({
   selector: 'app-event-category-list',
@@ -16,7 +17,6 @@ export class EventCategoryListComponent implements OnInit {
 
   eventCategories: EventCategory[];
 
-
   ws: any;
   name: string;
   disabled: boolean;
@@ -25,7 +25,8 @@ export class EventCategoryListComponent implements OnInit {
               private routerLink: Router,
               private _notifications: NotificationsService,
               private _fb: FormBuilder,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private _notificationService: PushNotificationsService) { }
 
   ngOnInit() {
     this.eventCategoryService.getEventCategories().subscribe(
@@ -37,10 +38,11 @@ export class EventCategoryListComponent implements OnInit {
   }
 
   addToFavourite(eventCategory: EventCategory) {
-    this.eventCategoryService.addToFavourite(eventCategory).subscribe(
+    this._notificationService.requestPermission();
+  /*  this.eventCategoryService.addToFavourite(eventCategory).subscribe(
       response => console.log('YEA added new category!' + response)
-    );
-    this.connect(eventCategory);
+    );*/
+   // this.connect(eventCategory);
     this.routerLink.navigateByUrl('/home');
   }
 

@@ -17,6 +17,7 @@ import {MyEventListComponent} from '../event/my-event-list/my-event-list.compone
 import {HomeComponent} from '../home/home.component';
 import {RegisterComponent} from '../login/register/register.component';
 import {UserEditComponent} from '../user/user-edit/user-edit.component';
+import {PushNotificationsService} from '../services/push.notification.service';
 
 const routes: Routes = [
   {path: 'users', component: UserListComponent, canActivate: [RouteGuardComponent]},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'pageNotAvaliable', component: PageNotAvaliableComponent, data: {message: 'Page not avaliable'}},
   {path: 'pageNotFound', component: PageNotAvaliableComponent, data: {message: 'Page not found'}},
   {path: 'register', component: RegisterComponent},
+  {path: 'push-notification', component: PushNotificationsService},
   {path: '**', redirectTo: '/pageNotFound'}
 ];
 

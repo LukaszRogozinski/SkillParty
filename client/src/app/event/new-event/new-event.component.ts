@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {EventCategory} from '../../event-category/model/event-category.model';
 import {EventCategoryService} from '../../event-category/event-category.service';
+import {PushNotificationsService} from '../../services/push.notification.service';
 
 @Component({
   selector: 'app-new-event',
@@ -26,7 +27,8 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
   constructor(private eventService: EventService,
               private eventCategoryService: EventCategoryService,
-              private router: Router) { }
+              private router: Router,
+              private _notificationService: PushNotificationsService) { }
 
   ngOnInit() {
 
@@ -41,15 +43,41 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
     );
   }
 
+  notify() {
+    let data: Array < any >= [];
+    data.push({
+      'title': 'Approval',
+      'alertContent': 'This is First Alert -- By Debasis Saha'
+    });
+    data.push({
+      'title': 'Request',
+      'alertContent': 'This is Second Alert -- By Debasis Saha'
+    });
+    data.push({
+      'title': 'Leave Application',
+      'alertContent': 'This is Third Alert -- By Debasis Saha'
+    });
+    data.push({
+      'title': 'Approval',
+      'alertContent': 'This is Fourth Alert -- By Debasis Saha'
+    });
+    data.push({
+      'title': 'To Do Task',
+      'alertContent': 'This is Fifth Alert -- By Debasis Saha'
+    });
+    this._notificationService.generateNotification(data);
+  }
+
   addEvent(){
-    this.connect();
+    this.notify();
+  //  this.connect();
     this.eventService.add(this.newEvent)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
       );
-    let a = this.ws.connected;
-      this.sendName();
+//    let a = this.ws.connected;
+  //    this.sendName();
     this.changesSaved = true;
     this.router.navigateByUrl('/home');
   }
