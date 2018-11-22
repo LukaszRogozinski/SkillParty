@@ -43,6 +43,7 @@ import {Error404Component} from './error-pages/404/error-404.component';
 import {Error500Component} from './error-pages/500/error-500.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {NewsletterService} from './services/newsletter.service';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { environment } from '../environments/environment';
     IsLoggedService,
     MessageService,
     HttpService,
+    NewsletterService,
     HttpErrorHandler,
     {provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,

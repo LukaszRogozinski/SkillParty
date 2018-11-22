@@ -6,6 +6,8 @@ import * as Stomp from 'stompjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 import {MessageService} from '../../services/message.service';
+import {SwPush} from '@angular/service-worker';
+import {NewsletterService} from '../../services/newsletter.service';
 
 @Component({
   selector: 'app-event-category-list',
@@ -16,16 +18,20 @@ export class EventCategoryListComponent implements OnInit {
 
   eventCategories: EventCategory[];
 
+  readonly VAPID_PUBLIC_KEY = 'BI5mCqcxTLbVlaMXdtNgzuzvguutX4CW8SJ8qotChykJCs_9hBVlPfO-ccr4O6APBDCfe3DCICo8r-NVcR_tfrM';
 
   ws: any;
   name: string;
   disabled: boolean;
+  subscription: PushSubscription;
 
   constructor(private eventCategoryService: EventCategoryService,
               private routerLink: Router,
               private _notifications: NotificationsService,
               private _fb: FormBuilder,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private swPush: SwPush,
+              private newsletterService: NewsletterService) { }
 
   ngOnInit() {
     this.eventCategoryService.getEventCategories().subscribe(
@@ -34,6 +40,24 @@ export class EventCategoryListComponent implements OnInit {
       },
       (error) => console.log(error)
     );
+  }
+
+
+  subscribeToNotifications() {
+
+    this.swPush.requestSubscription({
+      serverPublicKey: this.VAPID_PUBLIC_KEY
+    })
+      .then(sub =>
+      {
+        this.subscription = sub;
+       // this.newsletterService.addPushSubscriber(this.subscription).subscribe();
+        console.log('PushSubscription: ');
+        console.log(this.subscription);
+        console.log('Sub: ');
+        console.log(sub);
+      })
+      .catch(err => console.error("Could not subscribe to notifications", err));
   }
 
   addToFavourite(eventCategory: EventCategory) {
