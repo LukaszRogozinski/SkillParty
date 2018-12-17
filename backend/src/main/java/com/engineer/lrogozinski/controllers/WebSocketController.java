@@ -9,7 +9,7 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class WebSockerController {
+public class WebSocketController {
 
     @Autowired
     private SimpMessageSendingOperations simpMessageSendingOperations;

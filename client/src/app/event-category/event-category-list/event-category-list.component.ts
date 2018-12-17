@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EventCategory} from '../model/event-category.model';
 import {EventCategoryService} from '../event-category.service';
 import {Router} from '@angular/router';
 import * as Stomp from 'stompjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {NotificationsService, NotificationType} from 'angular2-notifications';
 import {MessageService} from '../../services/message.service';
 import {SwPush} from '@angular/service-worker';
 import {NewsletterService} from '../../services/newsletter.service';
+import {PushNotificationService} from '../../services/push-notification.service';
 
 @Component({
   selector: 'app-event-category-list',
@@ -23,7 +24,7 @@ export class EventCategoryListComponent implements OnInit {
   ws: any;
   name: string;
   disabled: boolean;
-  subscription: PushSubscription;
+  pushSubscription: PushSubscription;
 
   constructor(private eventCategoryService: EventCategoryService,
               private routerLink: Router,
@@ -31,7 +32,9 @@ export class EventCategoryListComponent implements OnInit {
               private _fb: FormBuilder,
               private messageService: MessageService,
               private swPush: SwPush,
-              private newsletterService: NewsletterService) { }
+              private newsletterService: NewsletterService,
+              private pushService: PushNotificationService) {
+  }
 
   ngOnInit() {
     this.eventCategoryService.getEventCategories().subscribe(
@@ -45,19 +48,37 @@ export class EventCategoryListComponent implements OnInit {
 
   subscribeToNotifications() {
 
-    this.swPush.requestSubscription({
-      serverPublicKey: this.VAPID_PUBLIC_KEY
-    })
-      .then(sub =>
-      {
-        this.subscription = sub;
-       // this.newsletterService.addPushSubscriber(this.subscription).subscribe();
-        console.log('PushSubscription: ');
-        console.log(this.subscription);
-        console.log('Sub: ');
-        console.log(sub);
+    if (this.swPush.isEnabled) {
+      this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY
       })
-      .catch(err => console.error("Could not subscribe to notifications", err));
+        .then(subscription => {
+          this.pushSubscription = subscription;
+          console.log(JSON.stringify(this.pushSubscription));
+         // this.pushService.sendSubscriptionToTheServer(subscription).subscribe();
+          this.pushService.saveSuscriptionToBackEnd(this.pushSubscription).subscribe();
+        })
+        .catch(console.error);
+    }
+
+
+    /* this.swPush.requestSubscription({
+       serverPublicKey: this.VAPID_PUBLIC_KEY
+     })
+       .then(sub =>
+       {
+         this.subscription = sub;
+        // this.newsletterService.addPushSubscriber(this.subscription).subscribe();
+         console.log('PushSubscription: ');
+         console.log(this.subscription);
+         console.log('Sub: ');
+         console.log(sub);
+       })
+       .catch(err => console.error("Could not subscribe to notifications", err));*/
+  }
+
+  SendNotifications() {
+    this.pushService.sendNotification().subscribe();
   }
 
   addToFavourite(eventCategory: EventCategory) {
@@ -69,22 +90,22 @@ export class EventCategoryListComponent implements OnInit {
   }
 
   connect(eventCategoryName: EventCategory) {
-    //connect to stomp where stomp endpoint is exposed
-    //let ws = new SockJS(http://localhost:8080/greeting);
-    let socket = new WebSocket("ws://localhost:8080/" + eventCategoryName.name.toLowerCase());
+    // connect to stomp where stomp endpoint is exposed
+    // let ws = new SockJS(http://localhost:8080/greeting);
+    const socket = new WebSocket('ws://localhost:8080/' + eventCategoryName.name.toLowerCase());
     this.ws = Stomp.over(socket);
-    let that = this;
-    this.ws.connect({}, function(frame) {
-      that.ws.subscribe("/errors", function(message) {
-        alert("Error " + message.body);
+    const that = this;
+    this.ws.connect({}, function (frame) {
+      that.ws.subscribe('/errors', function (message) {
+        alert('Error ' + message.body);
       });
-      that.ws.subscribe("/" + eventCategoryName.name.toLowerCase() +  "Topic/reply", function(message) {
-        console.log(message)
-        that.messageService.createNotification(message.body)
+      that.ws.subscribe('/' + eventCategoryName.name.toLowerCase() + 'Topic/reply', function (message) {
+        console.log(message);
+        that.messageService.createNotification(message.body);
       });
       that.disabled = true;
-    }, function(error) {
-      alert("STOMP error " + error);
+    }, function (error) {
+      alert('STOMP error ' + error);
     });
   }
 }
