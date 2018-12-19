@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {EventCategory} from '../../event-category/model/event-category.model';
 import {EventCategoryService} from '../../event-category/event-category.service';
+import {PushNotificationService} from '../../services/push-notification.service';
 
 @Component({
   selector: 'app-new-event',
@@ -21,12 +22,12 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   newEvent: NewEvent = new NewEvent();
   ws: any;
   name: string;
-  disabled: boolean;
   changesSaved = false;
 
   constructor(private eventService: EventService,
               private eventCategoryService: EventCategoryService,
-              private router: Router) { }
+              private router: Router,
+              private pushService: PushNotificationService) { }
 
   ngOnInit() {
 
@@ -41,44 +42,25 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
     );
   }
 
+  sendNotifications(newEvent: NewEvent) {
+    this.pushService.getSubscriptionsFromDB().subscribe();
+    if (newEvent.eventCategory.toLowerCase() === 'sport') {
+      this.pushService.sendSportNotification().subscribe();
+    } else if (newEvent.eventCategory.toLowerCase() === 'relax') {
+      this.pushService.sendRelaxNotification().subscribe();
+    }
+  }
+
   addEvent(){
-    this.connect();
+    this.pushService.getSubscriptionsFromDB().subscribe();
     this.eventService.add(this.newEvent)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
       );
-    let a = this.ws.connected;
-      this.sendName();
+    this.sendNotifications(this.newEvent);
     this.changesSaved = true;
     this.router.navigateByUrl('/home');
-  }
-
-  sendName() {
-    let data = JSON.stringify({
-      'title' : this.newEvent.eventCategory.toLocaleLowerCase() + " event",
-      'body' : 'You have new ' +  this.newEvent.eventCategory.toLowerCase() + ' event',
-      'type' : 'Info'
-    })
-    this.ws.ws.onopen = () => this.ws.send("/app/" + this.newEvent.eventCategory.toLowerCase() + "Message", {}, data);
-  }
-
-  connect() {
-    let socket = new WebSocket("ws://localhost:8080/" + this.newEvent.eventCategory.toLowerCase());
-    this.ws = Stomp.over(socket );
-
-    let that = this;
-    this.ws.connect({}, function(frame) {
-      that.ws.subscribe("/errors", function(message) {
-        alert("Error " + message.body);
-      });
-        that.ws.subscribe("/" + that.newEvent.eventCategory.toLowerCase() + "Topic/reply", function(message) {
-        console.log(message)
-      });
-      that.disabled = true;
-    }, function(error) {
-      alert("STOMP error " + error);
-    });
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {

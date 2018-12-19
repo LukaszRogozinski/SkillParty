@@ -2,51 +2,73 @@ const express = require('express');
 const webpush = require('web-push');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
+const got = require('got');
 
 const PUBLIC_VAPID = 'BI5mCqcxTLbVlaMXdtNgzuzvguutX4CW8SJ8qotChykJCs_9hBVlPfO-ccr4O6APBDCfe3DCICo8r-NVcR_tfrM';
 const PRIVATE_VAPID = 'b5AwMS0KywWpy0Lft2YPtzfXiOAO8SK9qPvRO6KamsQ';
-const fakeDatabase = [];
-let subscriptions = [];
 const request = require('request');
 const app = express();
-var http = require('http');
-
+const allSubscriptions = [];
 app.use(cors());
 app.use(bodyParser.json());
 
 webpush.setVapidDetails('mailto:you@domain.com', PUBLIC_VAPID, PRIVATE_VAPID);
 
+app.get('/getAll', (req, res) => {
+	
+	request('http://localhost:8080/web-push/getAllWebSubscriptions', function(error, response, body) {
+		console.log('statusCode: ', response && response.statusCode);
+		console.log('allSubscriptionsBefore: ', allSubscriptions.length);
+			
+		const temp = JSON.parse(body);
+		
+		temp.forEach(subscription => {
+		allSubscriptions.push(subscription);
+		console.log('subscription added');
+		});
+		
+		console.log('allSubscriptionsAfter: ', allSubscriptions.length);
+	});
+ });
 
-app.post('/subscription', (req, res) => {
-  const subscription = req.body;
-  fakeDatabase.push(subscription);
-});
+app.post('/sendSportEvent', (req, res) => {
 
-app.get('/getAll', function(req, res) {
-	http.request('http://localhost:8080/web-push/getAllWebSubscriptions', function(response) {
-		subscriptions = response.pipe(res);
-		console.log(subscriptions);
-	}).on('error', function(e) {
-		res.sendStatus(500);
-	}).end();
-});
-
-
-app.post('/sendNotification', (req, res) => {
-  const notificationPayload = {
+ const notificationPayload = {
     notification: {
-      title: 'New Notification',
-      body: 'This is the body of the notification',
-      icon: 'assets/icons/icon-512x512.png'
+      title: 'New Sport Event',
+      body: 'Check out event list for new events!',
+      icon: 'assets/icons/sport.png'
     }
   };
 
-  const promises = [];
-  fakeDatabase.forEach(subscription => {
+	console.log('allSubscriptionsActual: ', allSubscriptions.length);
+	const promises = [];
+	allSubscriptions.forEach(subscription => {
     promises.push(webpush.sendNotification(subscription, JSON.stringify(notificationPayload)));
   });
   Promise.all(promises).then(() => res.sendStatus(200));
+
+	console.log('allSubscriptionsAfterFunction: ', allSubscriptions.length);
+});
+
+app.post('/sendRelaxEvent', (req, res) => {
+
+ const notificationPayload = {
+    notification: {
+      title: 'New Relax Event',
+      body: 'Check out event list for new events!',
+      icon: 'assets/icons/relax.png'
+    }
+  };
+
+	const promises = [];
+	allSubscriptions.forEach(subscription => {
+    promises.push(webpush.sendNotification(subscription, JSON.stringify(notificationPayload)));
+  });
+  Promise.all(promises).then(() => res.sendStatus(200));
+	while(allSubscriptions.length > 0) {
+	allSubscriptions.pop();
+	}
 });
 
 app.listen(3000, () => {

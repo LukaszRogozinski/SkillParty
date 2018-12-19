@@ -3,8 +3,8 @@ import {EventCategory} from '../model/event-category.model';
 import {EventCategoryService} from '../event-category.service';
 import {Router} from '@angular/router';
 import * as Stomp from 'stompjs';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {NotificationsService, NotificationType} from 'angular2-notifications';
+import {FormBuilder} from '@angular/forms';
+import {NotificationsService} from 'angular2-notifications';
 import {MessageService} from '../../services/message.service';
 import {SwPush} from '@angular/service-worker';
 import {NewsletterService} from '../../services/newsletter.service';
@@ -55,37 +55,18 @@ export class EventCategoryListComponent implements OnInit {
         .then(subscription => {
           this.pushSubscription = subscription;
           console.log(JSON.stringify(this.pushSubscription));
-         // this.pushService.sendSubscriptionToTheServer(subscription).subscribe();
           this.pushService.saveSuscriptionToBackEnd(this.pushSubscription).subscribe();
         })
         .catch(console.error);
     }
-
-
-    /* this.swPush.requestSubscription({
-       serverPublicKey: this.VAPID_PUBLIC_KEY
-     })
-       .then(sub =>
-       {
-         this.subscription = sub;
-        // this.newsletterService.addPushSubscriber(this.subscription).subscribe();
-         console.log('PushSubscription: ');
-         console.log(this.subscription);
-         console.log('Sub: ');
-         console.log(sub);
-       })
-       .catch(err => console.error("Could not subscribe to notifications", err));*/
-  }
-
-  SendNotifications() {
-    this.pushService.sendNotification().subscribe();
   }
 
   addToFavourite(eventCategory: EventCategory) {
     this.eventCategoryService.addToFavourite(eventCategory).subscribe(
       response => console.log('YEA added new category!' + response)
     );
-    this.connect(eventCategory);
+    this.subscribeToNotifications();
+
     this.routerLink.navigateByUrl('/home');
   }
 
