@@ -42,23 +42,18 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
     );
   }
 
-  sendNotifications(newEvent: NewEvent) {
+  sendNotifications() {
     this.pushService.getSubscriptionsFromDB().subscribe();
-    if (newEvent.eventCategory.toLowerCase() === 'sport') {
-      this.pushService.sendSportNotification().subscribe();
-    } else if (newEvent.eventCategory.toLowerCase() === 'relax') {
-      this.pushService.sendRelaxNotification().subscribe();
-    }
+    this.pushService.sendNotification().subscribe();
   }
 
   addEvent(){
-    this.pushService.getSubscriptionsFromDB().subscribe();
     this.eventService.add(this.newEvent)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
       );
-    this.sendNotifications(this.newEvent);
+    this.sendNotifications();
     this.changesSaved = true;
     this.router.navigateByUrl('/home');
   }

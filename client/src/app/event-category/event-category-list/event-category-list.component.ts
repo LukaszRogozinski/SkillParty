@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {EventCategory} from '../model/event-category.model';
 import {EventCategoryService} from '../event-category.service';
 import {Router} from '@angular/router';
-import * as Stomp from 'stompjs';
 import {FormBuilder} from '@angular/forms';
 import {NotificationsService} from 'angular2-notifications';
 import {MessageService} from '../../services/message.service';
@@ -45,7 +44,6 @@ export class EventCategoryListComponent implements OnInit {
     );
   }
 
-
   subscribeToNotifications() {
 
     if (this.swPush.isEnabled) {
@@ -68,25 +66,5 @@ export class EventCategoryListComponent implements OnInit {
     this.subscribeToNotifications();
 
     this.routerLink.navigateByUrl('/home');
-  }
-
-  connect(eventCategoryName: EventCategory) {
-    // connect to stomp where stomp endpoint is exposed
-    // let ws = new SockJS(http://localhost:8080/greeting);
-    const socket = new WebSocket('ws://localhost:8080/' + eventCategoryName.name.toLowerCase());
-    this.ws = Stomp.over(socket);
-    const that = this;
-    this.ws.connect({}, function (frame) {
-      that.ws.subscribe('/errors', function (message) {
-        alert('Error ' + message.body);
-      });
-      that.ws.subscribe('/' + eventCategoryName.name.toLowerCase() + 'Topic/reply', function (message) {
-        console.log(message);
-        that.messageService.createNotification(message.body);
-      });
-      that.disabled = true;
-    }, function (error) {
-      alert('STOMP error ' + error);
-    });
   }
 }

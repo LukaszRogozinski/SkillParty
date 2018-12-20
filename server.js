@@ -27,37 +27,18 @@ app.get('/getAll', (req, res) => {
 		console.log('subscription added');
 		});
 		
-		console.log('allSubscriptionsAfter: ', allSubscriptions.length);
+		console.log('allSubscriptionsAfter: ', allSubscriptions);
 	});
+	res.sendStatus(200);
  });
 
-app.post('/sendSportEvent', (req, res) => {
+app.post('/sendNotification', (req, res) => {
 
  const notificationPayload = {
     notification: {
-      title: 'New Sport Event',
+      title: 'New Event',
       body: 'Check out event list for new events!',
-      icon: 'assets/icons/sport.png'
-    }
-  };
-
-	console.log('allSubscriptionsActual: ', allSubscriptions.length);
-	const promises = [];
-	allSubscriptions.forEach(subscription => {
-    promises.push(webpush.sendNotification(subscription, JSON.stringify(notificationPayload)));
-  });
-  Promise.all(promises).then(() => res.sendStatus(200));
-
-	console.log('allSubscriptionsAfterFunction: ', allSubscriptions.length);
-});
-
-app.post('/sendRelaxEvent', (req, res) => {
-
- const notificationPayload = {
-    notification: {
-      title: 'New Relax Event',
-      body: 'Check out event list for new events!',
-      icon: 'assets/icons/relax.png'
+      icon: 'assets/icons/notification.png'
     }
   };
 
