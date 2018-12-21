@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TokenStorage} from '../core/token.storage';
 import { Router} from '@angular/router';
 import {IsLoggedService} from '../services/is-logged.service';
+import {AuthService} from '../core/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,56 +11,26 @@ import {IsLoggedService} from '../services/is-logged.service';
 })
 export class NavbarComponent implements OnInit{
 
-  roles = {ROLE_ADMIN: false, ROLE_USER: false};
-  rolesArray = [];
-  isLogged = false;
-  username: string;
-
   constructor(private token: TokenStorage,
               private router: Router,
               private isLoggedService: IsLoggedService,
-              private tokenStorage: TokenStorage) { }
+              private tokenStorage: TokenStorage,
+              public authService: AuthService) { }
 
   ngOnInit(): void {
     this.isLoggedService.statusUpdated.subscribe(
       (data: boolean) => {
-        this.isLogged = data;
-        if(this.isLogged)
+        const isLogged = data;
+        if(isLogged)
         {
-          this.username = this.tokenStorage.getUsernameFromToken();
-          this.initRoles();
+          this.authService.username = this.tokenStorage.getUsernameFromToken();
+        //  this.username = this.tokenStorage.getUsernameFromToken();
+          this.authService.initRoles();
         } else {
-          this.resetRoles();
+          this.authService.resetRoles();
         }
       }
     );
   }
-
-  logout(): void {
-    this.token.signOut();
-    this.isLoggedService.statusUpdated.next(false);
-    this.router.navigate(['login']);
-  }
-
-  private initRoles(){
-    let decodedToken = this.token.getDecodedToken();
-    this.rolesArray = decodedToken.scopes.split(',');
-      Object.entries(this.roles).forEach(([key, value]) => this.roles[key] = this.hasRole(key))
-
-  }
-
-  private resetRoles(){
-    Object.entries(this.roles).forEach(([key, value]) => this.roles[key] = false);
-  }
-
-  hasRole(role: string): boolean {
-    for(var i=0; i < this.rolesArray.length; i++){
-      if(this.rolesArray[i]===role){
-        return true;
-      }
-    }
-    return false;
-  }
-
 
 }

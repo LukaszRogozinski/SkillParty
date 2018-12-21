@@ -56,7 +56,7 @@ export class EventCategoryListComponent implements OnInit {
       });
       that.ws.subscribe("/" + eventCategoryName.name.toLowerCase() +  "Topic/reply", function(message) {
         console.log(message)
-        that.messageService.createNotification(message.body)
+        that.messageService.createNotification(message.body);
       });
       that.disabled = true;
     }, function(error) {
