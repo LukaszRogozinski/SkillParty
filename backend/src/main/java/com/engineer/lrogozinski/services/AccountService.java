@@ -1,6 +1,7 @@
 package com.engineer.lrogozinski.services;
 
 import com.engineer.lrogozinski.domain.Account;
+import com.engineer.lrogozinski.dto.UserInfo;
 
 import java.util.List;
 

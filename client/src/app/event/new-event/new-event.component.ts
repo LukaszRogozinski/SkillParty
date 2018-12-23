@@ -8,6 +8,14 @@ import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {EventCategory} from '../../event-category/model/event-category.model';
 import {EventCategoryService} from '../../event-category/event-category.service';
+import {EmailService} from '../../services/email.service';
+
+export class EmailMessage {
+  subject: string;
+  email: string;
+  feedback: string;
+  eventCategory: string;
+}
 
 @Component({
   selector: 'app-new-event',
@@ -17,72 +25,49 @@ import {EventCategoryService} from '../../event-category/event-category.service'
 export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
   eventCategories: EventCategory[];
-  @ViewChild('f') signupForm: NgForm;
   newEvent: NewEvent = new NewEvent();
-  ws: any;
-  name: string;
-  disabled: boolean;
   changesSaved = false;
+  emailMessage: EmailMessage;
 
   constructor(private eventService: EventService,
               private eventCategoryService: EventCategoryService,
-              private router: Router) { }
+              private router: Router,
+              private emailService: EmailService) {
+  }
 
   ngOnInit() {
 
     this.getEventCategories();
     this.newEvent.averageVote = 0;
+    this.emailMessage = new EmailMessage();
+    this.emailMessage.email = 'noreply@eventshare.com';
+    this.emailMessage.feedback = 'New event that might interested you had been added. Check it out before it\'s to late!';
   }
 
-  getEventCategories(){
+  getEventCategories() {
     this.eventCategoryService.getEventCategories().subscribe(
       response => this.eventCategories = response,
       error => console.log(error)
     );
   }
 
-  addEvent(){
-    this.connect();
+  addEvent() {
     this.eventService.add(this.newEvent)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
       );
-    let a = this.ws.connected;
-      this.sendName();
     this.changesSaved = true;
+    this.emailMessage.eventCategory = this.newEvent.eventCategory;
+    this.emailMessage.subject = 'New ' + this.newEvent.eventCategory.toLowerCase() + ' event!';
+    this.emailService.sendEmails(this.emailMessage).subscribe(
+      response => console.log(response)
+    );
     this.router.navigateByUrl('/home');
   }
 
-  sendName() {
-    let data = JSON.stringify({
-      'title' : this.newEvent.eventCategory.toLocaleLowerCase() + " event",
-      'body' : 'You have new ' +  this.newEvent.eventCategory.toLowerCase() + ' event',
-      'type' : 'Info'
-    })
-    this.ws.ws.onopen = () => this.ws.send("/app/" + this.newEvent.eventCategory.toLowerCase() + "Message", {}, data);
-  }
-
-  connect() {
-    let socket = new WebSocket("ws://localhost:8080/" + this.newEvent.eventCategory.toLowerCase());
-    this.ws = Stomp.over(socket );
-
-    let that = this;
-    this.ws.connect({}, function(frame) {
-      that.ws.subscribe("/errors", function(message) {
-        alert("Error " + message.body);
-      });
-        that.ws.subscribe("/" + that.newEvent.eventCategory.toLowerCase() + "Topic/reply", function(message) {
-        console.log(message)
-      });
-      that.disabled = true;
-    }, function(error) {
-      alert("STOMP error " + error);
-    });
-  }
-
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    if((this.newEvent.name !== null) && !this.changesSaved){
+    if ((this.newEvent.name !== null) && !this.changesSaved) {
       return confirm('Do you want to discard the changes?');
     } else {
       return true;

@@ -40,7 +40,9 @@ export class AuthService {
     this.tokenStorage.signOut();
     this.isLoggedService.statusUpdated.next(false);
     this.router.navigate(['login']);
-    this.messageService.info('Logged out');
+    if(!this.tokenStorage.getToken()) {
+      this.messageService.info('Logged out');
+    }
   }
 
   public initRoles() {

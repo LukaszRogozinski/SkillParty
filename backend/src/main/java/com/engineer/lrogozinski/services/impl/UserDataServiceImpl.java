@@ -1,5 +1,6 @@
 package com.engineer.lrogozinski.services.impl;
 
+import com.engineer.lrogozinski.domain.EventCategory;
 import com.engineer.lrogozinski.domain.UserData;
 import com.engineer.lrogozinski.dto.UserDataDto;
 import com.engineer.lrogozinski.dto.converter.UserDataDtoToUserData;
@@ -61,5 +62,14 @@ public class UserDataServiceImpl implements UserDataService {
     public UserData findByUsername(String username) {
         return userDataRepository.findById(
                 accountService.findByUsername(username).getUserData().getId()).orElse(null);
+    }
+
+    @Override
+    public List<String> findAllEmailsByFavouriteEventCategoriesContains(EventCategory eventCategory) {
+        List<String> emailList = new ArrayList<>();
+                userDataRepository.findAllByFavouriteEventCategoriesContains(eventCategory).forEach(userData -> {
+                    emailList.add(userData.getEmail());
+                });
+        return emailList;
     }
 }

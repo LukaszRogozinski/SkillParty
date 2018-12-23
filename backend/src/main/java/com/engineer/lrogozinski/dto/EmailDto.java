@@ -4,9 +4,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class Feedback {
+public class EmailDto {
     @NotNull
-    private String name;
+    private String subject;
 
     @NotNull
     @Email
@@ -16,12 +16,14 @@ public class Feedback {
     @Min(10)
     private String feedback;
 
-    public String getName() {
-        return name;
+    private String eventCategory;
+
+    public String getSubject() {
+        return subject;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getEmail() {
@@ -38,5 +40,13 @@ public class Feedback {
 
     public void setFeedback(String feedback) {
         this.feedback = feedback;
+    }
+
+    public String getEventCategory() {
+        return eventCategory;
+    }
+
+    public void setEventCategory(String eventCategory) {
+        this.eventCategory = eventCategory;
     }
 }

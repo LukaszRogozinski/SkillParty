@@ -1,6 +1,8 @@
 package com.engineer.lrogozinski.services;
 
+import com.engineer.lrogozinski.domain.EventCategory;
 import com.engineer.lrogozinski.domain.UserData;
+import com.engineer.lrogozinski.dto.UserDataDto;
 
 import java.util.List;
 
@@ -16,4 +18,7 @@ public interface UserDataService {
     void deleteById(Integer id);
 
     UserData findByUsername(String username);
+
+    List<String> findAllEmailsByFavouriteEventCategoriesContains(EventCategory eventCategory);
+
 }

@@ -1,6 +1,7 @@
 package com.engineer.lrogozinski.services.impl;
 
 import com.engineer.lrogozinski.domain.Account;
+import com.engineer.lrogozinski.dto.UserInfo;
 import com.engineer.lrogozinski.repositories.AccountRepository;
 import com.engineer.lrogozinski.services.AccountService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,6 +61,4 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccountByUsername(String username) {
         accountRepository.deleteAccountByUsername(username);
     }
-
-
 }
