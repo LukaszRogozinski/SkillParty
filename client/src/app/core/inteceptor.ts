@@ -26,6 +26,8 @@ export class Interceptor implements HttpInterceptor {
           if (err.status === 401) {
             this.router.navigate(['login']);
           }
+        } if(!this.token.getToken()) {
+          this.router.navigate(['login']);
         }
       }
     ));

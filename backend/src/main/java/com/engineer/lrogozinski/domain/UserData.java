@@ -58,7 +58,7 @@ public class UserData {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userData")
     private List<Vote> votes = new ArrayList<>();
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne
     private Account account;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")

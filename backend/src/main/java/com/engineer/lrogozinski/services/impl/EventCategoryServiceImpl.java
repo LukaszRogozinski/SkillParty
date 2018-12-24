@@ -1,12 +1,15 @@
 package com.engineer.lrogozinski.services.impl;
 
 import com.engineer.lrogozinski.domain.EventCategory;
+import com.engineer.lrogozinski.exceptions.ServiceException;
 import com.engineer.lrogozinski.repositories.EventCategoryRepository;
 import com.engineer.lrogozinski.services.EventCategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.engineer.lrogozinski.exceptions.ExceptionsMessage.CANNOT_FIND_EVENT_CATEGORY_WITH_PROVIDED_ID;
 
 @Service
 public class EventCategoryServiceImpl implements EventCategoryService {
@@ -26,7 +29,7 @@ public class EventCategoryServiceImpl implements EventCategoryService {
 
     @Override
     public EventCategory findById(Integer id) {
-        return eventCategoryRepository.findById(id).orElse(null);
+        return eventCategoryRepository.findById(id).orElseThrow(() -> new ServiceException(CANNOT_FIND_EVENT_CATEGORY_WITH_PROVIDED_ID));
     }
 
     @Override

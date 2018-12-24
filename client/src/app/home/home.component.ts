@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorage} from '../core/token.storage';
 
 @Component({
@@ -11,7 +11,8 @@ export class HomeComponent implements OnInit {
 
   username: string;
 
-  constructor(private tokenStorage: TokenStorage) { }
+  constructor(private tokenStorage: TokenStorage) {
+  }
 
   ngOnInit() {
     this.username = this.tokenStorage.getUsernameFromToken();

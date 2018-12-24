@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import 'rxjs-compat/add/observable/of';
-
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -9,7 +8,8 @@ export class TokenStorage {
 
   username: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   signOut() {
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -18,7 +18,7 @@ export class TokenStorage {
 
   public saveToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY,  token);
+    window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
   public getToken(): string {
@@ -39,7 +39,7 @@ export class TokenStorage {
     let jwt = this.getToken();
     let jwtData = jwt.split('.')[1];
     let decodedJwtJsonData = window.atob(jwtData);
-    let decodedToken: {exp:number, iat: number, scopes: string[], sub: string};
+    let decodedToken: { exp: number, iat: number, scopes: string[], sub: string };
     decodedToken = JSON.parse(decodedJwtJsonData);
     return decodedToken.sub;
   }

@@ -12,7 +12,7 @@
           [(ngModel)]="username"
           required
           #usernameModel="ngModel"
-          >
+        >
         <span class="help-block" style="color: red" *ngIf="!usernameModel.valid && usernameModel.touched">Please enter an username!</span>
 
       </div>
@@ -25,11 +25,11 @@
           [(ngModel)]="password"
           required
           #passwordModel="ngModel"
-          >
+        >
         <span class="help-block" style="color: red" *ngIf="!passwordModel.valid && passwordModel.touched">Please enter a password!</span>
 
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!f.valid" >Sign in</button>
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Sign in</button>
       <br>
       <br>
       <div class="row">

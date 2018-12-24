@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {EventCategory} from './model/event-category.model';
@@ -9,7 +9,8 @@ import {HttpService} from '../services/http.service';
 })
 export class EventCategoryService {
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+  }
 
   private eventCategoryUrl = 'http://localhost:8080/eventCategory';
 
@@ -18,6 +19,6 @@ export class EventCategoryService {
   }
 
   public addToFavourite(eventCategory: EventCategory): Observable<any> {
-   return this.httpService.post(this.eventCategoryUrl + '/add', eventCategory);
+    return this.httpService.post(this.eventCategoryUrl + '/add', eventCategory);
   }
 }

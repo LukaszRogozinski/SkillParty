@@ -2,13 +2,14 @@ package com.engineer.lrogozinski.services;
 
 import com.engineer.lrogozinski.domain.Account;
 import com.engineer.lrogozinski.dto.UserInfo;
+import com.engineer.lrogozinski.exceptions.ServiceException;
 
 import java.util.List;
 
 public interface AccountService {
     List<Account> findAll();
 
-    Account findById(Integer id);
+    Account findById(Integer id) throws ServiceException;
 
     Account save(Account object);
 

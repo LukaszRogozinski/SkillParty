@@ -1,10 +1,7 @@
 package com.engineer.lrogozinski.controllers;
 
-import com.engineer.lrogozinski.config.EmailConfig;
 import com.engineer.lrogozinski.dto.EmailDto;
 import com.engineer.lrogozinski.services.EmailService;
-import com.engineer.lrogozinski.services.EventCategoryService;
-import com.engineer.lrogozinski.services.UserDataService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

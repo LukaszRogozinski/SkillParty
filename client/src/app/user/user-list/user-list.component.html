@@ -27,18 +27,18 @@
     <td scope="row">{{user.averageVote}}</td>
     <td scope="row">
       <div
-      class="btn-group"
-      appDropdown>
-      <button
-        type="button"
-        class="btn btn-primary dropdown-toggle">
-        Manage User <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" >
-        <li><a appHighlight  [routerLink]="['/user-edit', user.username]" >Edit user</a></li>
-        <li><a appHighlight [highlightColor]="'#c9302c'" (click)="deleteUser(user)">Delete user</a></li>
-      </ul>
-    </div>
+        class="btn-group"
+        appDropdown>
+        <button
+          type="button"
+          class="btn btn-primary dropdown-toggle">
+          Manage User <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a appHighlight [routerLink]="['/user-edit', user.username]">Edit user</a></li>
+          <li><a appHighlight [highlightColor]="'#c9302c'" (click)="deleteUser(user)">Delete user</a></li>
+        </ul>
+      </div>
     </td>
   </tr>
   </tbody>

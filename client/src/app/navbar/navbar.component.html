@@ -5,22 +5,23 @@
     </div>
 
     <div class="collapse navbar-collapse">
-      <ul  class="nav navbar-nav">
+      <ul class="nav navbar-nav">
         <li class="dropdown" appDropdown *ngIf="(authService.roles['ROLE_USER'])">
           <a class="dropdown-toggle" role="button">Events<span class="caret"></span> </a>
           <ul class="dropdown-menu">
-            <li ><a class="" routerLink="/my-event-list" appHighlight>My events</a> </li>
-            <li ><a class="" routerLink="/event-list" appHighlight>All events</a> </li>
+            <li><a class="" routerLink="/my-event-list" appHighlight>My events</a></li>
+            <li><a class="" routerLink="/event-list" appHighlight>All events</a></li>
           </ul>
         <li *ngIf="(authService.roles['ROLE_ADMIN'])">
-        <a routerLink="/users">Users</a> </li>
+          <a routerLink="/users">Users</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" appDropdown>
-      <a class="dropdown-toggle" role="button">Manage<span class="caret"></span> </a>
+          <a class="dropdown-toggle" role="button">Manage<span class="caret"></span> </a>
           <ul class="dropdown-menu">
-           <li ><a class="" [routerLink]="['/user-detail', authService.username]" appHighlight>My account</a> </li>
-            <li  ><a style="cursor: pointer" appHighlight [defaultColor]="'transparent'" (click)="authService.logout()">Logout</a> </li>
+            <li><a class="" [routerLink]="['/user-detail', authService.username]" appHighlight>My account</a></li>
+            <li><a style="cursor: pointer" appHighlight [defaultColor]="'transparent'" (click)="authService.logout()">Logout</a>
+            </li>
           </ul>
         </li>
       </ul>

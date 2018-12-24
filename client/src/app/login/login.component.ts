@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../core/auth.service';
 import {TokenStorage} from '../core/token.storage';
@@ -15,7 +15,7 @@ export class LoginComponent {
               private authService: AuthService,
               private token: TokenStorage,
               private isLogedService: IsLoggedService
-             ) {
+  ) {
   }
 
   username: string;

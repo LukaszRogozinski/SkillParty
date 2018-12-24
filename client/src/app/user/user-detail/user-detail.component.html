@@ -1,7 +1,7 @@
 <div class="col-xs-12" *ngIf="user">
 
   <div class="row">
-      <h2>User details</h2>
+    <h2>User details</h2>
   </div>
 
   <div class="row">
@@ -13,16 +13,17 @@
         class="btn btn-primary dropdown-toggle">
         Manage User <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" >
-        <li><a appHighlight  [routerLink]="['/user-edit', user.username]">Edit user</a></li>
-        <li><a appHighlight [highlightColor]="'#5cb85c'" routerLink="/event-category-list">Add favourite category</a></li>
+      <ul class="dropdown-menu">
+        <li><a appHighlight [routerLink]="['/user-edit', user.username]">Edit user</a></li>
+        <li><a appHighlight [highlightColor]="'#5cb85c'" routerLink="/event-category-list">Add favourite category</a>
+        </li>
       </ul>
     </div>
   </div>
 
   <div class="row">
-      <h3>Username</h3>
-      <h4>{{user.username}}</h4>
+    <h3>Username</h3>
+    <h4>{{user.username}}</h4>
   </div>
 
   <div class="row">

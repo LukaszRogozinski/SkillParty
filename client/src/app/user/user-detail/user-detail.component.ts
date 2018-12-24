@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorage} from '../../core/token.storage';
 import {UserService} from '../user.service';
 import {User} from '../model/user.model';
@@ -18,21 +18,22 @@ export class UserDetailComponent implements OnInit {
   constructor(private userService: UserService,
               private token: TokenStorage,
               private route: ActivatedRoute,
-              private messageService: MessageService) { }
+              private messageService: MessageService) {
+  }
 
   ngOnInit() {
     this.getUserDetail();
   }
 
-  getUserDetail(){
+  getUserDetail() {
     const username = this.route.snapshot.paramMap.get('username');
     this.userService.getUserDetailByUsername(username).subscribe(
       response => this.user = response
     ),
-    (error) => {
-      console.log(error);
-      this.messageService.error(error.toString());
-    }
+      (error) => {
+        console.log(error);
+        this.messageService.error(error.toString());
+      };
   }
 
 }

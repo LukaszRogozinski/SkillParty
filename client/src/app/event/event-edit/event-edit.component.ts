@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Event} from '../model/event.model';
 import {EventService} from '../event.service';
 import {ActivatedRoute} from '@angular/router';
@@ -12,8 +12,9 @@ export class EventEditComponent implements OnInit {
 
   event: Event;
 
-  constructor( private route: ActivatedRoute,
-               private eventService: EventService) { }
+  constructor(private route: ActivatedRoute,
+              private eventService: EventService) {
+  }
 
   ngOnInit() {
     this.getEvent();

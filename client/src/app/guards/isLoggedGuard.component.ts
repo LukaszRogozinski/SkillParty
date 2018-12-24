@@ -3,24 +3,25 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {Observable} from 'rxjs';
 import {TokenStorage} from '../core/token.storage';
 import {IsLoggedService} from '../services/is-logged.service';
+import {MessageService} from '../services/message.service';
 
 @Injectable()
-export class LoginGuardComponent implements CanActivate {
+export class IsLoggedGuardComponent implements CanActivate {
 
   constructor(private isLoggedService: IsLoggedService,
               private tokenStorage: TokenStorage,
-              private router: Router) {
+              private router: Router,
+              private messageService: MessageService) {
 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.tokenStorage.getToken()) {
-      this.router.navigate(['home']);
-      return false;
-    } else {
-      //  this.tokenStorage.signOut();
-      //this.isLoggedService.statusUpdated.next(false);
       return true;
+    } else {
+      this.router.navigate(['login']);
+      this.messageService.error('Session expired');
+      return false;
     }
   }
 

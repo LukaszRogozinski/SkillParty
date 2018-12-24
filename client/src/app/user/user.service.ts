@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from './model/user.model';
 import {HttpService} from '../services/http.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+  }
 
   private userUrl = 'http://localhost:8080/user';
 

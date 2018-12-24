@@ -4,12 +4,15 @@ import com.engineer.lrogozinski.domain.Event;
 import com.engineer.lrogozinski.dto.EventDto;
 import com.engineer.lrogozinski.dto.converter.EventDtoToEvent;
 import com.engineer.lrogozinski.dto.converter.EventToEventDto;
+import com.engineer.lrogozinski.exceptions.ServiceException;
 import com.engineer.lrogozinski.repositories.EventRepository;
 import com.engineer.lrogozinski.services.EventService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.engineer.lrogozinski.exceptions.ExceptionsMessage.CANNOT_FIND_EVENT_WITH_PROVIDED_ID;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -35,7 +38,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event findById(Integer id) {
-        return eventRepository.findById(id).orElse(null);
+        return eventRepository.findById(id).orElseThrow(() -> new ServiceException(CANNOT_FIND_EVENT_WITH_PROVIDED_ID));
     }
 
     @Override
@@ -52,24 +55,4 @@ public class EventServiceImpl implements EventService {
     public void deleteById(Integer id) {
         eventRepository.deleteById(id);
     }
-
-    @Override
-    public List<EventDto> findAllDto() {
-        List<EventDto> eventDtoList = new ArrayList<>();
-        eventRepository.findAll().forEach(event -> {
-            eventDtoList.add(eventToEventDto.convert(event));
-        });
-        return eventDtoList;
-    }
-
-    @Override
-    public EventDto findByIdDto(Integer id) {
-        return eventToEventDto.convert(eventRepository.findById(id).orElse(null));
-    }
-
-    @Override
-    public void saveDto(EventDto object) {
-        eventRepository.save(eventDtoToEvent.convert(object));
-    }
-
 }

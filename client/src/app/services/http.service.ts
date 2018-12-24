@@ -8,27 +8,28 @@ import {HttpErrorHandler} from './http-error-handler.service';
 export class HttpService {
 
   constructor(private http: HttpClient,
-              private httpErrorHandler: HttpErrorHandler) {}
+              private httpErrorHandler: HttpErrorHandler) {
+  }
 
-  get<T>(endpoint: string) : Observable<T> {
+  get<T>(endpoint: string): Observable<T> {
     return this.http.get<T>(endpoint).pipe(
       catchError(err => this.httpErrorHandler.handleError(err))
     );
   }
 
-  post<T>(endpoint: string, body) : Observable<T> {
+  post<T>(endpoint: string, body): Observable<T> {
     return this.http.post<T>(endpoint, body).pipe(
       catchError(err => this.httpErrorHandler.handleError(err))
     );
   }
 
-  put<T>(endpoint: string, body) : Observable<T> {
+  put<T>(endpoint: string, body): Observable<T> {
     return this.http.put<T>(endpoint, body).pipe(
       catchError(err => this.httpErrorHandler.handleError(err))
     );
   }
 
-  delete<T>(endpoint: string) : Observable<T> {
+  delete<T>(endpoint: string): Observable<T> {
     return this.http.delete<T>(endpoint).pipe(
       catchError(err => this.httpErrorHandler.handleError(err))
     );

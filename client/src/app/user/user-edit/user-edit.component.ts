@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../model/user.model';
 import {UserService} from '../user.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -16,13 +16,14 @@ export class UserEditComponent implements OnInit {
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private messageService: MessageService) { }
+              private messageService: MessageService) {
+  }
 
   ngOnInit() {
     this.getUserDetail();
   }
 
-  getUserDetail(){
+  getUserDetail() {
     const username = this.activatedRoute.snapshot.paramMap.get('username');
     this.userService.getUserDetailByUsername(username).subscribe(
       response => this.user = response
@@ -30,13 +31,13 @@ export class UserEditComponent implements OnInit {
       (error) => console.log(error);
   }
 
-  editUser(){
+  editUser() {
     const username = this.activatedRoute.snapshot.paramMap.get('username');
     this.userService.saveUser(this.user, username).subscribe(
       response => {
-        this.messageService.success("user details changed")
-        console.log(response)
-    this.router.navigate(['home'])
+        this.messageService.success('user details changed');
+        console.log(response);
+        this.router.navigate(['home']);
       },
       error => {
         console.log(error);

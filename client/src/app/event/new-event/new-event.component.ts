@@ -1,14 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NewEvent} from '../model/new-event.model';
 import {EventService} from '../event.service';
-import * as Stomp from 'stompjs';
 import {CanComponentDeactivate} from '../../guards/can-deactivate-guard.service';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
-import {NgForm} from '@angular/forms';
 import {EventCategory} from '../../event-category/model/event-category.model';
 import {EventCategoryService} from '../../event-category/event-category.service';
 import {EmailService} from '../../services/email.service';
+import {MessageService} from '../../services/message.service';
 
 export class EmailMessage {
   subject: string;
@@ -32,7 +31,8 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   constructor(private eventService: EventService,
               private eventCategoryService: EventCategoryService,
               private router: Router,
-              private emailService: EmailService) {
+              private emailService: EmailService,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   addEvent() {
     this.eventService.add(this.newEvent)
       .subscribe(
-        (response) => console.log(response),
+        () => this.messageService.success("Successfully added new event!"),
         (error) => console.log(error)
       );
     this.changesSaved = true;

@@ -8,13 +8,13 @@
   padding-right: 5px;
 }
 
-.list-item:hover{
+.list-item:hover {
   color: white;
   cursor: pointer;
 }
 
 .list-item:focus {
-  outline:0;
+  outline: 0;
   background-color: black;
   color: white;
 }

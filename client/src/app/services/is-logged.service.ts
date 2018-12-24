@@ -6,6 +6,7 @@ export class IsLoggedService {
 
   statusUpdated = new Subject();
 
-    constructor(){}
+  constructor() {
+  }
 
 }

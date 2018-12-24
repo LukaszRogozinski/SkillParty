@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {HttpService} from '../services/http.service';
 import {TokenStorage} from './token.storage';
@@ -20,8 +19,8 @@ export class AuthService {
               private isLoggedService: IsLoggedService, private messageService: MessageService) {
   }
 
-  attemptAuth(ussername: string, password: string): Observable<any> {
-    const credentials = {username: ussername, password: password};
+  attemptAuth(username: string, password: string): Observable<any> {
+    const credentials = {username: username, password: password};
     console.log('attempAuth ::');
     return this.httpService.post<any>('http://localhost:8080/token/generate-token', credentials);
   }
@@ -40,7 +39,7 @@ export class AuthService {
     this.tokenStorage.signOut();
     this.isLoggedService.statusUpdated.next(false);
     this.router.navigate(['login']);
-    if(!this.tokenStorage.getToken()) {
+    if (!this.tokenStorage.getToken()) {
       this.messageService.info('Logged out');
     }
   }

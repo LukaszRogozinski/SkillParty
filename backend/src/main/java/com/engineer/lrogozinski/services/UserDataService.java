@@ -2,14 +2,14 @@ package com.engineer.lrogozinski.services;
 
 import com.engineer.lrogozinski.domain.EventCategory;
 import com.engineer.lrogozinski.domain.UserData;
-import com.engineer.lrogozinski.dto.UserDataDto;
+import com.engineer.lrogozinski.exceptions.ServiceException;
 
 import java.util.List;
 
 public interface UserDataService {
     List<UserData> findAll();
 
-    UserData findById(Integer id);
+    UserData findById(Integer id) throws ServiceException;
 
     UserData save(UserData object);
 

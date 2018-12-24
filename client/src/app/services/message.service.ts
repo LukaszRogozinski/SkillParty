@@ -6,7 +6,7 @@ import {NotificationsService, NotificationType} from 'angular2-notifications';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Injectable()
-export class MessageService implements OnInit{
+export class MessageService implements OnInit {
 
   form: FormGroup;
   temp: any;
@@ -16,17 +16,9 @@ export class MessageService implements OnInit{
               private _fb: FormBuilder) {
   }
 
-  ngOnInit(){//to co poniżej można zostawić jeśli chcemy customizować swoje powiadomienie ale musi być wywołane w każdej metodzie osobno
-/*    this.form = this._fb.group({
-      timeOut: 5000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-      animate: 'fromRight'
-    });*/
-  }
+  ngOnInit() {}
 
-  fbFormInit(){
+  fbFormInit() {
     this.form = this._fb.group({
       timeOut: 3000,
       showProgressBar: true,
@@ -50,9 +42,9 @@ export class MessageService implements OnInit{
     return bsModalRef.content.confirmed;
   }
 
-  createNotification(message: string){
+  createNotification(message: string) {
     this.fbFormInit();
-    let messageBody : {title: string, body: string, type: string};
+    let messageBody: { title: string, body: string, type: string };
     messageBody = JSON.parse(message);
     const title = messageBody.title;
     const content = messageBody.body;
@@ -60,28 +52,28 @@ export class MessageService implements OnInit{
     this._notifications.create(title, content, type, this.temp);
   }
 
-  success(message: string){
+  success(message: string) {
     this.fbFormInit();
-    this._notifications.create("Success", message, NotificationType.Success, this.temp);
+    this._notifications.create('Success', message, NotificationType.Success, this.temp);
   }
 
-  alert(message: string){
+  alert(message: string) {
     this.fbFormInit();
-    this._notifications.create("Alert", message, NotificationType.Alert, this.temp);
+    this._notifications.create('Alert', message, NotificationType.Alert, this.temp);
   }
 
-  error(message: string){
+  error(message: string) {
     this.fbFormInit();
-    this._notifications.create("Error", message, NotificationType.Error, this.temp);
+    this._notifications.create('Error', message, NotificationType.Error, this.temp);
   }
 
-  info(message: string){
+  info(message: string) {
     this.fbFormInit();
-    this._notifications.create("Info", message, NotificationType.Info, this.temp);
+    this._notifications.create('Info', message, NotificationType.Info, this.temp);
   }
 
-  warn(message: string){
+  warn(message: string) {
     this.fbFormInit();
-    this._notifications.create("Warn", message, NotificationType.Warn, this.temp);
+    this._notifications.create('Warn', message, NotificationType.Warn, this.temp);
   }
 }

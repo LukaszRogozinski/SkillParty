@@ -1,7 +1,6 @@
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from '../login/login.component';
 import {NgModule} from '@angular/core';
-import {WebsocketComponent} from '../websocket/websocket.component';
 import {EventListComponent} from '../event/event-list/event-list.component';
 import {EventDetailComponent} from '../event/event-detail/event-detail.component';
 import {EventEditComponent} from '../event/event-edit/event-edit.component';
@@ -17,14 +16,14 @@ import {MyEventListComponent} from '../event/my-event-list/my-event-list.compone
 import {HomeComponent} from '../home/home.component';
 import {RegisterComponent} from '../login/register/register.component';
 import {UserEditComponent} from '../user/user-edit/user-edit.component';
+import {IsLoggedGuardComponent} from '../guards/isLoggedGuard.component';
 
 const routes: Routes = [
   {path: 'users', component: UserListComponent, canActivate: [RouteGuardComponent]},
   {path: 'login', component: LoginComponent, canActivate: [LoginGuardComponent]},
-  {path : '', component : LoginComponent, pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
+  {path: '', component: LoginComponent, pathMatch: 'full'},
+  {path: 'home', component: HomeComponent, canActivate: [IsLoggedGuardComponent]},
   {path: 'event', component: EventDetailComponent},
-  {path: 'websocket', component: WebsocketComponent},
   {path: 'event-list', component: EventListComponent},
   {path: 'my-event-list', component: MyEventListComponent},
   {path: 'event-edit/:id', component: EventEditComponent},
@@ -48,4 +47,5 @@ const routes: Routes = [
   ],
   declarations: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

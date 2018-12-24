@@ -51,10 +51,9 @@ public class UserController {
     @RequestMapping(value = "/delete/{username}", method = RequestMethod.DELETE)
     @Transactional
     public void deleteUserByUsername(@PathVariable(value = "username") String username){
-        try {
+        int z = 5;
             accountService.deleteAccountByUsername(username);
-        } catch (Exception e){
-        }
+            int y = 5;
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")

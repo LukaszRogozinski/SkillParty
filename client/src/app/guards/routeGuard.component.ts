@@ -7,7 +7,7 @@ import {URLsAvability} from './URLsAvailabilityForUsersRoles';
 @Injectable()
 export class RouteGuardComponent implements CanActivate {
 
-  decodedToken: { sub: string, scopes: string, iat: number, exp: number }
+  decodedToken: { sub: string, scopes: string, iat: number, exp: number };
   rolesArray: String[];
 
   constructor(private tokenStorage: TokenStorage,
@@ -24,7 +24,7 @@ export class RouteGuardComponent implements CanActivate {
           avaliable = true;
           break;
         }
-      }else {
+      } else {
         this.router.navigateByUrl('pageNotAvaliable');
       }
     }
