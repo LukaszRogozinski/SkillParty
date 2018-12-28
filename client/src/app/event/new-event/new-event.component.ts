@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {EventCategory} from '../../event-category/model/event-category.model';
 import {EventCategoryService} from '../../event-category/event-category.service';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-new-event',
@@ -26,7 +27,8 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
   constructor(private eventService: EventService,
               private eventCategoryService: EventCategoryService,
-              private router: Router) { }
+              private router: Router,
+              private messageService: MessageService) { }
 
   ngOnInit() {
 
@@ -45,8 +47,7 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
     this.connect();
     this.eventService.add(this.newEvent)
       .subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
+        () => this.messageService.success("Successfully added new event!"),        (error) => console.log(error)
       );
     let a = this.ws.connected;
       this.sendName();

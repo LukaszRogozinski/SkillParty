@@ -20,8 +20,8 @@ export class AuthService {
               private isLoggedService: IsLoggedService, private messageService: MessageService) {
   }
 
-  attemptAuth(ussername: string, password: string): Observable<any> {
-    const credentials = {username: ussername, password: password};
+  attemptAuth(username: string, password: string): Observable<any> {
+    const credentials = {username: username, password: password};
     console.log('attempAuth ::');
     return this.httpService.post<any>('http://localhost:8080/token/generate-token', credentials);
   }

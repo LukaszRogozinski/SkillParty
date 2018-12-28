@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {BsModalRef} from 'ngx-bootstrap';
 

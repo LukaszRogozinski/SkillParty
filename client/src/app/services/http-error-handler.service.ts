@@ -22,20 +22,24 @@ export class HttpErrorHandler {
 
   }
 
-  handleError(error: HttpErrorResponse): ErrorObservable<any>{
-      if(error.error instanceof ErrorEvent){
-        // A client-side or network error occurred. Handle it accordingly.
-        console.error('An error occurred:', error.error.message);
-      } else {
-        if(error.status === this.notAuthorizedUserErrorCode || error.status === this.internalErrorCode) {
-          this.messageService.error("Your session has expired.");
-          this.isLoggedService.statusUpdated.next(false);
-          this.router.navigate(['login']);
-        } else if(error.status === this.forbiddenErrorCode) {
-          this.messageService.error("Invalid username or password");
-        } else if (error.status === this.badRequest) {
-          this.messageService.error("The page do not exist");
-        } else {
+  handleError(error: HttpErrorResponse): ErrorObservable<any> {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      if (error.status === this.notAuthorizedUserErrorCode) {
+        this.messageService.error('Your session has expired.');
+        this.isLoggedService.statusUpdated.next(false);
+        this.router.navigate(['login']);
+      } else if (error.status === this.internalErrorCode) {
+        this.messageService.error('Failed to load this source');
+        this.router.navigate(['home']);
+      } else if (error.status === this.forbiddenErrorCode && error.error["BadCredentialsException"] === "Bad credentials") {
+        this.messageService.error('Invalid username or password');
+      } else if (error.status === this.forbiddenErrorCode) {
+        this.messageService.error('Source not allowed');
+      } else if (error.status === this.badRequest) {
+        this.messageService.error('The page do not exist');
           console.error(`Backend returned code ${error.status}, ` +
             `body was: ${error.error}`);
         }

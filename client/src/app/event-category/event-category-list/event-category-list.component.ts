@@ -38,7 +38,7 @@ export class EventCategoryListComponent implements OnInit {
 
   addToFavourite(eventCategory: EventCategory) {
     this.eventCategoryService.addToFavourite(eventCategory).subscribe(
-      response => console.log('YEA added new category!' + response)
+      () => this.messageService.success("Successfully added new favourite category!")
     );
     this.connect(eventCategory);
     this.routerLink.navigateByUrl('/home');
