@@ -27,12 +27,7 @@ public class RegisterController {
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @Transactional
-    public ResponseEntity<?> registerNewUser(@RequestBody NewUserDto newUserDto) {
-        try {
-            userService.save(newUserDtoToAccountDto.convert(newUserDto));
-        } catch (Exception e){
-            return ResponseEntity.notFound().build();
-        }
-        return new ResponseEntity(new RegisterResponse("success"), HttpStatus.OK);
+    public Account registerNewUser(@RequestBody NewUserDto newUserDto) {
+           return userService.save(newUserDtoToAccountDto.convert(newUserDto));
     }
 }

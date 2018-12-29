@@ -43,7 +43,7 @@ public class Account {
     @Column(name = "version")
     private Integer version;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private UserData userData;
 
     public Integer getId() {

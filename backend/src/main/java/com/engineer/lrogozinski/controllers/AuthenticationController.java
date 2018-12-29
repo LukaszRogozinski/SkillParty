@@ -1,10 +1,8 @@
 package com.engineer.lrogozinski.controllers;
 
 import com.engineer.lrogozinski.config.JwtTokenUtil;
-import com.engineer.lrogozinski.domain.UsedToken;
 import com.engineer.lrogozinski.security.AuthToken;
 import com.engineer.lrogozinski.security.LoginUser;
-import com.engineer.lrogozinski.services.UsedTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,9 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -27,12 +22,9 @@ public class AuthenticationController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private UsedTokenService usedTokenService;
-
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws Exception {
-    try {
+    public ResponseEntity<?> register(@RequestBody LoginUser loginUser) {
+
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginUser.getUsername(),
@@ -41,20 +33,7 @@ public class AuthenticationController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
-        usedTokenService.save(new UsedToken(token, new Date()));
         return ResponseEntity.ok(new AuthToken(token));
-    } catch (org.springframework.security.authentication.BadCredentialsException e){
-        return ResponseEntity.status(403).body(e);
-    }
-
-     //   List<UsedToken> usedTokens = usedTokenService.findAll();
-       /* for(int i=0; i<usedTokens.size(); i++){
-            if(usedTokens.get(i).getToken()
-                    .equals(token)){
-                throw new Exception("current token was used before");
-            }
-        }*/
-
     }
 
 }

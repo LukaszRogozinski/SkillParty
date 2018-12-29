@@ -51,17 +51,13 @@ public class UserController {
     @RequestMapping(value = "/delete/{username}", method = RequestMethod.DELETE)
     @Transactional
     public void deleteUserByUsername(@PathVariable(value = "username") String username){
-        try {
             accountService.deleteAccountByUsername(username);
-        } catch (Exception e){
-        }
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @RequestMapping(value = "/update/{username}", method = RequestMethod.PUT)
-    public void updateUser(@PathVariable(value = "username") String username ,@RequestBody UserDataDto userDataDto){
-        Account account =  accountService.findByUsername(username);
-        account.setUserData(userDataDtoToUserData.convert(userDataDto));
-        accountService.save(account);
+    @Transactional
+    public Account updateUser(@PathVariable(value = "username") String username ,@RequestBody UserDataDto userDataDto){
+        return accountService.updateUser(username, userDataDto);
     }
 }

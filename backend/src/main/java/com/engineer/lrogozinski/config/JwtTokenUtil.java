@@ -1,10 +1,6 @@
 package com.engineer.lrogozinski.config;
 
-import com.engineer.lrogozinski.domain.UsedToken;
-import com.engineer.lrogozinski.services.UsedTokenService;
 import io.jsonwebtoken.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +12,6 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,19 +21,6 @@ import static com.engineer.lrogozinski.security.Constants.AUTHORITIES_KEY;
 import static com.engineer.lrogozinski.security.Constants.SIGNING_KEY;
 @Component
 public class JwtTokenUtil implements Serializable {
-
-    @Autowired
-    private UsedTokenService usedTokenService;
-
-    @Scheduled(fixedRate = ACCESS_TOKEN_VALIDITY_SECONDS)
-    public void DeleteUsedToken(){
-        List<UsedToken> usedTokens = usedTokenService.findAll();
-        usedTokens.forEach(usedToken -> {
-            if(isTokenExpired(usedToken.getToken())){
-                usedTokenService.delete(usedToken);
-            }
-        });
-    }
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);

@@ -2,13 +2,16 @@ package com.engineer.lrogozinski.services;
 
 import com.engineer.lrogozinski.domain.Event;
 import com.engineer.lrogozinski.dto.EventDto;
+import com.engineer.lrogozinski.exceptions.ServiceException;
 
+import javax.servlet.http.HttpServletRequest;
+import java.rmi.server.ServerCloneException;
 import java.util.List;
 
 public interface EventService{
-    List<Event> findAll();
+    List<EventDto> findAll();
 
-    Event findById(Integer id);
+    Event findById(Integer id) throws ServiceException;
 
     Event save(Event object);
 
@@ -16,9 +19,10 @@ public interface EventService{
 
     void deleteById(Integer id);
 
-    List<EventDto> findAllDto();
+    List<EventDto> getAllLoggedUserEvents(HttpServletRequest req);
 
-    EventDto findByIdDto(Integer id);
+    Event addEvent(EventDto eventDto, HttpServletRequest req);
 
-    void saveDto(EventDto object);
+    EventDto getEventDetails(Integer id, HttpServletRequest req);
+
 }

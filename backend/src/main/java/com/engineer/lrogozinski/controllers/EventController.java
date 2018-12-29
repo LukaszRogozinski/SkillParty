@@ -46,53 +46,31 @@ public class EventController {
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<EventDto> getAllEvents(){
-        List<EventDto> eventDtoList = new ArrayList<>();
-        eventService.findAll().forEach(event -> {
-            eventDtoList.add(eventToEventDto.convert(event));
-        });
-        return eventDtoList;
+        return eventService.findAll();
     }
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value="/all-mine-events", method = RequestMethod.GET)
     public List<EventDto> getAllMineEvents(HttpServletRequest req) {
-        String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
-        UserData userData =  userDataService.findByUsername(jwtTokenUtil.getUsernameFromToken(token));
-        List<EventDto> eventDtoList = new ArrayList<>();
-        userData.getEventList().forEach(event -> eventDtoList.add(eventToEventDto.convert(event)));
-        return eventDtoList;
+        return eventService.getAllLoggedUserEvents(req);
     }
 
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @Transactional
-    public void addEvent(@RequestBody EventDto eventDto, HttpServletRequest req){
-        String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
-        Event event = eventDtoToEvent.convert(eventDto);
-       eventService.save(event);
-       UserData userData =  userDataService.findByUsername(jwtTokenUtil.getUsernameFromToken(token));
-       userData.addEvent(event);
-       userDataService.save(userData);
+    public Event addEvent(@RequestBody EventDto eventDto, HttpServletRequest req){
+       return eventService.addEvent(eventDto,req);
     }
 
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public EventDto getEventDetails(@PathVariable(value = "id") Integer id, HttpServletRequest req){
-        String token = req.getHeader(HEADER_STRING).replace(TOKEN_PREFIX,"");
-        UserData userData =  userDataService.findByUsername(jwtTokenUtil.getUsernameFromToken(token));
-        EventDto eventDto =  eventToEventDto.convert(eventService.findById(id));
-        if(userData.getId() == eventDto.getUsernameOwnerId()){
-            eventDto.setIsEventLoggedUser(true);
-        } else {
-            eventDto.setIsEventLoggedUser(false);
-        }
-        return eventDto;
+        return eventService.getEventDetails(id, req);
     }
 
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/detail/{id}/delete", method = RequestMethod.DELETE)
-    public ResponseEntity<?> DeleteEvent(@PathVariable(value = "id") Integer id){
+    public void DeleteEvent(@PathVariable(value = "id") Integer id){
          eventService.deleteById(id);
-         return ResponseEntity.ok().build();
     }
 
 }
