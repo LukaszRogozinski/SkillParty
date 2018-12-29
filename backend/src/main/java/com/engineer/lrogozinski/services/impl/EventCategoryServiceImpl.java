@@ -22,7 +22,7 @@ import static com.engineer.lrogozinski.security.Constants.TOKEN_PREFIX;
 @Service
 public class EventCategoryServiceImpl implements EventCategoryService {
 
-    private EventCategoryRepository eventCategoryRepository;
+    private final EventCategoryRepository eventCategoryRepository;
 
     private final UserDataService userDataService;
 

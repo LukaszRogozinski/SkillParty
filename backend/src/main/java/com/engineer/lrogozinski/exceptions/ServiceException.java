@@ -1,6 +1,7 @@
 package com.engineer.lrogozinski.exceptions;
 
 public class ServiceException extends RuntimeException {
+
     public ServiceException() {
         super();
     }

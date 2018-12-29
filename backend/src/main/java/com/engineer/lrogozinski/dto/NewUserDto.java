@@ -7,6 +7,7 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class NewUserDto {
+
     String username;
     String password;
     String name;

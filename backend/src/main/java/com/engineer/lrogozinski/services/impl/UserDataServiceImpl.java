@@ -18,16 +18,14 @@ import static com.engineer.lrogozinski.exceptions.ExceptionsMessage.CANNOT_FIND_
 @Service
 public class UserDataServiceImpl implements UserDataService {
 
-    private UserDataRepository userDataRepository;
+    private final UserDataRepository userDataRepository;
 
-    private AccountService accountService;
+    private final AccountService accountService;
 
-    private UserDataDtoToUserData userDataDtoToUserData;
 
-    public UserDataServiceImpl(UserDataRepository userDataRepository, AccountService accountService, UserDataDtoToUserData userDataDtoToUserData) {
+    public UserDataServiceImpl(UserDataRepository userDataRepository, AccountService accountService) {
         this.userDataRepository = userDataRepository;
         this.accountService = accountService;
-        this.userDataDtoToUserData = userDataDtoToUserData;
     }
 
     @Override

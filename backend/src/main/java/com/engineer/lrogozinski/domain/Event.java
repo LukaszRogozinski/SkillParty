@@ -1,8 +1,5 @@
 package com.engineer.lrogozinski.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

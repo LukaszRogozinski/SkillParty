@@ -16,7 +16,7 @@ import static com.engineer.lrogozinski.exceptions.ExceptionsMessage.CANNOT_FIND_
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     private final UserDataDtoToUserData userDataDtoToUserData;
 
@@ -74,6 +74,4 @@ public class AccountServiceImpl implements AccountService {
         account.setUserData(userDataDtoToUserData.convert(userDataDto));
         return accountRepository.save(account);
     }
-
-
 }

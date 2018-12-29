@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "account")
+@Table(name = "account",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})}
+        )
 public class Account {
 
     @Id

@@ -30,7 +30,6 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role findById(Integer id) {
         return roleRepository.findById(id).orElseThrow(() -> new ServiceException(CANNOT_FIND_ROLE_WITH_PROVIDED_ID));
-
     }
 
     @Override

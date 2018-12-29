@@ -5,10 +5,10 @@ import com.engineer.lrogozinski.dto.EventDto;
 import com.engineer.lrogozinski.exceptions.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.rmi.server.ServerCloneException;
 import java.util.List;
 
 public interface EventService{
+
     List<EventDto> findAll();
 
     Event findById(Integer id) throws ServiceException;

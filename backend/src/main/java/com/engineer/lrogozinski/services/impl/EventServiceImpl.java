@@ -23,7 +23,7 @@ import static com.engineer.lrogozinski.security.Constants.TOKEN_PREFIX;
 @Service
 public class EventServiceImpl implements EventService {
 
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
     private final EventToEventDto eventToEventDto;
 

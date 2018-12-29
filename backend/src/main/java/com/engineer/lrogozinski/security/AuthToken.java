@@ -5,7 +5,6 @@ public class AuthToken {
     private String token;
 
     public AuthToken(){
-
     }
 
     public AuthToken(String token){

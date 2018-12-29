@@ -22,16 +22,13 @@ public class EventCategoryController {
 
     private final EventCategoryService eventCategoryService;
 
-
     public EventCategoryController(EventCategoryService eventCategoryService) {
         this.eventCategoryService = eventCategoryService;
-
     }
 
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<EventCategoryDto> getAllEventCategories(){
-
          return eventCategoryService.findAll();
     }
 

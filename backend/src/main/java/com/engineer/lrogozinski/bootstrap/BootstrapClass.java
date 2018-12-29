@@ -68,13 +68,6 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         user1.getRoles().add(user);
         user2.getRoles().add(user);
         user3.getRoles().add(user);
-        //user1.addRole(admin);
-        //user1.addRole(user);
-      //  user2.addRole(user);
-        //user3.addRole(user);
-       // accountService.save(user1);
-       // accountService.save(user2);
-       // accountService.save(user3);
     }
 
     public void loadRoles(){

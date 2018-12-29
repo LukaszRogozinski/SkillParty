@@ -2,12 +2,8 @@ package com.engineer.lrogozinski.controllers;
 
 import com.engineer.lrogozinski.domain.Account;
 import com.engineer.lrogozinski.dto.NewUserDto;
-import com.engineer.lrogozinski.dto.RegisterResponse;
 import com.engineer.lrogozinski.dto.converter.NewUserDtoToAccountDto;
 import com.engineer.lrogozinski.services.security.UserService;
-import jdk.nashorn.internal.parser.JSONParser;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 

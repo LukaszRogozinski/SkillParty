@@ -5,6 +5,7 @@ import com.engineer.lrogozinski.domain.UserData;
 import java.util.List;
 
 public interface UserDataService {
+
     List<UserData> findAll();
 
     UserData findById(Integer id);

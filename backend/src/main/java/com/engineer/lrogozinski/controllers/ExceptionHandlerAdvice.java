@@ -46,4 +46,14 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
                 .body(json.toString());
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity handleException(Exception e) {
+
+        final JSONObject json = new JSONObject().put("ExceptionError:", e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(json.toString());
+    }
+
+
 }
