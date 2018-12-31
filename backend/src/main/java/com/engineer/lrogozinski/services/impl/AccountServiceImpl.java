@@ -70,7 +70,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account updateUser(String username, UserDataDto userDataDto) {
-        Account account =  this.findByUsername(username);
+        Account account =  accountRepository.findByUsername(username);
         account.setUserData(userDataDtoToUserData.convert(userDataDto));
         return accountRepository.save(account);
     }

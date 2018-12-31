@@ -57,7 +57,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @RequestMapping(value = "/update/{username}", method = RequestMethod.PUT)
    // @Transactional
-    public Account updateUser(@PathVariable(value = "username") String username ,@RequestBody UserDataDto userDataDto){
-        return accountService.updateUser(username, userDataDto);
+    public void updateUser(@PathVariable(value = "username") String username ,@RequestBody UserDataDto userDataDto){
+        accountService.updateUser(username, userDataDto);
     }
 }

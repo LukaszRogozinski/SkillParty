@@ -51,7 +51,7 @@ public class UserData {
     @Column(name = "flat_no")
     @Min(1)
     private Integer flatNo;
-
+    
     @Column(name = "average_vote")
     private Double averageVote = 0.0;
 
