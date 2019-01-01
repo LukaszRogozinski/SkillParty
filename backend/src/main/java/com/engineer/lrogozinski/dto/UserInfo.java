@@ -19,6 +19,6 @@ public class UserInfo {
     private String street;
     private Integer houseNo;
     private Integer flatNo;
-    private Double averageVote;
+    private String phoneNo;
     private List<String> favouriteCategories = new ArrayList<>();
 }

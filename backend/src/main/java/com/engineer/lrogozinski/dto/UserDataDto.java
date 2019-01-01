@@ -15,5 +15,5 @@ public class UserDataDto {
     private String street;
     private Integer houseNo;
     private Integer flatNo;
-
+    private String phoneNo;
 }

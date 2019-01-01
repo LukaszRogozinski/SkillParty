@@ -20,6 +20,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUsers().subscribe(
       response => {
         this.users = response;
+        let z = 5;
       },
       (error) => console.log(error)
     );

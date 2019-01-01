@@ -51,7 +51,10 @@ public class UserData {
     @Column(name = "flat_no")
     @Min(1)
     private Integer flatNo;
-    
+
+    @Column(name = "phone_number")
+    private String phoneNo;
+
     @Column(name = "average_vote")
     private Double averageVote = 0.0;
 
@@ -200,5 +203,13 @@ public class UserData {
         if(!eventCategory.getUserDataList().contains(this)){
             eventCategory.getUserDataList().add(this);
         }
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 }

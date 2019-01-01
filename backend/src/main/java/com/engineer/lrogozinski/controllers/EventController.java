@@ -26,6 +26,7 @@ public class EventController {
     public List<EventDto> getAllEvents(){
         return eventService.findAll();
     }
+
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value="/all-mine-events", method = RequestMethod.GET)
     public List<EventDto> getAllMineEvents(HttpServletRequest req) {

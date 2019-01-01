@@ -26,7 +26,7 @@ public class AccountToUserInfo implements Converter<Account, UserInfo> {
                 .street(account.getUserData().getStreet())
                 .houseNo(account.getUserData().getHouseNo())
                 .flatNo(account.getUserData().getFlatNo())
-                .averageVote(account.getUserData().getAverageVote())
+                .phoneNo(account.getUserData().getPhoneNo())
                 .favouriteCategories(favouriteEventCategories)
                 .build();
     }
