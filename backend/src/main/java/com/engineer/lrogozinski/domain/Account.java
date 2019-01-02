@@ -46,6 +46,7 @@ public class Account {
     private Integer version;
 
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @JsonBackReference
     private UserData userData;
 
     public Integer getId() {
