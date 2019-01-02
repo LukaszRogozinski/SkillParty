@@ -49,7 +49,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/delete/{username}", method = RequestMethod.DELETE)
-   // @Transactional
+    @Transactional
     public void deleteUserByUsername(@PathVariable(value = "username") String username){
             accountService.deleteAccountByUsername(username);
     }

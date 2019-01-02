@@ -37,6 +37,7 @@ import {HttpService} from './services/http.service';
 import {HttpErrorHandler} from './services/http-error-handler.service';
 import {IsLoggedGuardComponent} from './guards/isLoggedGuard.component';
 import {UserEditComponent} from './user/user-edit/user-edit.component';
+import {OnlyNumber} from './directives/only-number.directive';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {UserEditComponent} from './user/user-edit/user-edit.component';
     DropdownDirective,
     NewEventComponent,
     HighlightDirective,
+    OnlyNumber,
     UserListComponent,
     UserDetailComponent,
     EventCategoryListComponent,

@@ -40,7 +40,7 @@ public class SMSServiceImpl implements SMSService {
     public void sendMessage(String eventCategoryName) {
         EventCategory eventCategory = this.eventCategoryService.findByName(eventCategoryName);
         List<UserData> userDataList = this.userDataService.findAllByFavouriteEventCategoriesContaining(eventCategory);
-int z = 5;
+        int z = 5;
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
         for (UserData user:
@@ -50,6 +50,7 @@ int z = 5;
                     new PhoneNumber("+15005550006"),
                     "New " + eventCategoryName.toLowerCase() + " event has been added!")
                     .create();
+            //log.info(twilio_message.getSid());
             System.out.println(twilio_message.getSid());
 
             ListenableFuture<ResourceSet<Message>> future = Message.reader().readAsync();
@@ -58,10 +59,12 @@ int z = 5;
                     new FutureCallback<ResourceSet<Message>>() {
                         public void onSuccess(ResourceSet<Message> messages) {
                             for (Message message : messages) {
+                                //log.info(message.getSid() + " : " + message.getStatus());
                                 System.out.println(message.getSid() + " : " + message.getStatus());
                             }
                         }
                         public void onFailure(Throwable t) {
+                            //log.error("Failed to get message status: " + t.getMessage());
                             System.out.println("Failed to get message status: " + t.getMessage());
                         }
                     });

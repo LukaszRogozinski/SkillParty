@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/SMS")
+@RequestMapping("/sms")
 public class SMSController {
 
     private final SMSService smsService;

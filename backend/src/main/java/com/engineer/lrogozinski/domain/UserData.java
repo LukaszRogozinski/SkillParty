@@ -1,6 +1,9 @@
 package com.engineer.lrogozinski.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -11,6 +14,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "user_data")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class UserData {
 
     @Id
@@ -62,6 +69,7 @@ public class UserData {
     private List<Vote> votes = new ArrayList<>();
 
     @OneToOne
+   // @JsonBackReference
     private Account account;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -70,7 +78,7 @@ public class UserData {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USER_DATA_EVENT_CATEGORY", joinColumns = @JoinColumn(name = "user_data_id"),
             inverseJoinColumns = @JoinColumn(name = "event_category_id"))
-    @JsonBackReference
+    //@JsonBackReference
     List<EventCategory> favouriteEventCategories = new ArrayList<>();
 
     @Version

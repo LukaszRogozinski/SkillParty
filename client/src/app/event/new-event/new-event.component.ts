@@ -42,6 +42,7 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   }
 
   addEvent(){
+
     this.eventService.add(this.newEvent)
       .subscribe(
         () => {

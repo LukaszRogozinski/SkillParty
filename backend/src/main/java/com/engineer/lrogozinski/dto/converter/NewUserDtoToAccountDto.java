@@ -20,6 +20,7 @@ public class NewUserDtoToAccountDto implements Converter<NewUserDto, AccountDto>
         userData.setStreet(newUserDto.getStreet());
         userData.setHouseNo(newUserDto.getHouseNo());
         userData.setFlatNo(newUserDto.getFlatNo());
+        userData.setPhoneNo(newUserDto.getPhoneNo());
 
         return AccountDto.builder()
                 .username(newUserDto.getUsername())

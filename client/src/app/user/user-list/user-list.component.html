@@ -36,7 +36,7 @@
       </button>
       <ul class="dropdown-menu" >
         <li><a appHighlight  [routerLink]="['/user-edit', user.username]" >Edit user</a></li>
-        <li><a appHighlight [highlightColor]="'#c9302c'" (click)="deleteUser(user)">Delete user</a></li>
+        <li><a appHighlight style="cursor: pointer;" [highlightColor]="'#c9302c'" (click)="deleteUser(user)">Delete user</a></li>
       </ul>
     </div>
     </td>

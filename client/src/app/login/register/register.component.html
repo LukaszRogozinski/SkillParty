@@ -102,35 +102,48 @@
       </div>
 
       <div class="pagination-centered">
-        <div class="col-sm-6 form-group">
+        <div class="col-sm-4 form-group">
           <label class="required-sign" for="houseNo">House number</label>
           <input
             type="number"
             id="houseNo"
             class="form-control"[(ngModel)]="newUser.houseNo"
             name="houseNo"
-            required>
+            required
+            #houseNo="ngModel">
+          <span class="help-block" *ngIf="!houseNo.valid && houseNo.touched">Please enter a house number!</span>
         </div>
 
-        <div class="col-sm-6 form-group">
-          <label class="required-sign" for="flatNo">Flat number</label>
+        <div class="col-sm-4 form-group">
+          <label for="flatNo">Flat number</label>
           <input
             type="number"
             id="flatNo"
             class="form-control"
             [(ngModel)]="newUser.flatNo"
-            name="flatNo"
+            name="flatNo">
+        </div>
+
+        <div class="col-sm-4 form-group">
+          <label class="required-sign" for="phoneNo">Phone number</label>
+          <input
+            OnlyNumber="true"
+            placeholder="+48XXXXXXXXX"
+            type="text"
+            minlength="12"
+            maxlength="12"
+            id="phoneNo"
+            class="form-control"
+            [(ngModel)]="newUser.phoneNo"
+            name="phoneNo"
+            #phoneNo="ngModel"
             required>
         </div>
       </div>
 
       <div class="row">
-
           <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Register</button>
-
       </div>
-
-
     </form>
   </div>
 </div>

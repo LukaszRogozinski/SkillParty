@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class SmsService {
 
-  private SMSUrl = 'http://localhost:8080/SMS';
+  private SMSUrl = 'http://localhost:8080/sms';
 
   constructor(private httpService: HttpService) {}
 

@@ -3,6 +3,7 @@ import {NewUserModel} from './model/new-user.model';
 import {RegisterService} from './register.service';
 import {Router} from '@angular/router';
 import {MessageService} from '../../services/message.service';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit {
               private messageService: MessageService) { }
 
   ngOnInit() {
+    this.newUser.phoneNo = "+48";
   }
 
   registerNewUser() {
