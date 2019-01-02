@@ -9,6 +9,7 @@ import {NgForm} from '@angular/forms';
 import {EventCategory} from '../../event-category/model/event-category.model';
 import {EventCategoryService} from '../../event-category/event-category.service';
 import {MessageService} from '../../services/message.service';
+import {SmsService} from '../../services/sms.service';
 
 @Component({
   selector: 'app-new-event',
@@ -18,17 +19,15 @@ import {MessageService} from '../../services/message.service';
 export class NewEventComponent implements OnInit, CanComponentDeactivate {
 
   eventCategories: EventCategory[];
-  @ViewChild('f') signupForm: NgForm;
   newEvent: NewEvent = new NewEvent();
-  ws: any;
   name: string;
-  disabled: boolean;
   changesSaved = false;
 
   constructor(private eventService: EventService,
               private eventCategoryService: EventCategoryService,
               private router: Router,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private smsService: SmsService) { }
 
   ngOnInit() {
 
@@ -43,42 +42,16 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   }
 
   addEvent(){
-    this.connect();
     this.eventService.add(this.newEvent)
       .subscribe(
-        () => this.messageService.success("Successfully added new event!"),        (error) => console.log(error)
+        () => {
+          this.messageService.success("Successfully added new event!");
+          this.smsService.SendSMS(this.newEvent.eventCategory).subscribe();
+        },
+        (error) => console.log(error)
       );
-    let a = this.ws.connected;
-      this.sendName();
     this.changesSaved = true;
     this.router.navigateByUrl('/home');
-  }
-
-  sendName() {
-    let data = JSON.stringify({
-      'title' : this.newEvent.eventCategory.toLocaleLowerCase() + " event",
-      'body' : 'You have new ' +  this.newEvent.eventCategory.toLowerCase() + ' event',
-      'type' : 'Info'
-    })
-    this.ws.ws.onopen = () => this.ws.send("/app/" + this.newEvent.eventCategory.toLowerCase() + "Message", {}, data);
-  }
-
-  connect() {
-    let socket = new WebSocket("ws://localhost:8080/" + this.newEvent.eventCategory.toLowerCase());
-    this.ws = Stomp.over(socket );
-
-    let that = this;
-    this.ws.connect({}, function(frame) {
-      that.ws.subscribe("/errors", function(message) {
-        alert("Error " + message.body);
-      });
-        that.ws.subscribe("/" + that.newEvent.eventCategory.toLowerCase() + "Topic/reply", function(message) {
-        console.log(message)
-      });
-      that.disabled = true;
-    }, function(error) {
-      alert("STOMP error " + error);
-    });
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
