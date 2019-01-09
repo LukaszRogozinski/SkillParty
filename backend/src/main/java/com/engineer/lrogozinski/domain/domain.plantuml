@@ -1,0 +1,222 @@
+@startuml
+
+title __DOMAIN's Class Diagram__\n
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class Account {
+          - id : Integer
+          - username : String
+          - password : String
+          - verified : Boolean
+          - active : Boolean
+          - roles : List<Role>
+          - version : Integer
+          + getId()
+          + setId()
+          + getUsername()
+          + setUsername()
+          + getVerified()
+          + setVerified()
+          + getActive()
+          + setActive()
+          + getVersion()
+          + setVersion()
+          + getPassword()
+          + setPassword()
+          + getRoles()
+          + setRoles()
+          + addRole()
+          + getUserData()
+          + setUserData()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class Event {
+          - id : Integer
+          - name : String
+          - description : String
+          - avaliableQuantity : Integer
+          - price : Integer
+          - averageVote : Double
+          - imageUrl : String
+          - votes : List<Vote>
+          - version : Integer
+          + getId()
+          + setId()
+          + getName()
+          + setName()
+          + getDescription()
+          + setDescription()
+          + getAvaliableQuantity()
+          + setAvaliableQuantity()
+          + getPrice()
+          + setPrice()
+          + getVersion()
+          + setVersion()
+          + getUser()
+          + setUser()
+          + getAverageVote()
+          + setAverageVote()
+          + getVotes()
+          + setVotes()
+          + getEventCategory()
+          + setEventCategory()
+          + getImageUrl()
+          + setImageUrl()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class EventCategory {
+          - id : Integer
+          - name : String
+          - events : List<Event>
+          ~ userDataList : List<UserData>
+          - version : Integer
+          + getId()
+          + setId()
+          + getName()
+          + setName()
+          + getVersion()
+          + setVersion()
+          + getEvent()
+          + addEvent()
+          + getUserDataList()
+          + setUserDataList()
+          + getEvents()
+          + setEvents()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class Role {
+          - id : Integer
+          - role : String
+          - version : Integer
+          - accounts : List<Account>
+          + getRole()
+          + setRole()
+          + getVersion()
+          + setVersion()
+          + getAccounts()
+          + setAccounts()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class UsedToken {
+          - id : Integer
+          - token : String
+          - date : Date
+          + getId()
+          + setId()
+          + getToken()
+          + setToken()
+          + getDate()
+          + setDate()
+          + UsedToken()
+          + UsedToken()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class UserData {
+          - id : Integer
+          - email : String
+          - name : String
+          - surname : String
+          - city : String
+          - street : String
+          - houseNo : Integer
+          - flatNo : Integer
+          - averageVote : Double
+          - votes : List<Vote>
+          - eventList : List<Event>
+          ~ favouriteEventCategories : List<EventCategory>
+          - version : Integer
+          + getId()
+          + setId()
+          + getEmail()
+          + setEmail()
+          + getName()
+          + setName()
+          + getSurname()
+          + setSurname()
+          + getCity()
+          + setCity()
+          + getStreet()
+          + setStreet()
+          + getHouseNo()
+          + setHouseNo()
+          + getFlatNo()
+          + setFlatNo()
+          + getAverageVote()
+          + setAverageVote()
+          + getVersion()
+          + setVersion()
+          + getEventList()
+          + setEventList()
+          + getAccount()
+          + setAccount()
+          + getVotes()
+          + setVotes()
+          + addEvent()
+          + getFavouriteEventCategories()
+          + setFavouriteEventCategories()
+          + addFavouriteEventCategory()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class Vote {
+          - id : Integer
+          - quantity : Integer
+          + getId()
+          + setId()
+          + getQuantity()
+          + setQuantity()
+          + getEvent()
+          + setEvent()
+          + getUserData()
+          + setUserData()
+      }
+    }
+  }
+  
+
+  Account o-- UserData : userData
+  Event o-- EventCategory : eventCategory
+  Event o-- UserData : user
+  UserData o-- Account : account
+  Vote o-- Event : event
+  Vote o-- UserData : userData
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -49,14 +49,14 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/delete/{username}", method = RequestMethod.DELETE)
-   // @Transactional
+    @Transactional
     public void deleteUserByUsername(@PathVariable(value = "username") String username){
-            accountService.deleteAccountByUsername(username);
+        accountService.deleteAccountByUsername(username);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @RequestMapping(value = "/update/{username}", method = RequestMethod.PUT)
-   // @Transactional
+    // @Transactional
     public void updateUser(@PathVariable(value = "username") String username ,@RequestBody UserDataDto userDataDto){
         accountService.updateUser(username, userDataDto);
     }

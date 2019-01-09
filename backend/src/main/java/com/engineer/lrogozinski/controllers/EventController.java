@@ -26,6 +26,7 @@ public class EventController {
     public List<EventDto> getAllEvents(){
         return eventService.findAll();
     }
+
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value="/all-mine-events", method = RequestMethod.GET)
     public List<EventDto> getAllMineEvents(HttpServletRequest req) {
@@ -36,7 +37,7 @@ public class EventController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @Transactional
     public Event addEvent(@RequestBody EventDto eventDto, HttpServletRequest req){
-       return eventService.addEvent(eventDto,req);
+        return eventService.addEvent(eventDto,req);
     }
 
     @PreAuthorize("hasRole('USER')")
@@ -48,7 +49,7 @@ public class EventController {
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/detail/{id}/delete", method = RequestMethod.DELETE)
     public void DeleteEvent(@PathVariable(value = "id") Integer id){
-         eventService.deleteById(id);
+        eventService.deleteById(id);
     }
 
 }

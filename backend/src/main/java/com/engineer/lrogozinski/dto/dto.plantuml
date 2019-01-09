@@ -1,0 +1,250 @@
+@startuml
+
+title __DTO's Class Diagram__\n
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class AccountDto {
+          - id : Integer
+          - username : String
+          - password : String
+          + AccountDto()
+          + getId()
+          + getUsername()
+          + getPassword()
+          + getUserdata()
+          + setId()
+          + setUsername()
+          + setPassword()
+          + setUserdata()
+          + equals()
+          + hashCode()
+          # canEqual()
+          + toString()
+          + AccountDto()
+          {static} + builder()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class AccountDtoBuilder {
+          - id : Integer
+          - username : String
+          - password : String
+          ~ AccountDtoBuilder()
+          + id()
+          + username()
+          + password()
+          + userdata()
+          + build()
+          + toString()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class EventCategoryDto {
+          - name : String
+          + EventCategoryDto()
+          + getName()
+          + setName()
+          + equals()
+          + hashCode()
+          # canEqual()
+          + toString()
+          + EventCategoryDto()
+          {static} + builder()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class EventCategoryDtoBuilder {
+          - name : String
+          ~ EventCategoryDtoBuilder()
+          + name()
+          + build()
+          + toString()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class EventDto {
+          - id : Integer
+          - name : String
+          - description : String
+          - avaliableQuantity : Integer
+          - price : Integer
+          - averageVote : Double
+          - token : String
+          - eventCategory : String
+          - imageUrl : String
+          + EventDto()
+          + getId()
+          + getName()
+          + getDescription()
+          + getAvaliableQuantity()
+          + getPrice()
+          + getAverageVote()
+          + getToken()
+          + getEventCategory()
+          + getImageUrl()
+          + setId()
+          + setName()
+          + setDescription()
+          + setAvaliableQuantity()
+          + setPrice()
+          + setAverageVote()
+          + setToken()
+          + setEventCategory()
+          + setImageUrl()
+          + equals()
+          + hashCode()
+          # canEqual()
+          + toString()
+          + EventDto()
+          {static} + builder()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class EventDtoBuilder {
+          - id : Integer
+          - name : String
+          - description : String
+          - avaliableQuantity : Integer
+          - price : Integer
+          - averageVote : Double
+          - token : String
+          - eventCategory : String
+          - imageUrl : String
+          ~ EventDtoBuilder()
+          + id()
+          + name()
+          + description()
+          + avaliableQuantity()
+          + price()
+          + averageVote()
+          + token()
+          + eventCategory()
+          + imageUrl()
+          + build()
+          + toString()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class UserDataDto {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class UserInfo {
+          - username : String
+          - name : String
+          - surname : String
+          - email : String
+          - city : String
+          - street : String
+          - houseNo : Integer
+          - flatNo : Integer
+          - averageVote : Double
+          - favouriteCategories : List<String>
+          + UserInfo()
+          + getUsername()
+          + getName()
+          + getSurname()
+          + getEmail()
+          + getCity()
+          + getStreet()
+          + getHouseNo()
+          + getFlatNo()
+          + getAverageVote()
+          + getFavouriteCategories()
+          + setUsername()
+          + setName()
+          + setSurname()
+          + setEmail()
+          + setCity()
+          + setStreet()
+          + setHouseNo()
+          + setFlatNo()
+          + setAverageVote()
+          + setFavouriteCategories()
+          + equals()
+          + hashCode()
+          # canEqual()
+          + toString()
+          + UserInfo()
+          {static} + builder()
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class UserInfoBuilder {
+          - username : String
+          - name : String
+          - surname : String
+          - email : String
+          - city : String
+          - street : String
+          - houseNo : Integer
+          - flatNo : Integer
+          - averageVote : Double
+          - favouriteCategories : List<String>
+          ~ UserInfoBuilder()
+          + username()
+          + name()
+          + surname()
+          + email()
+          + city()
+          + street()
+          + houseNo()
+          + flatNo()
+          + averageVote()
+          + favouriteCategories()
+          + build()
+          + toString()
+      }
+    }
+  }
+  
+
+  AccountDto o-- UserData : userdata
+  AccountDto +-down- AccountDtoBuilder
+  AccountDtoBuilder o-- UserData : userdata
+  EventCategoryDto +-down- EventCategoryDtoBuilder
+  EventDto +-down- EventDtoBuilder
+  UserInfo +-down- UserInfoBuilder
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

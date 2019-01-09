@@ -33,7 +33,6 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   ngOnInit() {
 
     this.getEventCategories();
-    this.newEvent.averageVote = 0;
   }
 
   getEventCategories(){

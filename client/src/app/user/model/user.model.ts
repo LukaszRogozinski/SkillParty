@@ -8,6 +8,6 @@ export class User {
   street: string;
   houseNo: number;
   flatNo: number;
-  averageVote: number;
+  phoneNo: number;
   favouriteCategories: string[];
 }

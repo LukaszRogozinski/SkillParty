@@ -1,5 +1,9 @@
 package com.engineer.lrogozinski.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -7,6 +11,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "event_category")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class EventCategory {
 
     @Id
@@ -22,6 +30,7 @@ public class EventCategory {
     private String imageUrl;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventCategory")
+    // @JsonBackReference
     private List<Event> events = new ArrayList<>();
 
     @ManyToMany(mappedBy = "favouriteEventCategories")
@@ -60,7 +69,7 @@ public class EventCategory {
     }
 
     public void addEvent(Event event) {
-       this.events.add(event);
+        this.events.add(event);
     }
 
     public List<UserData> getUserDataList() {

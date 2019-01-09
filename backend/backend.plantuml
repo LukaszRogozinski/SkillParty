@@ -1,0 +1,579 @@
+@startuml
+
+title __LROGOZINSKI's Class Diagram__\n
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class Account {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class AccountDto {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      interface AccountDtoService {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      package com.engineer.lrogozinski.services.impl {
+        class AccountDtoServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      package com.engineer.lrogozinski.dto.converter {
+        class AccountDtoToAccount {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.repositories {
+      interface AccountRepository {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      interface AccountService {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      package com.engineer.lrogozinski.services.impl {
+        class AccountServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      package com.engineer.lrogozinski.dto.converter {
+        class AccountToAccountDto {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      package com.engineer.lrogozinski.dto.converter {
+        class AccountToUserInfo {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.security {
+      class AuthToken {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.controllers {
+      class AuthenticationController {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.bootstrap {
+      class BootstrapClass {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.config {
+      class CORSFilter {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.security {
+      class Constants {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      interface CrudService {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class Event {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class EventCategory {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.controllers {
+      class EventCategoryController {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class EventCategoryDto {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      package com.engineer.lrogozinski.dto.converter {
+        class EventCategoryDtoToEventCategory {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.repositories {
+      interface EventCategoryRepository {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      interface EventCategoryService {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      package com.engineer.lrogozinski.services.impl {
+        class EventCategoryServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      package com.engineer.lrogozinski.dto.converter {
+        class EventCategoryToEventCategoryDto {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.controllers {
+      class EventController {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class EventDto {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      package com.engineer.lrogozinski.dto.converter {
+        class EventDtoToEvent {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.repositories {
+      interface EventRepository {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      interface EventService {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      package com.engineer.lrogozinski.services.impl {
+        class EventServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      package com.engineer.lrogozinski.dto.converter {
+        class EventToEventDto {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.config {
+      class JwtAuthenticationEntryPoint {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.config {
+      class JwtAuthenticationFilter {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.config {
+      class JwtTokenUtil {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.security {
+      class LoginUser {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    class LrogozinskiApplication {
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class Role {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.repositories {
+      interface RoleRepository {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      interface RoleService {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      package com.engineer.lrogozinski.services.impl {
+        class RoleServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class UsedToken {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.repositories {
+      interface UsedTokenRepository {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      interface UsedTokenService {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      package com.engineer.lrogozinski.services.impl {
+        class UsedTokenServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.controllers {
+      class UserController {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class UserData {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class UserDataDto {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.repositories {
+      interface UserDataRepository {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      interface UserDataService {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      package com.engineer.lrogozinski.services.impl {
+        class UserDataServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.dto {
+      class UserInfo {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      package com.engineer.lrogozinski.services.security {
+        interface UserService {
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.services {
+      package com.engineer.lrogozinski.services.security {
+        package com.engineer.lrogozinski.services.security.impl {
+          class UserServiceImpl {
+          }
+        }
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.domain {
+      class Vote {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.config {
+      class WebSecurityConfig {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.controllers {
+      class WebSockerController {
+      }
+    }
+  }
+  
+
+  package com.engineer.lrogozinski {
+    package com.engineer.lrogozinski.config {
+      class WebSocketConfig {
+      }
+    }
+  }
+  
+
+  Account o-- UserData : userData
+  AccountDto o-- UserData : userdata
+  AccountDtoServiceImpl -up-|> AccountDtoService
+  AccountDtoServiceImpl o-- AccountRepository : accountRepository
+  AccountDtoServiceImpl o-- AccountToAccountDto : accountToAccountDto
+  AccountDtoServiceImpl o-- AccountDtoToAccount : accountDtoToAccount
+  AccountDtoToAccount -up-|> Converter
+  AccountServiceImpl -up-|> AccountService
+  AccountServiceImpl o-- AccountRepository : accountRepository
+  AccountToAccountDto -up-|> Converter
+  AccountToUserInfo -up-|> Converter
+  AuthenticationController o-- JwtTokenUtil : jwtTokenUtil
+  AuthenticationController o-- UsedTokenService : usedTokenService
+  BootstrapClass -up-|> ApplicationListener
+  BootstrapClass o-- AccountService : accountService
+  BootstrapClass o-- UserService : userService
+  BootstrapClass o-- RoleService : roleService
+  BootstrapClass o-- EventCategoryService : eventCategoryService
+  BootstrapClass o-- UserDataService : userDataService
+  CORSFilter -up-|> Filter
+  Event o-- EventCategory : eventCategory
+  Event o-- UserData : user
+  EventCategoryController o-- EventCategoryService : eventCategoryService
+  EventCategoryController o-- EventCategoryToEventCategoryDto : eventCategoryToEventCategoryDto
+  EventCategoryController o-- EventCategoryDtoToEventCategory : eventCategoryDtoToEventCategory
+  EventCategoryController o-- UserDataService : userDataService
+  EventCategoryController o-- JwtTokenUtil : jwtTokenUtil
+  EventCategoryDtoToEventCategory -up-|> Converter
+  EventCategoryServiceImpl -up-|> EventCategoryService
+  EventCategoryServiceImpl o-- EventCategoryRepository : eventCategoryRepository
+  EventCategoryToEventCategoryDto -up-|> Converter
+  EventController o-- JwtTokenUtil : jwtTokenUtil
+  EventController o-- EventService : eventService
+  EventController o-- EventDtoToEvent : eventDtoToEvent
+  EventController o-- UserDataService : userDataService
+  EventController o-- EventToEventDto : eventToEventDto
+  EventDtoToEvent -up-|> Converter
+  EventDtoToEvent o-- EventCategoryService : eventCategoryService
+  EventServiceImpl -up-|> EventService
+  EventServiceImpl o-- EventRepository : eventRepository
+  EventServiceImpl o-- EventDtoToEvent : eventDtoToEvent
+  EventServiceImpl o-- EventToEventDto : eventToEventDto
+  EventToEventDto -up-|> Converter
+  JwtAuthenticationEntryPoint -up-|> AuthenticationEntryPoint
+  JwtAuthenticationEntryPoint -up-|> Serializable
+  JwtAuthenticationFilter -up-|> OncePerRequestFilter
+  JwtAuthenticationFilter o-- JwtTokenUtil : jwtTokenUtil
+  JwtTokenUtil -up-|> Serializable
+  JwtTokenUtil o-- UsedTokenService : usedTokenService
+  RoleServiceImpl -up-|> RoleService
+  RoleServiceImpl o-- RoleRepository : roleRepository
+  UsedTokenServiceImpl -up-|> UsedTokenService
+  UsedTokenServiceImpl o-- UsedTokenRepository : usedTokenRepository
+  UserController o-- UserService : userService
+  UserController o-- JwtTokenUtil : jwtTokenUtil
+  UserController o-- AccountToUserInfo : accountToUserInfo
+  UserData o-- Account : account
+  UserDataServiceImpl -up-|> UserDataService
+  UserDataServiceImpl o-- UserDataRepository : userDataRepository
+  UserDataServiceImpl o-- AccountService : accountService
+  UserServiceImpl -up-|> UserDetailsService
+  UserServiceImpl -up-|> UserService
+  UserServiceImpl o-- AccountService : accountService
+  UserServiceImpl o-- AccountToUserInfo : accountToUserInfo
+  Vote o-- Event : event
+  Vote o-- UserData : userData
+  WebSecurityConfig -up-|> WebSecurityConfigurerAdapter
+  WebSecurityConfig o-- JwtAuthenticationEntryPoint : unauthorizedHandler
+  WebSocketConfig -up-|> AbstractWebSocketMessageBrokerConfigurer
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

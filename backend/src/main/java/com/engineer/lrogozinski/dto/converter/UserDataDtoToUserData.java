@@ -18,6 +18,7 @@ public class UserDataDtoToUserData implements Converter<UserDataDto,UserData> {
         userData.setStreet(userDataDto.getStreet());
         userData.setHouseNo(userDataDto.getHouseNo());
         userData.setFlatNo(userDataDto.getFlatNo());
+        userData.setPhoneNo(userDataDto.getPhoneNo());
         return userData;
     }
 }

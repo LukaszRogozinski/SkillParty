@@ -29,12 +29,12 @@ public class EventCategoryController {
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value="/all", method = RequestMethod.GET)
     public List<EventCategoryDto> getAllEventCategories(){
-         return eventCategoryService.findAll();
+        return eventCategoryService.findAll();
     }
 
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value ="/add", method = RequestMethod.POST)
     public UserData addEventCategoryToFavouriteList(@RequestBody EventCategoryDto eventCategoryDto, HttpServletRequest req) {
-       return eventCategoryService.addFavouriteEventCategoryToLoggedUser(eventCategoryDto.getName(), req);
+        return eventCategoryService.addFavouriteEventCategoryToLoggedUser(eventCategoryDto.getName(), req);
     }
 }

@@ -24,6 +24,6 @@ public class RegisterController {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @Transactional
     public Account registerNewUser(@RequestBody NewUserDto newUserDto) {
-           return userService.save(newUserDtoToAccountDto.convert(newUserDto));
+        return userService.save(newUserDtoToAccountDto.convert(newUserDto));
     }
 }

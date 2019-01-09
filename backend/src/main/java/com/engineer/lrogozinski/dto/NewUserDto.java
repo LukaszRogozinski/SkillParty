@@ -17,4 +17,5 @@ public class NewUserDto {
     String street;
     Integer houseNo;
     Integer flatNo;
+    String phoneNo;
 }
