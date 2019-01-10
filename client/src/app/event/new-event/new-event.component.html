@@ -58,7 +58,7 @@
           <input
             type="number"
             id="avaliableQuantity"
-            class="form-control" [(ngModel)]="newEvent.avaliableQuantity"
+            class="form-control"[(ngModel)]="newEvent.avaliableQuantity"
             name="avaliableQuantity"
             required>
         </div>
@@ -103,7 +103,6 @@
       </div>
       <div class="pull-left">
         <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Add</button>
-        <button class="btn btn-primary" type="button">Clear</button>
         <button class="btn btn-danger" type="button">Delete</button>
 
       </div>

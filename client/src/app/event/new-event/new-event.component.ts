@@ -54,7 +54,7 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   addEvent() {
     this.eventService.add(this.newEvent)
       .subscribe(
-        () => this.messageService.success("Successfully added new event!"),
+        () => this.messageService.success('Successfully added new event!'),
         (error) => console.log(error)
       );
     this.changesSaved = true;

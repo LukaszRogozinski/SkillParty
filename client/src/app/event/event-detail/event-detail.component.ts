@@ -49,7 +49,7 @@ export class EventDetailComponent implements OnInit {
             .subscribe(
               () => {
                 this.router.navigateByUrl('/home');
-                this.messageService.success("event successfully deleted.");
+                this.messageService.success('event successfully deleted.');
               },
               error => console.log('error' + error)
             );

@@ -9,7 +9,7 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class WebSockerController {
+public class WebSocketController {
 
     @Autowired
     private SimpMessageSendingOperations simpMessageSendingOperations;
@@ -17,14 +17,12 @@ public class WebSockerController {
     @MessageMapping("/sportMessage")
     @SendTo("/sportTopic/reply")
     public String processSportMessageFromClient(@Payload String message) throws Exception {
-
         return message;
     }
 
     @MessageMapping("/relaxMessage")
     @SendTo("/relaxTopic/reply")
     public String processRelaxMessageFromClient(@Payload String message) throws Exception {
-            //String mes = message;
         return message;
     }
 

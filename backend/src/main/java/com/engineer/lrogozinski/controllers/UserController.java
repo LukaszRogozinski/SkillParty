@@ -24,7 +24,7 @@ public class UserController {
 
     private final AccountService accountService;
 
-    private AccountToUserInfo accountToUserInfo;
+    private final AccountToUserInfo accountToUserInfo;
 
     private final UserDataDtoToUserData userDataDtoToUserData;
 
@@ -51,16 +51,13 @@ public class UserController {
     @RequestMapping(value = "/delete/{username}", method = RequestMethod.DELETE)
     @Transactional
     public void deleteUserByUsername(@PathVariable(value = "username") String username){
-        int z = 5;
-            accountService.deleteAccountByUsername(username);
-            int y = 5;
+        accountService.deleteAccountByUsername(username);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @RequestMapping(value = "/update/{username}", method = RequestMethod.PUT)
+    // @Transactional
     public void updateUser(@PathVariable(value = "username") String username ,@RequestBody UserDataDto userDataDto){
-        Account account =  accountService.findByUsername(username);
-        account.setUserData(userDataDtoToUserData.convert(userDataDto));
-        accountService.save(account);
+        accountService.updateUser(username, userDataDto);
     }
 }

@@ -1,6 +1,9 @@
 package com.engineer.lrogozinski.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Role {
 
     @Id
@@ -27,7 +34,7 @@ public class Role {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ACCOUNT_ROLE", joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "account_id"))
-    @JsonBackReference
+    //  @JsonBackReference
     private List<Account> accounts = new ArrayList<>();
 
     public Integer getId() {

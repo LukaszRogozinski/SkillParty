@@ -32,7 +32,7 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(org.springframework.security.authentication.BadCredentialsException.class)
     public ResponseEntity handleException(org.springframework.security.authentication.BadCredentialsException e){
-       final JSONObject json = new JSONObject().put("BadCredentialsException", e.getMessage());
+        final JSONObject json = new JSONObject().put("BadCredentialsException", e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
                 .body(json.toString());
@@ -45,5 +45,15 @@ public class ExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(json.toString());
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity handleException(Exception e) {
+
+        final JSONObject json = new JSONObject().put("ExceptionError:", e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(json.toString());
+    }
+
 
 }

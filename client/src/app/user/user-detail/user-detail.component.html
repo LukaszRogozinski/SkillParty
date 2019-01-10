@@ -13,10 +13,9 @@
         class="btn btn-primary dropdown-toggle">
         Manage User <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu">
-        <li><a appHighlight [routerLink]="['/user-edit', user.username]">Edit user</a></li>
-        <li><a appHighlight [highlightColor]="'#5cb85c'" routerLink="/event-category-list">Add favourite category</a>
-        </li>
+      <ul class="dropdown-menu" >
+        <li><a appHighlight  [routerLink]="['/user-edit', user.username]">Edit user</a></li>
+        <li><a appHighlight [highlightColor]="'#5cb85c'" routerLink="/event-category-list">Add favourite category</a></li>
       </ul>
     </div>
   </div>
@@ -64,8 +63,8 @@
   </div>
 
   <div class="row">
-    <h3>Average vote</h3>
-    <h4>{{user.averageVote}}</h4>
+    <h3>Phone number</h3>
+    <h4>{{user.phoneNo}}</h4>
   </div>
 
   <div class="row">

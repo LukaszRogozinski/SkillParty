@@ -10,7 +10,7 @@
     <th scope="col">Street</th>
     <th scope="col">houseNo</th>
     <th scope="col">flatNo</th>
-    <th scope="col">averageVote</th>
+    <th scope="col">phoneNo</th>
     <th scope="col">Manage</th>
   </tr>
   </thead>
@@ -24,7 +24,7 @@
     <td scope="row">{{user.street}}</td>
     <td scope="row">{{user.houseNo}}</td>
     <td scope="row">{{user.flatNo}}</td>
-    <td scope="row">{{user.averageVote}}</td>
+    <td scope="row">{{user.phoneNo}}</td>
     <td scope="row">
       <div
         class="btn-group"
@@ -34,9 +34,9 @@
           class="btn btn-primary dropdown-toggle">
           Manage User <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu">
-          <li><a appHighlight [routerLink]="['/user-edit', user.username]">Edit user</a></li>
-          <li><a appHighlight [highlightColor]="'#c9302c'" (click)="deleteUser(user)">Delete user</a></li>
+        <ul class="dropdown-menu" >
+          <li><a appHighlight  [routerLink]="['/user-edit', user.username]" >Edit user</a></li>
+          <li><a appHighlight style="cursor: pointer;" [highlightColor]="'#c9302c'" (click)="deleteUser(user)">Delete user</a></li>
         </ul>
       </div>
     </td>

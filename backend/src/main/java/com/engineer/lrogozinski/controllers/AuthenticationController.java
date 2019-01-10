@@ -22,9 +22,8 @@ public class AuthenticationController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody LoginUser loginUser){
+    public ResponseEntity<?> register(@RequestBody LoginUser loginUser) {
 
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -35,7 +34,6 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
         return ResponseEntity.ok(new AuthToken(token));
-
     }
 
 }

@@ -4,6 +4,7 @@ import com.engineer.lrogozinski.domain.Account;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AccountRepository extends CrudRepository<Account, Integer> {
+
     Account findByUsername(String username);
     void deleteAccountByUsername(String username);
     void deleteByUsername(String username);

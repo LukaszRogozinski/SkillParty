@@ -1,6 +1,8 @@
 package com.engineer.lrogozinski.services.impl;
 
 import com.engineer.lrogozinski.domain.Account;
+import com.engineer.lrogozinski.dto.UserDataDto;
+import com.engineer.lrogozinski.dto.converter.UserDataDtoToUserData;
 import com.engineer.lrogozinski.exceptions.ServiceException;
 import com.engineer.lrogozinski.repositories.AccountRepository;
 import com.engineer.lrogozinski.services.AccountService;
@@ -14,10 +16,13 @@ import static com.engineer.lrogozinski.exceptions.ExceptionsMessage.CANNOT_FIND_
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    private final UserDataDtoToUserData userDataDtoToUserData;
+
+    public AccountServiceImpl(AccountRepository accountRepository, UserDataDtoToUserData userDataDtoToUserData) {
         this.accountRepository = accountRepository;
+        this.userDataDtoToUserData = userDataDtoToUserData;
     }
 
     @Override
@@ -61,5 +66,12 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void deleteAccountByUsername(String username) {
         accountRepository.deleteAccountByUsername(username);
+    }
+
+    @Override
+    public Account updateUser(String username, UserDataDto userDataDto) {
+        Account account =  accountRepository.findByUsername(username);
+        account.setUserData(userDataDtoToUserData.convert(userDataDto));
+        return accountRepository.save(account);
     }
 }

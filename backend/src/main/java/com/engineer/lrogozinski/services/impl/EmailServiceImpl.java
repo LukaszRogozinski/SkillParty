@@ -38,7 +38,7 @@ public class EmailServiceImpl implements EmailService {
 
         EventCategory eventCategory = eventCategoryService.findByName(emailDto.getEventCategory());
         List<String> userDataList = userDataService.findAllEmailsByFavouriteEventCategoriesContains(eventCategory);
-
+        int z = 5;
         //Create an email instance
         for (String email:userDataList) {
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
