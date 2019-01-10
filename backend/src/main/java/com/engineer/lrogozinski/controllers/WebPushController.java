@@ -20,6 +20,7 @@ public class WebPushController {
 
     @RequestMapping(value = "/subscribe", method = RequestMethod.POST)
     public void saveWebPushSubscription(@RequestBody WebPushSubscriptionDto webPushSubscriptionDto) {
+        int z = 5;
         webPushSubscriptionService.save(webPushSubscriptionDto);
     }
 

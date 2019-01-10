@@ -32,7 +32,10 @@ export class UserListComponent implements OnInit {
       confirmed => {
         if(confirmed) {
           this.userService.deleteSelectedUserByUsername(user.username).subscribe(
-            response => console.log("success" + response),
+            () => {
+              this.router.navigate(["home"]);
+              this.messageService.success("User successfully deleted.");
+            },
             error => console.log("error" + error)
           );
         }

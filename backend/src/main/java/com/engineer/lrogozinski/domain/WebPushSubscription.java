@@ -1,10 +1,14 @@
 package com.engineer.lrogozinski.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "web_push_subscription")
+
 public class WebPushSubscription {
 
     @Id

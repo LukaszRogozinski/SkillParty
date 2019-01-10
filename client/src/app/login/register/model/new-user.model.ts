@@ -8,4 +8,5 @@ export class NewUserModel {
   street: string;
   houseNo: number;
   flatNo: number;
+  phoneNo: string;
 }

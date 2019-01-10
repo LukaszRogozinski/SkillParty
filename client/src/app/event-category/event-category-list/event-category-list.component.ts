@@ -20,9 +20,7 @@ export class EventCategoryListComponent implements OnInit {
 
   readonly VAPID_PUBLIC_KEY = 'BI5mCqcxTLbVlaMXdtNgzuzvguutX4CW8SJ8qotChykJCs_9hBVlPfO-ccr4O6APBDCfe3DCICo8r-NVcR_tfrM';
 
-  ws: any;
   name: string;
-  disabled: boolean;
   pushSubscription: PushSubscription;
 
   constructor(private eventCategoryService: EventCategoryService,
@@ -61,7 +59,7 @@ export class EventCategoryListComponent implements OnInit {
 
   addToFavourite(eventCategory: EventCategory) {
     this.eventCategoryService.addToFavourite(eventCategory).subscribe(
-      response => console.log('YEA added new category!' + response)
+      () => this.messageService.success("Successfully added new favourite category!")
     );
     this.subscribeToNotifications();
 

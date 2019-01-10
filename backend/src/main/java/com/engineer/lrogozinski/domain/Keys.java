@@ -1,11 +1,14 @@
 package com.engineer.lrogozinski.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "web_push_subscription_keys")
+
 public class Keys {
 
     @Id

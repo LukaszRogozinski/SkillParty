@@ -46,9 +46,9 @@ export class EventDetailComponent implements OnInit {
           const id = +this.route.snapshot.paramMap.get('id');
           this.eventService.deleteEventByID(id)
             .subscribe(
-              response => {
+              () => {
                 this.router.navigateByUrl('/home');
-                console.log("success" + response);
+                this.messageService.success("event successfully deleted.");
               },
               error => console.log("error" + error)
             );

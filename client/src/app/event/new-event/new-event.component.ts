@@ -9,6 +9,7 @@ import {NgForm} from '@angular/forms';
 import {EventCategory} from '../../event-category/model/event-category.model';
 import {EventCategoryService} from '../../event-category/event-category.service';
 import {PushNotificationService} from '../../services/push-notification.service';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-new-event',
@@ -27,7 +28,8 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   constructor(private eventService: EventService,
               private eventCategoryService: EventCategoryService,
               private router: Router,
-              private pushService: PushNotificationService) { }
+              private pushService: PushNotificationService,
+              private messageService: MessageService) { }
 
   ngOnInit() {
 
@@ -50,10 +52,11 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   addEvent(){
     this.eventService.add(this.newEvent)
       .subscribe(
-        (response) => console.log(response),
+        () => {this.messageService.success("Successfully added new event!")
+          this.sendNotifications();},
         (error) => console.log(error)
       );
-    this.sendNotifications();
+
     this.changesSaved = true;
     this.router.navigateByUrl('/home');
   }

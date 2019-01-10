@@ -1,6 +1,9 @@
 package com.engineer.lrogozinski.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -11,6 +14,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "user_data")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class UserData {
 
     @Id
@@ -52,13 +59,17 @@ public class UserData {
     @Min(1)
     private Integer flatNo;
 
+    @Column(name = "phone_number")
+    private String phoneNo;
+
     @Column(name = "average_vote")
     private Double averageVote = 0.0;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userData")
     private List<Vote> votes = new ArrayList<>();
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne
+    // @JsonBackReference
     private Account account;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -67,8 +78,8 @@ public class UserData {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USER_DATA_EVENT_CATEGORY", joinColumns = @JoinColumn(name = "user_data_id"),
             inverseJoinColumns = @JoinColumn(name = "event_category_id"))
-    @JsonBackReference
-    List<EventCategory> favouriteEventCategories = new ArrayList<>();
+    //@JsonBackReference
+            List<EventCategory> favouriteEventCategories = new ArrayList<>();
 
     @Version
     @Column(name = "version")
@@ -200,5 +211,13 @@ public class UserData {
         if(!eventCategory.getUserDataList().contains(this)){
             eventCategory.getUserDataList().add(this);
         }
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 }

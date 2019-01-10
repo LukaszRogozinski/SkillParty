@@ -68,13 +68,6 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         user1.getRoles().add(user);
         user2.getRoles().add(user);
         user3.getRoles().add(user);
-        //user1.addRole(admin);
-        //user1.addRole(user);
-      //  user2.addRole(user);
-        //user3.addRole(user);
-       // accountService.save(user1);
-       // accountService.save(user2);
-       // accountService.save(user3);
     }
 
     public void loadRoles(){
@@ -101,7 +94,8 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         userData1.setStreet("Skierniewicka");
         userData1.setHouseNo(10);
         userData1.setFlatNo(2);
-       // userData1.setAverageVote(0.0);
+        userData1.setPhoneNo("+48516253765");
+        // userData1.setAverageVote(0.0);
         user1.setUserdata(userData1);
         userService.save(user1);
 //-------------------------------------------------------------------------
@@ -119,7 +113,8 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         userData2.setStreet("Zielona");
         userData2.setHouseNo(20);
         userData2.setFlatNo(5);
-       // userData2.setAverageVote(0.0);
+        userData2.setPhoneNo("+48516253765");
+        // userData2.setAverageVote(0.0);
         user2.setUserdata(userData2);
         userService.save(user2);
 
@@ -138,7 +133,8 @@ public class BootstrapClass implements ApplicationListener<ContextRefreshedEvent
         userData3.setStreet("Malinowa");
         userData3.setHouseNo(30);
         userData3.setFlatNo(10);
-      //  userData3.setAverageVote(0.0);
+        userData3.setPhoneNo("+48516253765");
+        //  userData3.setAverageVote(0.0);
         user3.setUserdata(userData3);
         userService.save(user3);
     }

@@ -1,12 +1,15 @@
 package com.engineer.lrogozinski.services.impl;
 
 import com.engineer.lrogozinski.domain.Role;
+import com.engineer.lrogozinski.exceptions.ServiceException;
 import com.engineer.lrogozinski.repositories.RoleRepository;
 import com.engineer.lrogozinski.services.RoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.engineer.lrogozinski.exceptions.ExceptionsMessage.CANNOT_FIND_ROLE_WITH_PROVIDED_ID;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -26,7 +29,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findById(Integer id) {
-        return roleRepository.findById(id).orElse(null);
+        return roleRepository.findById(id).orElseThrow(() -> new ServiceException(CANNOT_FIND_ROLE_WITH_PROVIDED_ID));
     }
 
     @Override
