@@ -16,13 +16,13 @@ public class WebSocketController {
 
     @MessageMapping("/sportMessage")
     @SendTo("/sportTopic/reply")
-    public String processSportMessageFromClient(@Payload String message) throws Exception {
+    public String processSportMessage(@Payload String message) throws Exception {
         return message;
     }
 
     @MessageMapping("/relaxMessage")
     @SendTo("/relaxTopic/reply")
-    public String processRelaxMessageFromClient(@Payload String message) throws Exception {
+    public String processRelaxMessage(@Payload String message) throws Exception {
         return message;
     }
 

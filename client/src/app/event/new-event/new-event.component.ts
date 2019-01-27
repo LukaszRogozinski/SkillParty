@@ -28,61 +28,61 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   constructor(private eventService: EventService,
               private eventCategoryService: EventCategoryService,
               private router: Router,
-              private messageService: MessageService) { }
+              private messageService: MessageService) {
+  }
 
   ngOnInit() {
 
     this.getEventCategories();
   }
 
-  getEventCategories(){
+  getEventCategories() {
     this.eventCategoryService.getEventCategories().subscribe(
       response => this.eventCategories = response,
       error => console.log(error)
     );
   }
 
-  addEvent(){
+  addEvent() {
     this.connect();
     this.eventService.add(this.newEvent)
       .subscribe(
-        () => this.messageService.success("Successfully added new event!"),        (error) => console.log(error)
+        () => this.messageService.success('Successfully added new event!'),
+        (error) => console.log(error)
       );
-    let a = this.ws.connected;
-      this.sendName();
+    this.sendMessage();
     this.changesSaved = true;
     this.router.navigateByUrl('/home');
   }
 
-  sendName() {
+  sendMessage() {
     let data = JSON.stringify({
-      'title' : this.newEvent.eventCategory.toLocaleLowerCase() + " event",
-      'body' : 'You have new ' +  this.newEvent.eventCategory.toLowerCase() + ' event',
-      'type' : 'Info'
-    })
-    this.ws.ws.onopen = () => this.ws.send("/app/" + this.newEvent.eventCategory.toLowerCase() + "Message", {}, data);
+      'title': this.newEvent.eventCategory.toLocaleLowerCase() + ' event',
+      'body': 'You have new ' + this.newEvent.eventCategory.toLowerCase() + ' event',
+      'type': 'Info'
+    });
+    this.ws.ws.onopen = () => this.ws.send('/app/' + this.newEvent.eventCategory.toLowerCase() + 'Message', {}, data);
   }
 
   connect() {
-    let socket = new WebSocket("ws://localhost:8080/" + this.newEvent.eventCategory.toLowerCase());
-    this.ws = Stomp.over(socket );
+    let socket = new WebSocket('ws://localhost:8080/' + this.newEvent.eventCategory.toLowerCase());
+    this.ws = Stomp.over(socket);
 
     let that = this;
-    this.ws.connect({}, function(frame) {
-      that.ws.subscribe("/errors", function(message) {
-        alert("Error " + message.body);
+    this.ws.connect({}, function (frame) {
+      that.ws.subscribe('/errors', function (message) {
+        alert('Error ' + message.body);
       });
-        that.ws.subscribe("/" + that.newEvent.eventCategory.toLowerCase() + "Topic/reply", function(message) {
-        console.log(message)
-      });
-      that.disabled = true;
-    }, function(error) {
-      alert("STOMP error " + error);
+     /* that.ws.subscribe('/' + that.newEvent.eventCategory.toLowerCase() + 'Topic/reply', function (message) {
+        console.log(message);
+      });*/
+    }, function (error) {
+      alert('STOMP error ' + error);
     });
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    if((this.newEvent.name !== null) && !this.changesSaved){
+    if ((this.newEvent.name !== null) && !this.changesSaved) {
       return confirm('Do you want to discard the changes?');
     } else {
       return true;
