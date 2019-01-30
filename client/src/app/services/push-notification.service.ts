@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from './http.service';
 
-const SEND_NOTIFICATION_URL = 'http://localhost:3000/sendNotificationt';
+const SEND_NOTIFICATION_URL = 'http://localhost:3000/sendNotification';
 const GET_NOTIFICATION_URL = 'http://localhost:3000/getAll';
 const SAVE_SUBSCRIPTION_TO_BACKEND_URL = 'http://localhost:8080/web-push';
 

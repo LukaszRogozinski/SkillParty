@@ -45,7 +45,7 @@ export class NewEventComponent implements OnInit, CanComponentDeactivate {
   }
 
   sendNotifications() {
-    this.pushService.getSubscriptionsFromDB().subscribe();
+
     this.pushService.sendNotification().subscribe();
   }
 

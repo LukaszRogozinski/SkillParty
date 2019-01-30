@@ -4,17 +4,29 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const got = require('got');
 
-const PUBLIC_VAPID = 'BI5mCqcxTLbVlaMXdtNgzuzvguutX4CW8SJ8qotChykJCs_9hBVlPfO-ccr4O6APBDCfe3DCICo8r-NVcR_tfrM';
-const PRIVATE_VAPID = 'b5AwMS0KywWpy0Lft2YPtzfXiOAO8SK9qPvRO6KamsQ';
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('properties.txt');
+
+const PUBLIC_VAPID = properties.get('public_vapid');
+const PRIVATE_VAPID = properties.get('private_vapid');
 const request = require('request');
 const app = express();
 const allSubscriptions = [];
+
+
 app.use(cors());
 app.use(bodyParser.json());
 
 webpush.setVapidDetails('mailto:you@domain.com', PUBLIC_VAPID, PRIVATE_VAPID);
 
 app.get('/getAll', (req, res) => {
+
+	console.log(PUBLIC_VAPID);
+	console.log(PRIVATE_VAPID);
+	
+		while(allSubscriptions.length > 0) {
+	allSubscriptions.pop();
+	}
 	
 	request('http://localhost:8080/web-push/getAllWebSubscriptions', function(error, response, body) {
 		console.log('statusCode: ', response && response.statusCode);
@@ -46,10 +58,8 @@ app.post('/sendNotification', (req, res) => {
 	allSubscriptions.forEach(subscription => {
     promises.push(webpush.sendNotification(subscription, JSON.stringify(notificationPayload)));
   });
+
   Promise.all(promises).then(() => res.sendStatus(200));
-	while(allSubscriptions.length > 0) {
-	allSubscriptions.pop();
-	}
 });
 
 app.listen(3000, () => {

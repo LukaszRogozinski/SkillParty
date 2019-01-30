@@ -52,6 +52,7 @@ export class EventCategoryListComponent implements OnInit {
           this.pushSubscription = subscription;
           console.log(JSON.stringify(this.pushSubscription));
           this.pushService.saveSuscriptionToBackEnd(this.pushSubscription).subscribe();
+          this.pushService.getSubscriptionsFromDB().subscribe();
         })
         .catch(console.error);
     }
